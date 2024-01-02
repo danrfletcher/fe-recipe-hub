@@ -1,8 +1,10 @@
 import './App.css'
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div></div>
+    <>
+      <h1>Umami</h1>
+    </>
   )
 }
 
