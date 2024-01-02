@@ -1,6 +1,9 @@
 * {
   margin: 0;
   padding: 0;
+  background: #FEFDFE;
+  box-sizing: border-box;
+  color: #222222;
 }
 
 :root {
@@ -8,14 +11,28 @@
   font-family: 'Inter', sans-serif;
 }
 
+header {
+  border-top: 1.6em solid #660f27;
+}
+
 h1 {
+  padding-top: 0.3em;
   font-family: 'Dancing Script', cursive;
-  font-size: 5rem;
+  font-size: 4.3rem;
   font-weight: 700;
+  color: #660f27;
 }
 
 button {
   cursor: pointer;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  background: #660f27;
+  height: 1.6em;
+  width: 100%;
 }
 
 /* :root {
