@@ -9,3 +9,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <App />
   </Provider>
 )
+
+/*
+Our App component is wrapped in a Provider that calls the store. The store is considered the
+single source of truth for the app.
+*/
