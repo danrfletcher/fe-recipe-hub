@@ -1,10 +1,7 @@
-import { StyledFooter } from "./styled-components/footer";
-
 const Footer: React.FC = () => {
   return (
-    <StyledFooter>
-
-    </StyledFooter>
+    <footer>
+    </footer>
   )
 }
 

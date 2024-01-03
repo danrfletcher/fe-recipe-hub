@@ -4,3 +4,28 @@
   text-align: center;
   font-family: 'Inter', sans-serif;
 }
+
+.flex-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.4em;
+  background-color: hsl(343, 74%, 23%, 5%);
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #660f27;
+  height: 2.5em;
+  width: 2.5em;
+
+  &>* {
+    height: 100%;
+    width: 100%;
+    padding: 8px;
+    fill: #660f27;
+  }
+}
