@@ -7,14 +7,20 @@ const Nav: React.FC = () => {
     </nav>
   )
 }
+interface Props {
+  class: string
+}
 
-export const ToggledNav: React.FC = () => {
+export const ToggledNav: React.FC<Props> = (props): JSX.Element => {
+
   return (
-    <nav className="toggled-flex-container">
-      <span>Home</span>
-      <span>Recipes</span>
-      <span>Profile</span>
-    </nav>
+    <div className={props.class} >
+      <nav className="toggled-flex-container">
+        <span>Home</span>
+        <span>Recipes</span>
+        <span>Profile</span>
+      </nav>
+    </div>
   )
 }
 
