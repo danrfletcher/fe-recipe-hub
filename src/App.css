@@ -4,8 +4,11 @@
 	text-align: center;
 	font-family: "Inter", sans-serif;
 }
-@media (min-width: 500px) {
-	div.icon-container {
+
+@media (min-width: 501px) {
+
+	div.icon-container,
+	nav.toggled-flex-container {
 		display: none;
 	}
 }
@@ -13,11 +16,11 @@
 @media (max-width: 500px) {
 	nav.flex-container {
 		display: none;
-
 	}
 }
 
-.flex-container {
+.flex-container,
+.toggled-flex-container {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -34,13 +37,14 @@
 	height: 2.4em;
 	width: 2.4em;
 
-	& > * {
+	&>* {
 		height: 100%;
 		width: 100%;
 		padding: 7px;
 		fill: #660f27;
 	}
 }
+
 .icon {
 	background: transparent;
 	color: #660f27;
