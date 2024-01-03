@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 export const StyledHeader = styled.header`
-    background-color: #660f27;
+    border-top: 1em solid #660f27;
+    border-bottom: 0.1em solid #660f27;
+    background-color: white;
     width: 100vw;
-    height: 5em;
+    height: 4.5em;
     display: flex;
-    padding: 0px 10px;
+    padding: 2.4em 0.6em;
     `

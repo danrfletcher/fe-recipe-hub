@@ -23,7 +23,7 @@ export const NavButtonBox = styled.div`
     height: 2.5em;
     width: 2.5em;
     border-radius: 10px;
-    border: 1px solid white;
+    border: 1px solid #660f27;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,6 +31,6 @@ export const NavButtonBox = styled.div`
         height: 100%;
         width: 100%;
         padding: 8px;
-        fill: white;
+        fill: #660f27;
     }
     `
