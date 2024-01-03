@@ -5,7 +5,7 @@ const Header: React.FC = () => {
     <header>
       <h1>Umami</h1>
       <div className="icon-container">
-        <SlMenu style={{background: "transparent", color: "#660f27", cursor: "pointer"}} />
+        <SlMenu className = "icon"/>
       </div>
     </header>
   )
