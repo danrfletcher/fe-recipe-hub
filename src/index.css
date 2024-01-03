@@ -15,20 +15,6 @@ header {
   padding: 0.8em 1.1em;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-  background: #660f27;
-  height: 1.2em;
-  width: 100%;
-}
-
-span {
-  background: none;
-  color: #660f27;
-  cursor: pointer;
-}
-
 h1 {
   font-family: 'Dancing Script', cursive;
   font-size: 2.6rem;
@@ -45,4 +31,18 @@ h1 {
   h1 {
     font-size: 3.6rem;
   }
+}
+
+span {
+  background: none;
+  color: #660f27;
+  cursor: pointer;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  background: #660f27;
+  height: 1.2em;
+  width: 100%;
 }
