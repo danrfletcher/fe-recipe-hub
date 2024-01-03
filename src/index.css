@@ -36,3 +36,13 @@ h1 {
   color: #660f27;
   background: transparent;
 }
+
+@media (min-width: 501px) {
+  header {
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 3.6rem;
+  }
+}
