@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit"
+import navReducer from "../features/navSlice"
 
 export const store = configureStore({
-  reducer: {}
+  reducer: {
+    toggle: navReducer
+  }
 })
 
 export type AppDispatch = typeof store.dispatch
