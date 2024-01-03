@@ -5,7 +5,7 @@
 	font-family: "Inter", sans-serif;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 501px) {
 	div.icon-container {
 		display: none;
 	}
