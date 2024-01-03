@@ -12,7 +12,7 @@ header {
   align-items: center;
   border-top: 1.2em solid #660f27;
   width: 100vw;
-  padding: 0.7em 1.1em;
+  padding: 0.8em 1.1em;
 }
 
 footer {
@@ -26,6 +26,7 @@ footer {
 span {
   background: none;
   color: #660f27;
+  cursor: pointer;
 }
 
 h1 {
