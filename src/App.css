@@ -6,7 +6,9 @@
 }
 
 @media (min-width: 501px) {
-	div.icon-container {
+
+	div.icon-container,
+	nav.toggled-flex-container {
 		display: none;
 	}
 }
@@ -17,7 +19,8 @@
 	}
 }
 
-.flex-container {
+.flex-container,
+.toggled-flex-container {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
