@@ -7,11 +7,12 @@ const Nav: React.FC = () => {
     </nav>
   )
 }
+
 interface Props {
   class: string
 }
 
-export const ToggledNav: React.FC<Props> = (props): JSX.Element => {
+export const ToggledNav: React.FC<Props> = (props) => {
 
   return (
     <div className={props.class} >
