@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
+import { useAppSelector } from "../../app/hooks"
 
 interface FormValues {
   username: string
@@ -8,13 +9,14 @@ interface FormValues {
 
 const Login: React.FC = () => {
 
+  const isToggled = useAppSelector((state) => state.toggle.value);
   const { register, handleSubmit } = useForm<FormValues>()
   const submitForm: SubmitHandler<FormValues> = (data) => {
     console.log(data.username)
   }
 
   return (
-    <div className="page-container">
+    <div className={isToggled ? "page-slide-in" : "page-slide-out"}>
       <h2>Welcome to Umami</h2>
       <form onSubmit={handleSubmit(submitForm)}>
         <div>
