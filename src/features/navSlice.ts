@@ -12,7 +12,7 @@ const navSlice = createSlice({
   name: 'nav-toggle',
   initialState,
   reducers: {
-    toggle(state) {
+    toggle: (state) => {
       state.value = !state.value
     }
   }
