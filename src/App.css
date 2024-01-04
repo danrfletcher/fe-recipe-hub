@@ -52,6 +52,7 @@ div.slide-out {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	margin-bottom: 1.2em;
 	padding: 0.9em 0.4em;
 	background-color: hsl(343, 74%, 23%, 5%);
 }
