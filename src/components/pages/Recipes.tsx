@@ -1,6 +1,8 @@
 const Recipes: React.FC = () => {
   return (
-    <h2>Recipes</h2>
+    <div className="page-container">
+      <h2>Recipes</h2>
+    </div>
   )
 }
 

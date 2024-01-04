@@ -1,6 +1,8 @@
 const Home: React.FC = () => {
   return (
-    <h2>Home</h2>
+    <div className="page-container">
+      <h2>Home</h2>
+    </div>
   )
 }
 

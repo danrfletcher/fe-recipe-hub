@@ -1,6 +1,8 @@
 const Register: React.FC = () => {
   return (
-    <div></div>
+    <div className="page-container">
+      <h2>Register</h2>
+    </div>
   )
 }
 

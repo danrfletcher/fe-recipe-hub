@@ -1,6 +1,8 @@
 const Login: React.FC = () => {
   return (
-    <h2>Log in</h2>
+    <div className="page-container">
+      <h2>Log in</h2>
+    </div>
   )
 }
 
