@@ -15,7 +15,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="page-container">
-      <h2>Log in</h2>
+      <h2>Welcome to Umami</h2>
       <form onSubmit={handleSubmit(submitForm)}>
         <div>
           <label htmlFor="username">Username</label>
@@ -34,7 +34,7 @@ const Login: React.FC = () => {
             {...register("password")}
             required />
         </div>
-        <button type="submit" className="button">
+        <button type="submit">
           Log in
         </button>
       </form>
