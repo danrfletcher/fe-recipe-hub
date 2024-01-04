@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom"
+
 const Nav: React.FC = () => {
   return (
     <nav className="flex-container">
-      <span>Home</span>
-      <span>Recipes</span>
-      <span>Profile</span>
+      <Link to="/">Home</Link>
+      <Link to="/recipes">Recipes</Link>
+      <Link to="/login">Log in</Link>
     </nav>
   )
 }
@@ -17,9 +19,9 @@ export const ToggledNav: React.FC<Props> = (props) => {
   return (
     <div className={props.class} >
       <nav className="toggled-flex-container">
-        <span>Home</span>
-        <span>Recipes</span>
-        <span>Profile</span>
+        <Link to="/">Home</Link>
+        <Link to="/recipes">Recipes</Link>
+        <Link to="/login">Log in</Link>
       </nav>
     </div>
   )
