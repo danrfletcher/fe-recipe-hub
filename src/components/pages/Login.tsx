@@ -9,14 +9,14 @@ interface FormValues {
 
 const Login: React.FC = () => {
 
-  const isToggled = useAppSelector((state) => state.toggle.value);
+  const isNavToggled = useAppSelector((state) => state.navToggle.value);
   const { register, handleSubmit } = useForm<FormValues>()
   const submitForm: SubmitHandler<FormValues> = (data) => {
     console.log(data.username)
   }
 
   return (
-    <div className={isToggled ? "page-slide-in" : "page-slide-out"}>
+    <div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
       <h2>Welcome to Umami</h2>
       <form onSubmit={handleSubmit(submitForm)}>
         <div>

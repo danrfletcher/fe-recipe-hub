@@ -2,10 +2,10 @@ import { useAppSelector } from "../../app/hooks";
 
 const Register: React.FC = () => {
 
-  const isToggled = useAppSelector((state) => state.toggle.value);
+  const isNavToggled = useAppSelector((state) => state.navToggle.value);
 
   return (
-    <div className={isToggled ? "page-slide-in" : "page-slide-out"}>
+    <div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
       <h2>Register</h2>
     </div>
   )
