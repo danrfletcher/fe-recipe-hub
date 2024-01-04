@@ -4,7 +4,7 @@ import authReducer from "../features/auth/authSlice"
 
 export const store = configureStore({
   reducer: {
-    toggle: navReducer,
+    navToggle: navReducer,
     auth: authReducer
   }
 })

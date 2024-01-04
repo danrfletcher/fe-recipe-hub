@@ -12,12 +12,12 @@ const navSlice = createSlice({
   name: 'nav-toggle',
   initialState,
   reducers: {
-    toggle: (state) => {
+    navToggle: (state) => {
       state.value = !state.value
     }
   }
 })
 
-export const { toggle } = navSlice.actions
+export const { navToggle } = navSlice.actions
 
 export default navSlice.reducer
