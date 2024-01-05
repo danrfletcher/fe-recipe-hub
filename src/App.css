@@ -128,7 +128,7 @@ div.slide-out {
   text-underline-offset: 3px;
 }
 
-/* Login Page */
+/* Login // Register // LoginSuccess */
 
 .auth-header {
 	margin: 1.2em 0 0;
@@ -168,18 +168,48 @@ div.slide-out {
 	line-height: 3.5em;
 }
 
-.login-btn {
+.form-btns {
+	display: flex;
+}
+
+.styled-btn {
 	margin: 2.5em auto;
 	border: none;
 	border-radius: 50px;
 	padding: 0.6em 1.4em;
-	background: #0F664E;
-	color: white;
 	font-size: 1rem;
 	box-shadow: 0 0 2px black;
 	transition: 0.3s;
 }
 
-.login-btn:active {
+.auth-btn {
+	background: #0F664E;
+	color: white;
+}
+
+.back-btn {
+	background: #220F66;
+	color: white;
+}
+
+.styled-btn:active {
 	transform: scale(0.9);
+}
+
+.login-success {
+	display: flex;
+	flex-direction: column;
+}
+
+.login-success-text {
+	margin: 2em auto;
+}
+
+.username-text {
+	margin-top: 0.2em;
+	padding: 0.6em 0;
+	background-color: hsl(343, 74%, 23%, 5%);
+	color: #660f27;
+	font-size: 1.2rem;
+	font-weight: 600;
 }

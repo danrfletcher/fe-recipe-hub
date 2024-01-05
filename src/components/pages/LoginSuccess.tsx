@@ -18,13 +18,15 @@ const LoginSuccess: React.FC = () => {
   return (
     <div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
       <h2 className="auth-header">Welcome back!</h2>
-      <p>You are currently logged in as</p>
-      <span>{user}</span>
-      <button
-        className="login-btn"
-        onClick={handleClick}>
-        Log out
-      </button>
+      <div className="login-success">
+        <p className="login-success-text">You are currently logged in as:</p>
+        <span className="username-text">{user}</span>
+        <button
+          className="styled-btn back-btn"
+          onClick={handleClick}>
+          Log out
+        </button>
+      </div>
     </div>
   )
 }

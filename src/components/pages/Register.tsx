@@ -1,6 +1,7 @@
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { registerUser } from "../../features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 interface FormValues {
 	name: string;
 	username: string;
@@ -13,10 +14,11 @@ interface FormValues {
 const Register: React.FC = () => {
 
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
-	
+
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate()
 	const { register, handleSubmit } = useForm<FormValues>();
-	
+
 	const submitForm: SubmitHandler<FormValues> = (data) => {
 		if (data.password !== data.confirmPassword) {
 			alert("Passwords do not match!");
@@ -62,7 +64,7 @@ const Register: React.FC = () => {
 				</div>
 				<div className="input-wrapper">
 					<label htmlFor="profileImg" className="input-label" >
-						Image URL
+						Profile Image URL
 					</label>
 					<input
 						type="text"
@@ -70,6 +72,17 @@ const Register: React.FC = () => {
 						className="input-field"
 						{...register("ProfileImg")}
 						required />
+				</div>
+				<div className="input-wrapper">
+					<label htmlFor="bio" className="input-label" >Bio</label>
+					<input
+						type="text"
+						id="bio"
+						autoComplete="on"
+						className="input-field"
+						{...register("bio")}
+						required
+					/>
 				</div>
 				<div className="input-wrapper">
 					<label htmlFor="password" className="input-label" >
@@ -94,19 +107,19 @@ const Register: React.FC = () => {
 						required
 					/>
 				</div>
-				<div className="input-wrapper">
-					<label htmlFor="bio" className="input-label" >Add your bio</label>
-					<input
-						type="text"
-						id="bio"
-						autoComplete="on"
-						className="input-field"
-						{...register("bio")}
-						required
-					/></div>
-				<button type="submit" className="login-btn">
-					Register
-				</button>
+				<div className="form-btns">
+					<button
+						type="submit"
+						className="styled-btn auth-btn">
+						Register
+					</button>
+					<button
+						type="button"
+						className="styled-btn back-btn"
+						onClick={() => navigate("/login")}>
+						Back to Login
+					</button>
+				</div>
 			</form>
 		</div>
 	);
