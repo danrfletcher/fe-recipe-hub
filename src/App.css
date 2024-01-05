@@ -128,6 +128,13 @@ div.slide-out {
   text-underline-offset: 3px;
 }
 
+/* Login Page */
+
+.login-header {
+	margin: 1.2em 0 0;
+	color: #660f27;
+}
+
 .login-form {
 	display: flex;
 	flex-direction: column;
@@ -139,14 +146,15 @@ div.slide-out {
 .input-wrapper {
 	display: flex;
 	flex-direction: column;
-	margin-top: 1em;
+	margin-top: 1.4em;
 }
 
 .input-label {
-	margin-bottom: 1em;
+	margin-bottom: 0.9em;
 }
 
 .input-field {
+	margin: 0 5%;
 	border: none;
 	border-radius: 50px;
 	padding: 0 1em;
@@ -161,7 +169,7 @@ div.slide-out {
 }
 
 .login-btn {
-	margin: 1em auto;
+	margin: 2.5em auto;
 	border: none;
 	border-radius: 50px;
 	padding: 0.6em 1.4em;

@@ -30,7 +30,7 @@ const Login: React.FC = () => {
 
 	return (
 		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
-			<h2>Welcome to Umami</h2>
+			<h2 className="login-header">Welcome to Umami</h2>
 			<form className="login-form" onSubmit={handleSubmit(submitForm)}>
 				<div className="input-wrapper">
 					<label className="input-label" htmlFor="username">Username</label>
