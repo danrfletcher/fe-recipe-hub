@@ -33,7 +33,7 @@ const Register: React.FC = () => {
 
 	return (
 		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
-			<h2>Register</h2>
+			<h2 className="login-header">Register</h2>
 			<form
 				className="login-form"
 				onSubmit={handleSubmit(submitForm)}>
