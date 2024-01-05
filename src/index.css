@@ -37,6 +37,10 @@ main {
   padding-bottom: 1.2em;
 }
 
+button {
+  cursor: pointer;
+}
+
 footer {
   position: absolute;
   bottom: 0;
