@@ -37,7 +37,8 @@ export const login = (username: string, password: string): AppThunk =>
 			console.log(token);
 			dispatch(loginSuccess(token));
 		} catch (error: any) {
-			console.error("Login error:", error.response.data);
+			console.log(error.message)
+			// console.error("Login error:", error.response.data);
 		}
 	};
 
