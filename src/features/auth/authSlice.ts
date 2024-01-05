@@ -34,7 +34,6 @@ export const login = (username: string, password: string): AppThunk =>
 		try {
 			const response = await api.post("/login", { username, password });
 			const token = response.data;
-			console.log(token);
 			dispatch(loginSuccess(token));
 		} catch (error: any) {
 			console.log(error.message)
