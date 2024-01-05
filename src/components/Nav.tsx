@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { logout } from "../features/auth/authSlice";
 
 const Nav: React.FC = () => {
 	const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate()
 	const handleLogout = () => {
 		dispatch(logout());
+		navigate("/login")
 	};
 
 	return (
@@ -39,8 +41,10 @@ interface Props {
 export const ToggledNav: React.FC<Props> = (props) => {
 	const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate()
 	const handleLogout = () => {
 		dispatch(logout());
+		navigate("/login")
 	};
 
 	return (

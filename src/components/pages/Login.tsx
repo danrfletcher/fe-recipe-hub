@@ -10,13 +10,13 @@ interface FormValues {
 }
 
 const Login: React.FC = () => {
-	const navigate = useNavigate();
+
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
 	const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-
-	const { register, handleSubmit } = useForm<FormValues>();
-
+	
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+	const { register, handleSubmit } = useForm<FormValues>();
 
 	const submitForm: SubmitHandler<FormValues> = (data) => {
 		dispatch(login(data.username, data.password));

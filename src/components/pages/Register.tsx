@@ -13,9 +13,10 @@ interface FormValues {
 const Register: React.FC = () => {
 
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
-	const { register, handleSubmit } = useForm<FormValues>();
+	
 	const dispatch = useAppDispatch();
-
+	const { register, handleSubmit } = useForm<FormValues>();
+	
 	const submitForm: SubmitHandler<FormValues> = (data) => {
 		if (data.password !== data.confirmPassword) {
 			alert("Passwords do not match!");

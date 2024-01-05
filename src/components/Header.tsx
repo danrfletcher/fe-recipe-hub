@@ -6,6 +6,7 @@ import { ToggledNav } from "./Nav";
 const Header: React.FC = () => {
 
   const isNavToggled = useAppSelector((state) => state.navToggle.value);
+  
   const dispatch = useAppDispatch();
 
   return (
