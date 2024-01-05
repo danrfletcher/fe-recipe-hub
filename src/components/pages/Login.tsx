@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { login } from "../../features/auth/authSlice";
+import { useEffect } from "react";
 
 interface FormValues {
 	username: string;
@@ -9,21 +10,23 @@ interface FormValues {
 }
 
 const Login: React.FC = () => {
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
-	const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
+	const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
 	const { register, handleSubmit } = useForm<FormValues>();
 
 	const dispatch = useAppDispatch();
 
-	const submitForm: SubmitHandler<FormValues> = async (data) => {
+	const submitForm: SubmitHandler<FormValues> = (data) => {
 		dispatch(login(data.username, data.password));
-		if (isAuthenticated) {
-			navigate('/')
-		}
 	};
 
+	useEffect(() => {
+		if (isAuthenticated) {
+			navigate(-1);
+		}
+	}, [isAuthenticated]);
 	// const handleLogout = () => {
 	// 	dispatch(logout());
 	// };
@@ -33,7 +36,9 @@ const Login: React.FC = () => {
 			<h2 className="login-header">Welcome to Umami</h2>
 			<form className="login-form" onSubmit={handleSubmit(submitForm)}>
 				<div className="input-wrapper">
-					<label className="input-label" htmlFor="username">Username</label>
+					<label className="input-label" htmlFor="username">
+						Username
+					</label>
 					<input
 						type="text"
 						className="input-field"
@@ -44,7 +49,9 @@ const Login: React.FC = () => {
 					/>
 				</div>
 				<div className="input-wrapper">
-					<label className="input-label" htmlFor="password">Password</label>
+					<label className="input-label" htmlFor="password">
+						Password
+					</label>
 					<input
 						type="password"
 						className="input-field"
@@ -53,14 +60,15 @@ const Login: React.FC = () => {
 						required
 					/>
 				</div>
-				<button
-					className="login-btn"
-					type="submit">
+				<button className="login-btn" type="submit">
 					Log in
 				</button>
 			</form>
 			<p>
-				Not signed up? <Link className="nav-link" to="/register">Register</Link>
+				Not signed up?{" "}
+				<Link className="nav-link" to="/register">
+					Register
+				</Link>
 			</p>
 		</div>
 	);
