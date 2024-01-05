@@ -33,9 +33,9 @@ const Register: React.FC = () => {
 
 	return (
 		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
-			<h2 className="login-header">Register</h2>
+			<h2 className="auth-header">Register</h2>
 			<form
-				className="login-form"
+				className="auth-form"
 				onSubmit={handleSubmit(submitForm)}>
 				<div className="input-wrapper">
 					<label htmlFor="name" className="input-label" >

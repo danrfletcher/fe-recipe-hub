@@ -130,12 +130,12 @@ div.slide-out {
 
 /* Login Page */
 
-.login-header {
+.auth-header {
 	margin: 1.2em 0 0;
 	color: #660f27;
 }
 
-.login-form {
+.auth-form {
 	display: flex;
 	flex-direction: column;
 	margin: auto;
