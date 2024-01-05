@@ -7,6 +7,7 @@ interface AuthState {
 	token: string | null;
 	hasRegistered: boolean;
 }
+
 const initialState: AuthState = {
 	isAuthenticated: false,
 	token: null,
@@ -33,25 +34,33 @@ const authSlice = createSlice({
 
 export const login =
 	(username: string, password: string): AppThunk =>
-	async (dispatch) => {
-		try {
-			const response = await api.post("/login", { username, password });
-			const token = response.data;
-			dispatch(loginSuccess(token));
-		} catch (error: any) {
-			console.log(error.message);
-			// console.error("Login error:", error.response.data);
-		}
-	};
+		async (dispatch) => {
+			try {
+				const response = await api.post("/login", { username, password });
+				const token = response.data;
+				dispatch(loginSuccess(token));
+				console.log("Login successful")
+			} catch (error: any) {
+				console.log(error.response.data);
+			}
+		};
 
-export const registerUser =
-	(username: string,name: string,ProfileImg: string, password: string, bio: string): AppThunk =>
+export const registerUser = (
+	username: string,
+	name: string,
+	ProfileImg: string,
+	password: string,
+	bio: string
+): AppThunk =>
 	async () => {
 		try {
-      await api.post("/register", { username, name, ProfileImg, password, bio  });
-			console.log("registration successful");
+			await api.post("/register", { username, name, ProfileImg, password, bio });
+			console.log("Registration successful");
 		} catch (error: any) {
-			console.log(error);
+			console.log(error.response.data);
+			if (error.response.data === "Username already exists") {
+				return Promise.reject({ message: "That username already exists" })
+			}
 		}
 	};
 

@@ -24,12 +24,9 @@ const Login: React.FC = () => {
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			navigate(-1);
+			navigate("/login/success");
 		}
 	}, [isAuthenticated]);
-	// const handleLogout = () => {
-	// 	dispatch(logout());
-	// };
 
 	return (
 		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
@@ -75,5 +72,3 @@ const Login: React.FC = () => {
 };
 
 export default Login;
-
-//need to get the token and put it in the header with "authorization" and `Bearer {token}` for anything that needs authorisation
