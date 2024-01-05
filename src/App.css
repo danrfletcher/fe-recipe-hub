@@ -114,3 +114,16 @@ div.slide-out {
 	color: #660f27;
 	cursor: pointer;
 }
+
+.nav-link {
+  text-decoration: none;
+  background: none;
+  color: #660f27;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  text-decoration: 1px underline;
+  text-underline-offset: 3px;
+}

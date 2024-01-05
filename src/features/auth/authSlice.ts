@@ -1,33 +1,51 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { AppThunk } from "../../app/store";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { api } from "../../utils/api-utils";
 
-type User = {
-  username?: string,
-  password?: string
-}
 
 interface AuthState {
-  loading: boolean,
-  userInfo: User,
-  userToken: string | null,
-  error: string | null,
-  success: boolean
+	isAuthenticated: boolean;
+	token: string | null;
 }
-
 const initialState: AuthState = {
-  loading: false,
-  userInfo: {}, // for user object
-  userToken: null, // for JWT
-  error: null,
-  success: false // monitors registration process
-}
+	isAuthenticated: false,
+	token: null,
+};
 
 const authSlice = createSlice({
-  name: "auth",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-  }
-})
+	name: "auth",
+	initialState,
+	reducers: {
+		loginSuccess: (state, action: PayloadAction<string>) => {
+			state.isAuthenticated = true;
+			state.token = action.payload;
+		},
+		logout: (state) => {
+			state.isAuthenticated = false;
+			state.token = null;
+		},
+	},
+	extraReducers: (builder) => {
+		builder;
+	},
+});
 
-export default authSlice.reducer
+
+export const login =
+(username: string, password: string): AppThunk =>
+async (dispatch) => {
+  try {
+    const response = await api.post("/login", { username, password });
+
+			const token = response.data;
+			console.log(token, "<<<<token");
+			dispatch(loginSuccess(token));
+		} catch (error: any) {
+      console.error("Login error:", error.response.data);
+      
+		}
+	};
+
+
+    export const { loginSuccess, logout } = authSlice.actions;
+    export default authSlice.reducer;
