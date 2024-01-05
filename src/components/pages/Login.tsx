@@ -31,30 +31,36 @@ const Login: React.FC = () => {
 	return (
 		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
 			<h2>Welcome to Umami</h2>
-			<form onSubmit={handleSubmit(submitForm)}>
-				<div>
-					<label htmlFor="username">Username</label>
+			<form className="login-form" onSubmit={handleSubmit(submitForm)}>
+				<div className="input-wrapper">
+					<label className="input-label" htmlFor="username">Username</label>
 					<input
 						type="text"
+						className="input-field"
 						id="username"
 						autoComplete="on"
 						{...register("username")}
 						required
 					/>
 				</div>
-				<div className="form-group">
-					<label htmlFor="password">Password</label>
+				<div className="input-wrapper">
+					<label className="input-label" htmlFor="password">Password</label>
 					<input
 						type="password"
+						className="input-field"
 						id="password"
 						{...register("password")}
 						required
 					/>
 				</div>
-				<button type="submit">Log in</button>
+				<button
+					className="login-btn"
+					type="submit">
+					Log in
+				</button>
 			</form>
 			<p>
-				Not signed up? <Link to="/register">Register</Link>
+				Not signed up? <Link className="nav-link" to="/register">Register</Link>
 			</p>
 		</div>
 	);
