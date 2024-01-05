@@ -22,11 +22,7 @@ const Nav: React.FC = () => {
 					className="nav-link"
 					onClick={() => {
 						handleLogout();
-						console.log("clicked");
-					}}
-				>
-					Log out
-				</span>
+					}}>Log out</span>
 			) : (
 				<Link className="nav-link" to="/login">
 					Log in
@@ -61,13 +57,11 @@ export const ToggledNav: React.FC<Props> = (props) => {
 						className="nav-link"
 						onClick={() => {
 							handleLogout();
-							console.log("clicked");
-						}}
-					>
-						Log out
-					</span>
+						}}>Log out</span>
 				) : (
-					<Link className="nav-link" to="/login">Log in</Link>
+					<Link className="nav-link" to="/login">
+						Log in
+					</Link>
 				)}
 			</nav>
 		</div>

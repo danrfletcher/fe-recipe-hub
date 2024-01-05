@@ -1,1 +1,0 @@
-The components folder is where we store our components.

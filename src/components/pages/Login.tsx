@@ -1,35 +1,29 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { login } from "../../features/auth/authSlice";
-// import React from "react";
-
-
 
 interface FormValues {
 	username: string;
 	password: string;
-}  
+}
 
 const Login: React.FC = () => {
-  const navigate = useNavigate()
+	const navigate = useNavigate()
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
-  const isAuthenticated = useAppSelector((state)=>state.auth.isAuthenticated)
- 
+	const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
+
 	const { register, handleSubmit } = useForm<FormValues>();
 
 	const dispatch = useAppDispatch();
 
 	const submitForm: SubmitHandler<FormValues> = async (data) => {
 		dispatch(login(data.username, data.password));
-  if (isAuthenticated){
-    navigate('/')
-  }  
+		if (isAuthenticated) {
+			navigate('/')
+		}
 	};
 
-
-
-// need to finish it
 	// const handleLogout = () => {
 	// 	dispatch(logout());
 	// };
@@ -67,6 +61,5 @@ const Login: React.FC = () => {
 };
 
 export default Login;
-
 
 //need to get the token and put it in the header with "authorization" and `Bearer {token}` for anything that needs authorisation

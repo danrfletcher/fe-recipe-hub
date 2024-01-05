@@ -2,7 +2,6 @@ import { AppThunk } from "../../app/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { api } from "../../utils/api-utils";
 
-
 interface AuthState {
 	isAuthenticated: boolean;
 	token: string | null;
@@ -30,22 +29,17 @@ const authSlice = createSlice({
 	},
 });
 
-
-export const login =
-(username: string, password: string): AppThunk =>
-async (dispatch) => {
-  try {
-    const response = await api.post("/login", { username, password });
-
+export const login = (username: string, password: string): AppThunk =>
+	async (dispatch) => {
+		try {
+			const response = await api.post("/login", { username, password });
 			const token = response.data;
-			console.log(token, "<<<<token");
+			console.log(token);
 			dispatch(loginSuccess(token));
 		} catch (error: any) {
-      console.error("Login error:", error.response.data);
-      
+			console.error("Login error:", error.response.data);
 		}
 	};
 
-
-    export const { loginSuccess, logout } = authSlice.actions;
-    export default authSlice.reducer;
+export const { loginSuccess, logout } = authSlice.actions;
+export default authSlice.reducer;
