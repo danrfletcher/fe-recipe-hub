@@ -55,7 +55,6 @@ export const login =
 		async (dispatch) => {
 			try {
 				const response = await api.post("/login", { username, password });
-				console.log(response.data)
 				// dispatching a response object to the store to update the state
 				dispatch(loginSuccess(response.data));
 				console.log("Login successful")
