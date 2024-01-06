@@ -5,7 +5,7 @@ import { logout } from "../../features/auth/authSlice"
 const LoginSuccess: React.FC = () => {
 
   const isNavToggled = useAppSelector((state) => state.navToggle.value)
-  const user = useAppSelector((state) => state.user.value)
+  const user = useAppSelector((state) => state.auth.username)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -17,7 +17,7 @@ const LoginSuccess: React.FC = () => {
 
   return (
     <div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
-      <h2 className="auth-header">Welcome back!</h2>
+      <h2 className="auth-header">Hello!</h2>
       <div className="login-success">
         <p className="login-success-text">You are currently logged in as:</p>
         <span className="username-text">{user}</span>

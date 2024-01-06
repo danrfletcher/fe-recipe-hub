@@ -1,9 +1,8 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { login } from "../../features/auth/authSlice";
+import { loading, login } from "../../features/auth/authSlice";
 import { useEffect } from "react";
-import { updateUser } from "../../features/userSlice";
 
 interface FormValues {
 	username: string;
@@ -14,14 +13,18 @@ const Login: React.FC = () => {
 
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
 	const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-	
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const { register, handleSubmit } = useForm<FormValues>();
 
+	const isError = useAppSelector((state) => state.auth.isError)
+	const error = useAppSelector((state) => state.auth.error)
+	const isLoading = useAppSelector((state) => state.auth.isLoading)
+
 	const submitForm: SubmitHandler<FormValues> = (data) => {
+		dispatch(loading())
 		dispatch(login(data.username, data.password));
-		// dispatch(updateUser(data.username))
+	
 	};
 
 	useEffect(() => {
@@ -59,7 +62,17 @@ const Login: React.FC = () => {
 						required
 					/>
 				</div>
-				<button className="styled-btn auth-btn" type="submit">
+				{isError ? (
+					<div className="error-section">
+						<p>{error}</p>
+					</div>
+				) : (
+					null
+				)}
+				<button 
+				className="styled-btn auth-btn" 
+				type="submit"
+				disabled={isLoading}>
 					Log in
 				</button>
 			</form>
