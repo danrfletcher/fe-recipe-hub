@@ -14,18 +14,23 @@ const Login: React.FC = () => {
 
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
 	const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-	
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const { register, handleSubmit } = useForm<FormValues>();
 
+  // use isError as tennary to display the {error} message when there's an error 
+  const isError = useAppSelector((state)=>state.auth.isError)
+  const error = useAppSelector((state)=>state.auth.error)
+
+console.log(error, '<<<this is the error')
+
 	const submitForm: SubmitHandler<FormValues> = (data) => {
 		dispatch(login(data.username, data.password));
-		dispatch(updateUser(data.username))
+    dispatch(updateUser(data.username))
 	};
-
+  
 	useEffect(() => {
-		if (isAuthenticated) {
+    if (isAuthenticated) {
 			navigate("/login/success");
 		}
 	}, [isAuthenticated]);
