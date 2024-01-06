@@ -183,13 +183,18 @@ div.slide-out {
 }
 
 .auth-btn {
-	background: #0F664E;
+	background: #734060;
 	color: white;
 }
 
 .back-btn {
-	background: #220F66;
+	background: #404673;
 	color: white;
+}
+
+.auth-btn:disabled, .back-btn:disabled {
+	background: white;
+	color: gray;
 }
 
 .styled-btn:active {
