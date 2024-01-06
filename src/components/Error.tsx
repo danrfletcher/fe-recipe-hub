@@ -9,6 +9,7 @@ const Error: React.FC = (props: any) => {
       <h2>Error</h2>
       <p>{props.message}</p>
       <button
+        className="styled-btn back-btn"
         onClick={() => navigate(-1)}>
         Back
       </button>
