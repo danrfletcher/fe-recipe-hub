@@ -22,9 +22,6 @@ const Login: React.FC = () => {
 	const isError = useAppSelector((state) => state.auth.isError)
 	const error = useAppSelector((state) => state.auth.error)
 
-	console.log(isError, '<<<this is the error status')
-	console.log(error, '<<<this is the error')
-
 	const submitForm: SubmitHandler<FormValues> = (data) => {
 		dispatch(login(data.username, data.password));
 		// dispatch(updateUser(data.username))
