@@ -227,3 +227,14 @@ div.slide-out {
 	line-height: 2.2rem;
 	color: #921538;
 }
+
+img {
+  height: 20vh;
+}
+
+.recipe-div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
