@@ -21,13 +21,14 @@ const recipesSlice = createSlice({
 })
 
 export const getAllRecipes = ():AppThunk =>{
-  async (dispatch) =>{
+ return async (dispatch) =>{
   try {
     const response = await api.get("/recipes")
     console.log(response)
-    dispatch(getRecipes(response))
-return response  }
+    dispatch(getRecipes(response.data))
+  }
   catch (error){
+    
     console.log(error)
   }
 }

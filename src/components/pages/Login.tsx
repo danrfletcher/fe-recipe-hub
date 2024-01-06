@@ -21,7 +21,7 @@ const Login: React.FC = () => {
 
 	const submitForm: SubmitHandler<FormValues> = (data) => {
 		dispatch(login(data.username, data.password));
-		dispatch(updateUser(data.username))
+		// dispatch(updateUser(data.username))
 	};
 
 	useEffect(() => {

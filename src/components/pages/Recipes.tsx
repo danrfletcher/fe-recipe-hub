@@ -1,14 +1,17 @@
 import { useEffect } from "react";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { getAllRecipes } from "../../features/allRecipiesSlice";
 
 const Recipes: React.FC = () => {
 
   const isNavToggled = useAppSelector((state) => state.navToggle.value);
   const listOfRecipes = useAppSelector((state)=>state.recipes.allRecipes)
-  
-  useEffect(()=>{
+  const dispatch = useAppDispatch()  
 
-  },[listOfRecipes])
+
+  useEffect(()=>{
+    dispatch(getAllRecipes())
+  },[])
   
   
   return (
