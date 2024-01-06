@@ -1,7 +1,8 @@
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { authFail, registerUser } from "../../features/auth/authSlice";
+import { authFail, loading, registerUser } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 interface FormValues {
 	name: string;
@@ -17,6 +18,8 @@ const Register: React.FC = () => {
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
 	const isError = useAppSelector((state) => state.auth.isError)
 	const error = useAppSelector((state) => state.auth.error)
+	const isLoading = useAppSelector((state) => state.auth.isLoading)
+	const hasRegistered = useAppSelector((state) => state.auth.hasRegistered)
 
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate()
@@ -28,6 +31,7 @@ const Register: React.FC = () => {
 		} else if (data.password.length < 6) {
 			dispatch(authFail("Password must contain at least 6 characters"))
 		} else {
+			dispatch(loading())
 			dispatch(registerUser(
 				data.username,
 				data.name,
@@ -35,9 +39,14 @@ const Register: React.FC = () => {
 				data.password,
 				data.bio
 			))
-			navigate("/login")
 		}
 	}
+
+	useEffect(() => {
+		if (hasRegistered) {
+			navigate("/login");
+		}
+	}, [hasRegistered]);
 
 	return (
 		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
@@ -123,12 +132,14 @@ const Register: React.FC = () => {
 				<div className="form-btns">
 					<button
 						type="submit"
-						className="styled-btn auth-btn">
+						className="styled-btn auth-btn"
+						disabled={isLoading}>
 						Register
 					</button>
 					<button
 						type="button"
 						className="styled-btn back-btn"
+						disabled={isLoading}
 						onClick={() => navigate("/login")}>
 						Back to Login
 					</button>

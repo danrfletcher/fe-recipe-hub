@@ -10,6 +10,7 @@ interface AuthState {
 	hasRegistered: boolean;
 	isError: boolean;
 	error: string | null
+	isLoading: boolean
 }
 
 const initialState: AuthState = {
@@ -19,7 +20,8 @@ const initialState: AuthState = {
 	username: null,
 	hasRegistered: false,
 	isError: false,
-	error: null
+	error: null,
+	isLoading: false
 };
 
 const authSlice = createSlice({
@@ -33,17 +35,30 @@ const authSlice = createSlice({
 			state.username = action.payload.username
 			state.error = null
 			state.isError = false
+			state.isLoading = false
+			state.hasRegistered = false
+		},
+		registrationSuccess: (state) => {
+			state.hasRegistered = true
+			state.isLoading = false
 		},
 		authFail: (state, action: PayloadAction<string>) => {
 			state.isError = true;
 			state.error = action.payload;
+			state.isLoading = false
+			state.hasRegistered = false
 		},
 		logout: (state) => {
 			state.isAuthenticated = false;
 			state.token = null;
 			state.userId = null;
 			state.username = null
+			state.isLoading = false
+			state.hasRegistered = false
 		},
+		loading: (state) => {
+			state.isLoading = true
+		}
 	},
 	extraReducers: (builder) => {
 		builder;
@@ -55,7 +70,6 @@ export const login =
 		async (dispatch) => {
 			try {
 				const response = await api.post("/login", { username, password });
-				// dispatching a response object to the store to update the state
 				dispatch(loginSuccess(response.data));
 				console.log("Login successful")
 			} catch (error: any) {
@@ -75,6 +89,7 @@ export const registerUser = (
 	async (dispatch) => {
 		try {
 			await api.post("/register", { username, name, ProfileImg, password, bio });
+			dispatch(registrationSuccess())
 			console.log("Registration successful");
 		} catch (error: any) {
 			const baseError = error.response.data
@@ -86,5 +101,5 @@ export const registerUser = (
 		}
 	};
 
-export const { loginSuccess, logout, authFail } = authSlice.actions;
+export const { loginSuccess, logout, authFail, loading, registrationSuccess } = authSlice.actions;
 export default authSlice.reducer;
