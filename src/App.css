@@ -213,3 +213,12 @@ div.slide-out {
 	font-size: 1.2rem;
 	font-weight: 600;
 }
+
+.error-section > p {
+	margin: 2em 5% 0;
+	border: 1px solid hsl(343, 74%, 23%, 50%);
+	border-radius: 2px;
+	background: hsl(343, 74%, 23%, 5%);
+	line-height: 2.2rem;
+	color: #921538;
+}
