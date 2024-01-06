@@ -5,21 +5,21 @@ import { api } from "../../utils/api-utils";
 interface AuthState {
 	isAuthenticated: boolean;
 	token: string | null;
-  userId: number | null;
-  username: string | null;
+	userId: number | null;
+	username: string | null;
 	hasRegistered: boolean;
-  isError: boolean;
-  error: string | null
+	isError: boolean;
+	error: string | null
 }
 
 const initialState: AuthState = {
 	isAuthenticated: false,
 	token: null,
-  userId: null,
-  username: null,
+	userId: null,
+	username: null,
 	hasRegistered: false,
-  isError: false,
-  error: null
+	isError: false,
+	error: null
 };
 
 const authSlice = createSlice({
@@ -29,20 +29,20 @@ const authSlice = createSlice({
 		loginSuccess: (state, action: PayloadAction<any>) => {
 			state.isAuthenticated = true;
 			state.token = action.payload.token;
-      state.userId = action.payload.userId;
-      state.username = action.payload.username
+			state.userId = action.payload.userId;
+			state.username = action.payload.username
 			state.error = null
 			state.isError = false
 		},
-    loginFail: (state, action: PayloadAction<string>) =>{
-      state.isError = true;
-      state.error = action.payload;
-    },
+		authFail: (state, action: PayloadAction<string>) => {
+			state.isError = true;
+			state.error = action.payload;
+		},
 		logout: (state) => {
 			state.isAuthenticated = false;
 			state.token = null;
-      state.userId = null;
-      state.username = null
+			state.userId = null;
+			state.username = null
 		},
 	},
 	extraReducers: (builder) => {
@@ -55,14 +55,14 @@ export const login =
 		async (dispatch) => {
 			try {
 				const response = await api.post("/login", { username, password });
-        console.log(response.data)
+				console.log(response.data)
 				// dispatching a response object to the store to update the state
 				dispatch(loginSuccess(response.data));
 				console.log("Login successful")
 			} catch (error: any) {
 				console.log(error.response.data);
-        const errorMsg = error.response.data
-        dispatch(loginFail(errorMsg))
+				const errorMsg = error.response.data
+				dispatch(authFail(errorMsg))
 			}
 		};
 
@@ -73,17 +73,19 @@ export const registerUser = (
 	password: string,
 	bio: string
 ): AppThunk =>
-	async () => {
+	async (dispatch) => {
 		try {
 			await api.post("/register", { username, name, ProfileImg, password, bio });
 			console.log("Registration successful");
 		} catch (error: any) {
-			console.log(error.response.data);
-			if (error.response.data === "Username already exists") {
-				return Promise.reject({ message: "That username already exists" })
+			const baseError = error.response.data
+			if (baseError.errors) {
+				console.log(baseError)
+			} else {
+				dispatch(authFail(baseError))
 			}
 		}
 	};
 
-export const { loginSuccess, logout, loginFail } = authSlice.actions;
+export const { loginSuccess, logout, authFail } = authSlice.actions;
 export default authSlice.reducer;

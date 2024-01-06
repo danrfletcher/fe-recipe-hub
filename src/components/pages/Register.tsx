@@ -1,7 +1,8 @@
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { registerUser } from "../../features/auth/authSlice";
+import { authFail, registerUser } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+
 interface FormValues {
 	name: string;
 	username: string;
@@ -14,6 +15,8 @@ interface FormValues {
 const Register: React.FC = () => {
 
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
+	const isError = useAppSelector((state) => state.auth.isError)
+	const error = useAppSelector((state) => state.auth.error)
 
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate()
@@ -21,7 +24,9 @@ const Register: React.FC = () => {
 
 	const submitForm: SubmitHandler<FormValues> = (data) => {
 		if (data.password !== data.confirmPassword) {
-			alert("Passwords do not match!");
+			dispatch(authFail("Passwords do not match"))
+		} else if (data.password.length < 6) {
+			dispatch(authFail("Password must contain at least 6 characters"))
 		} else {
 			dispatch(registerUser(
 				data.username,
@@ -30,6 +35,7 @@ const Register: React.FC = () => {
 				data.password,
 				data.bio
 			))
+			navigate("/login")
 		}
 	}
 
@@ -107,6 +113,13 @@ const Register: React.FC = () => {
 						required
 					/>
 				</div>
+				{isError ? (
+					<div className="error-section">
+						<p>{error}</p>
+					</div>
+				) : (
+					null
+				)}
 				<div className="form-btns">
 					<button
 						type="submit"
