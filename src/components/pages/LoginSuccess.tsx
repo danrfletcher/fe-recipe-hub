@@ -5,7 +5,7 @@ import { logout } from "../../features/auth/authSlice"
 const LoginSuccess: React.FC = () => {
 
   const isNavToggled = useAppSelector((state) => state.navToggle.value)
-  const user = useAppSelector((state) => state.user.value)
+  const user = useAppSelector((state) => state.auth.username)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
