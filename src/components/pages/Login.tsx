@@ -18,19 +18,20 @@ const Login: React.FC = () => {
 	const navigate = useNavigate();
 	const { register, handleSubmit } = useForm<FormValues>();
 
-  // use isError as tennary to display the {error} message when there's an error 
-  const isError = useAppSelector((state)=>state.auth.isError)
-  const error = useAppSelector((state)=>state.auth.error)
+	// use isError as tennary to display the {error} message when there's an error 
+	const isError = useAppSelector((state) => state.auth.isError)
+	const error = useAppSelector((state) => state.auth.error)
 
-console.log(error, '<<<this is the error')
+	console.log(isError, '<<<this is the error status')
+	console.log(error, '<<<this is the error')
 
 	const submitForm: SubmitHandler<FormValues> = (data) => {
 		dispatch(login(data.username, data.password));
-    // dispatch(updateUser(data.username))
+		// dispatch(updateUser(data.username))
 	};
-  
+
 	useEffect(() => {
-    if (isAuthenticated) {
+		if (isAuthenticated) {
 			navigate("/login/success");
 		}
 	}, [isAuthenticated]);
@@ -64,6 +65,13 @@ console.log(error, '<<<this is the error')
 						required
 					/>
 				</div>
+				{isError ? (
+					<div className="error-section">
+						<p>{error}</p>
+					</div>
+				) : (
+					null
+				)}
 				<button className="styled-btn auth-btn" type="submit">
 					Log in
 				</button>
