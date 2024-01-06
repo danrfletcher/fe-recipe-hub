@@ -1,13 +1,13 @@
 import { configureStore, ThunkAction, Action  } from "@reduxjs/toolkit"
 import navReducer from "../features/navSlice"
 import authReducer from "../features/auth/authSlice"
-import userReducer from "../features/userSlice"
+// import userReducer from "../features/userSlice"
 
 export const store = configureStore({
   reducer: {
     navToggle: navReducer,
     auth: authReducer,
-    user: userReducer
+    // user: userReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

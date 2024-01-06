@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { login } from "../../features/auth/authSlice";
 import { useEffect } from "react";
-import { updateUser } from "../../features/userSlice";
+// import { updateUser } from "../../features/userSlice";
 
 interface FormValues {
 	username: string;
@@ -26,7 +26,7 @@ console.log(error, '<<<this is the error')
 
 	const submitForm: SubmitHandler<FormValues> = (data) => {
 		dispatch(login(data.username, data.password));
-    dispatch(updateUser(data.username))
+    // dispatch(updateUser(data.username))
 	};
   
 	useEffect(() => {
