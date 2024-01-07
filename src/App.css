@@ -11,11 +11,17 @@
 	nav.toggled-flex-container {
 		display: none;
 	}
+	.profile-wrapper {
+		max-width: 480px;
+	}
 }
 
 @media (max-width: 500px) {
 	nav.flex-container {
 		display: none;
+	}
+	.profile-wrapper {
+		max-width: 90vw;
 	}
 
 	@keyframes page-slide-in {
@@ -220,8 +226,9 @@ div.slide-out {
 .profile-wrapper {
 	display: flex;
 	flex-direction: column;
-	border-top: 1px solid hsl(343, 74%, 23%, 30%);
-	border-bottom: 1px solid hsl(343, 74%, 23%, 40%);
+	margin: auto;
+	border: 1px solid hsl(343, 74%, 23%, 30%);
+	border-radius: 10px;
 }
 
 .profile-text {
