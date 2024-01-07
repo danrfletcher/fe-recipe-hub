@@ -6,7 +6,9 @@ This is the front-end repository for Team HypeScript's group project.
 
 The application is built with React (inc. Redux Toolkit), Vite, and TypeScript and takes advantage of useful libraries including Axios, React Hook Form, and React Icons.
 
-When users interact with the site, request are made to our API, the link to which can be found [here](http://ec2-13-40-213-131.eu-west-2.compute.amazonaws.com:5000/swagger/index.html).
+The hosted application can be accessed [here](http://ec2-13-40-213-131.eu-west-2.compute.amazonaws.com:3000/).
+
+When users interact with the site, requests are made to our API, the link to which can be found [here](http://ec2-13-40-213-131.eu-west-2.compute.amazonaws.com:5000/swagger/index.html).
 
 This is a work in progress.
 

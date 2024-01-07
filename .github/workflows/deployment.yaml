@@ -1,0 +1,35 @@
+name: Deploy to server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout and clone repo
+        uses: actions/checkout@v4.1.1
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ec2-13-40-213-131.eu-west-2.compute.amazonaws.com >> ~/.ssh/known_hosts
+
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Copy deployment script
+        run: |
+          scp -o StrictHostKeyChecking=no scripts/deployment_script.sh ubuntu@ec2-13-40-213-131.eu-west-2.compute.amazonaws.com:~
+
+      - name: Run deployment script
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-13-40-213-131.eu-west-2.compute.amazonaws.com "\
+          ls -l ~/deployment_script.sh && \
+          chmod +x ~/deployment_script.sh && \
+          bash ~/deployment_script.sh"
