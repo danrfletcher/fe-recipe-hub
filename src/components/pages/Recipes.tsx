@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getAllRecipes } from "../../features/allRecipesSlice";
 import RecipeCard from "../RecipeCard";
-import { Ingredients } from "../Ingredients";
 
 const Recipes: React.FC = () => {
 
@@ -17,9 +16,8 @@ const Recipes: React.FC = () => {
 
 	return (
 		<>
-			<Ingredients />
 			<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
-				<h2>Recipes</h2>
+			<h2 className="cursive-header">Find the recipes you love</h2>
 				<div className="recipe-div">
 					{listOfRecipes.map((recipe) => {
 						return (
