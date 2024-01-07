@@ -31,6 +31,7 @@ export const CreateRecipe: React.FC = () => {
 					</label>
 					<input
 						type="text"
+            placeholder="Spaghetti..."
 						id="recipeTitle"
 						className="input-field"
 						{...register("recipeTitle")}
@@ -43,6 +44,7 @@ export const CreateRecipe: React.FC = () => {
 					</label>
 					<input
 						type="text"
+            placeholder="Classic Italian..."
 						id="tagLine"
 						autoComplete="on"
 						className="input-field"
@@ -90,6 +92,7 @@ export const CreateRecipe: React.FC = () => {
 					</label>
 					<input
 						type="url"
+            placeholder="www.recipeImage.co.uk"
 						id="recipeImg"
 						className="input-field"
 						{...register("recipeImg")}
@@ -98,7 +101,7 @@ export const CreateRecipe: React.FC = () => {
 				</div>
 				<div className="input-wrapper">
 					<label htmlFor="cuisine" className="input-label">
-						Difficulty Rating
+						Select Cuisine
 					</label>
 					<select
 						id="cuisine"
@@ -136,3 +139,5 @@ export const CreateRecipe: React.FC = () => {
 		</div>
 	);
 };
+
+
