@@ -135,6 +135,17 @@ div.slide-out {
 	color: #660f27;
 }
 
+.auth-img {
+	object-fit: cover;
+	border-radius: 100%;
+	width: 170px;
+	height: 170px;
+	max-height: 80vw;
+	max-width: 80vw;
+	box-shadow: 0 0 6px 1px #222222;
+	appearance: none;
+}
+
 .auth-form {
 	display: flex;
 	flex-direction: column;
@@ -202,22 +213,40 @@ div.slide-out {
 	transform: scale(0.9);
 }
 
-.login-success {
+.profile-el {
+	margin-bottom: 30px;
+}
+
+.profile-wrapper {
 	display: flex;
 	flex-direction: column;
+	border-top: 1px solid hsl(343, 74%, 23%, 30%);
+	border-bottom: 1px solid hsl(343, 74%, 23%, 40%);
 }
 
-.login-success-text {
-	margin: 2em auto;
-}
-
-.username-text {
-	margin-top: 0.2em;
-	padding: 0.6em 0;
+.profile-text {
+	padding: 1em 1em 0;
 	background-color: hsl(343, 74%, 23%, 5%);
 	color: #660f27;
-	font-size: 1.2rem;
-	font-weight: 600;
+	font-size: 1rem;
+	text-align: justify;
+}
+
+.profile-text {
+	padding: 1em 1em 0;
+	background-color: hsl(343, 74%, 23%, 5%);
+	color: #660f27;
+	font-size: 1rem;
+	font-weight: 400;
+	text-align: justify;
+}
+
+.profile-header {
+	font-weight: 500;
+}
+
+.profile-bio {
+	padding-bottom: 1em;
 }
 
 .error-section > p {
