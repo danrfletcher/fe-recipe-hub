@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useAppDispatch } from "../app/hooks";
 import { recipeId } from "../features/singleRecipeSlice";
 import { Recipe } from "../features/allRecipesSlice";
-import { lengthenDate } from "../utils/formatting-utils";
+import { formatTime, lengthenDate } from "../utils/formatting-utils";
 import { LuChefHat } from "react-icons/lu";
 
 const RecipeCard: React.FC<Recipe> = (props) => {
@@ -44,7 +44,7 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 						Difficulty: {setDifficulty(props.difficulty)}
 					</p>
 					<p className="recipe-facts recipe-el">
-						Prep time: {props.timeToPrepare} minutes
+						Prep time: {formatTime(props.timeToPrepare)}
 					</p>
 				</div>
 			</div>
