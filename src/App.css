@@ -12,7 +12,7 @@
 		display: none;
 	}
 	.profile-wrapper {
-		max-width: 480px;
+		max-width: 460px;
 	}
 }
 
@@ -234,21 +234,14 @@ div.slide-out {
 .profile-text {
 	padding: 1em 1em 0;
 	background-color: hsl(343, 74%, 23%, 5%);
-	color: #660f27;
-	font-size: 1rem;
-	text-align: justify;
-}
-
-.profile-text {
-	padding: 1em 1em 0;
-	background-color: hsl(343, 74%, 23%, 5%);
-	color: #660f27;
+	color: #222222;
 	font-size: 1rem;
 	font-weight: 400;
 	text-align: justify;
 }
 
 .profile-header {
+	color: #660f27;
 	font-weight: 500;
 }
 
