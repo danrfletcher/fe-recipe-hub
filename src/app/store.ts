@@ -3,12 +3,17 @@ import navReducer from "../features/navSlice";
 import authReducer from "../features/auth/authSlice";
 import recipesReducer from "../features/allRecipesSlice";
 import singleRecipeReducer from "../features/singleRecipeSlice.ts"
+import ingredientsReducer from "../features/ingredientsSlice.ts"
+
+
 export const store = configureStore({
 	reducer: {
 		navToggle: navReducer,
 		auth: authReducer,
 		recipes: recipesReducer,
     singleRecipe: singleRecipeReducer,
+    ingredients: ingredientsReducer
+    
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
