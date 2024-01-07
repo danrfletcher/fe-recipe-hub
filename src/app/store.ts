@@ -4,7 +4,7 @@ import authReducer from "../features/auth/authSlice";
 import recipesReducer from "../features/allRecipesSlice";
 import singleRecipeReducer from "../features/singleRecipeSlice.ts"
 import ingredientsReducer from "../features/ingredientsSlice.ts"
-
+import cuisinesReducer from "../features/cuisineSlice.ts"
 
 export const store = configureStore({
 	reducer: {
@@ -12,7 +12,8 @@ export const store = configureStore({
 		auth: authReducer,
 		recipes: recipesReducer,
     singleRecipe: singleRecipeReducer,
-    ingredients: ingredientsReducer
+    ingredients: ingredientsReducer,
+    cuisines: cuisinesReducer
     
 	},
 	middleware: (getDefaultMiddleware) =>

@@ -1,5 +1,6 @@
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { getAllCuisines } from "../../features/cuisineSlice";
 
 interface FormValues {
 	recipeTitle: string;
@@ -19,6 +20,8 @@ export const CreateRecipe: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { register, handleSubmit } = useForm<FormValues>();
 
+  dispatch(getAllCuisines())
+  
 	const submitForm: SubmitHandler<FormValues> = (data) => {};
 
 	return (
