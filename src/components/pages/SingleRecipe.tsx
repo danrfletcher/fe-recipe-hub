@@ -18,7 +18,7 @@ const SingleRecipe: React.FC = () => {
 		<div>
 			<h2>{recipeData.recipeTitle}</h2>
 			<p>{recipeData.tagLine}</p>
-			<img src={recipeData.recipeImg} />
+			<img src={recipeData.recipeImg} className="single-recipe-img" />
 			<br />
 			<span>Prep time: {recipeData.timeToPrepare} mins </span>
 			<span>Difficulty: {recipeData.difficulty}</span>
