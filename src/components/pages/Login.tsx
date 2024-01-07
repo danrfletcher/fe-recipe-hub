@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { getUserData, loading, login } from "../../features/auth/authSlice";
 import { useEffect } from "react";
-// import { updateUser } from "../../features/userSlice";
 
 interface FormValues {
 	username: string;

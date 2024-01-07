@@ -1,18 +1,31 @@
-import { configureStore, ThunkAction, Action  } from "@reduxjs/toolkit"
-import navReducer from "../features/navSlice"
-import authReducer from "../features/auth/authSlice"
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import navReducer from "../features/navSlice";
+import authReducer from "../features/auth/authSlice";
+import recipesReducer from "../features/allRecipesSlice";
+import singleRecipeReducer from "../features/singleRecipeSlice.ts"
+import ingredientsReducer from "../features/ingredientsSlice.ts"
+
 
 export const store = configureStore({
-  reducer: {
-    navToggle: navReducer,
-    auth: authReducer
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
-})
+	reducer: {
+		navToggle: navReducer,
+		auth: authReducer,
+		recipes: recipesReducer,
+    singleRecipe: singleRecipeReducer,
+    ingredients: ingredientsReducer
+    
+	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: false,
+		}),
+});
 
-export type AppDispatch = typeof store.dispatch
-export type RootState = ReturnType<typeof store.getState>
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+	ReturnType,
+	RootState,
+	unknown,
+	Action<string>
+>;

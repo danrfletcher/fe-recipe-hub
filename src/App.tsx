@@ -9,6 +9,7 @@ import Login from './components/pages/Login'
 import Register from './components/pages/Register'
 import Error from './components/Error'
 import LoginSuccess from './components/pages/LoginSuccess'
+import SingleRecipe from './components/pages/SingleRecipe'
 
 const App: React.FC = () => {
   return (
@@ -21,7 +22,8 @@ const App: React.FC = () => {
           <Route path='/recipes' element={<Recipes />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/login/success' element={<LoginSuccess />}></Route>
-          <Route path='/register' element={<Register />}></Route>
+          <Route path='/register' element={<Register />}/>
+          <Route path='/recipe/:recipeId' element={<SingleRecipe />} />
           <Route path='/*' element={<Error />}></Route>
         </Routes>
       </main>
