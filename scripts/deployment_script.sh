@@ -2,7 +2,7 @@
 
 set -e
 
-CONTAINER_NAME="recipes_container"
+CONTAINER_NAME="recipe_container"
 IMAGE_NAME="recipes-fe"
 APP_DIR="$HOME/RecipeHub-FE"
 
