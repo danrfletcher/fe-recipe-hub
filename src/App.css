@@ -2,7 +2,7 @@
 	position: relative;
 	min-height: 100vh;
 	text-align: center;
-	font-family: "Inter", sans-serif;
+	font-family: 'Roboto Slab', serif;
 }
 
 @media (min-width: 501px) {
@@ -11,6 +11,7 @@
 	nav.toggled-flex-container {
 		display: none;
 	}
+
 	.profile-wrapper {
 		max-width: 460px;
 	}
@@ -20,6 +21,7 @@
 	nav.flex-container {
 		display: none;
 	}
+
 	.profile-wrapper {
 		max-width: 90vw;
 	}
@@ -122,16 +124,16 @@ div.slide-out {
 }
 
 .nav-link {
-  text-decoration: none;
-  background: none;
-  color: #660f27;
-  cursor: pointer;
-  transition: 0.3s;
+	text-decoration: none;
+	background: none;
+	color: #660f27;
+	cursor: pointer;
+	transition: 0.3s;
 }
 
 .nav-link:hover {
-  text-decoration: 1px underline;
-  text-underline-offset: 3px;
+	text-decoration: 1px underline;
+	text-underline-offset: 3px;
 }
 
 /* Login // Register // LoginSuccess */
@@ -210,7 +212,8 @@ div.slide-out {
 	color: white;
 }
 
-.auth-btn:disabled, .back-btn:disabled {
+.auth-btn:disabled,
+.back-btn:disabled {
 	background: white;
 	color: gray;
 }
@@ -249,7 +252,7 @@ div.slide-out {
 	padding-bottom: 1em;
 }
 
-.error-section > p {
+.error-section>p {
 	margin: 2em 5% 0;
 	border: 1px solid hsl(343, 74%, 23%, 50%);
 	border-radius: 2px;
@@ -258,13 +261,85 @@ div.slide-out {
 	color: #921538;
 }
 
-img {
-  height: 20vh;
-}
+/* Recipes || RecipeCard */
 
 .recipe-div {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+
+@media (min-width: 501px) {
+	.recipe-wrapper {
+		margin-bottom: 2em;
+		max-width: 500px;
+	}
+	.recipe-img {
+		border-radius: 5px;
+		max-width: 500px;
+		appearance: none;
+	}
+}
+
+@media (max-width: 500px) {
+
+}
+
+.cursive-header {
+	margin: 0.7em auto 0.5em;
+	color: #660f27;
+	font-family: 'Dancing Script', cursive;
+	font-size: 2rem;
+}
+
+.recipe-info-wrapper {
+	margin: 0.4em 0.6em 0.6em;
+}
+
+.recipe-el {
+	margin-top: 14px;
+	text-align: start;
+}
+
+.recipe-img {
+	object-fit: cover;
+	height: 25vh;
+	width: 100vw;
+	cursor: pointer;
+	box-shadow: 0 0 2px 1px #222222;
+	transition: 0.3s;
+}
+
+.recipe-img:hover {
+	box-shadow: 0 0 6px 1px #222222;
+}
+
+.recipe-img:active {
+	transform: scale(0.98);
+}
+
+.recipe-facts-wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.recipe-facts {
+	font-weight: 300;
+}
+
+.difficulty-icon {
+	fill: gold;
+}
+
+.timestamp {
+	font-family: 'Roboto Slab', serif;
+	font-weight: 300;
+	color: #3C3C3C;
+}
+
+.recipe-title {
+	font-size: 1.4rem;
+	font-weight: 500;
+	color: #660f27;
 }
