@@ -10,6 +10,7 @@ import Register from './components/pages/Register'
 import Error from './components/Error'
 import LoginSuccess from './components/pages/LoginSuccess'
 import SingleRecipe from './components/pages/SingleRecipe'
+import { CreateRecipe } from './components/pages/CreateRecipe'
 
 const App: React.FC = () => {
   return (
@@ -18,13 +19,14 @@ const App: React.FC = () => {
       <Nav />
       <main>
         <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/recipes' element={<Recipes />}></Route>
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/login/success' element={<LoginSuccess />}></Route>
+          <Route path='/' element={<Home />}/>
+          <Route path='/recipes' element={<Recipes />}/>
+          <Route path='/login' element={<Login />}/>
+          <Route path='/login/success' element={<LoginSuccess />}/>
           <Route path='/register' element={<Register />}/>
-          <Route path='/recipe/:recipeId' element={<SingleRecipe />} />
-          <Route path='/*' element={<Error />}></Route>
+          <Route path='/recipe/:recipeId' element={<SingleRecipe />}/>
+          <Route path='/recipes/add_recipe' element={<CreateRecipe />}/>
+          <Route path='/*' element={<Error />}/>
         </Routes>
       </main>
       <Footer />
