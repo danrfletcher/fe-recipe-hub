@@ -81,4 +81,33 @@ const lengthenDate = (date: string): string => {
   return lengthenedDate.join(" ");
 };
 
-export { lengthenDate };
+const formatTime = (time: number): string => {
+  if (time < 60) {
+    if (time === 1) {
+      return `${time} min`
+    } else {
+      return `${time} mins`
+    }
+  }
+  if (time % 60 === 0) {
+    if (time / 60 === 1) {
+      return `1 hour`
+    } else {
+      return `${time / 60} hours`
+    }
+  }
+  if (time > 60 && time < 120) {
+    if (time === 61) {
+      return `1 hour 1 min`
+    } else {
+      return `1 hour ${time - 60} mins`
+    }
+  }
+  if (time - Math.floor(time / 60) * 60 === 1) {
+    return `${Math.floor(time / 60)} hours 1 min`
+  } else {
+    return `${Math.floor(time / 60)} hours ${time - Math.floor(time / 60) * 60} mins`
+  }
+}
+
+export { lengthenDate, formatTime };
