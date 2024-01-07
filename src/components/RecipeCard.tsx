@@ -47,6 +47,7 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 						Prep time: {formatTime(props.timeToPrepare)}
 					</p>
 				</div>
+				<button className="styled-btn fork-btn">Fork this recipe</button>
 			</div>
 		</div>
 	);
