@@ -1,5 +1,10 @@
+import { useNavigate} from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { getSingleRecipe, recipeId } from "../features/singleRecipeSlice";
+import { useEffect } from "react";
+
 interface recipe {
-	recipeId: number;
+	recipeId: string;
 	recipeTitle: string;
 	tagLine: string;
 	difficulty: number;
@@ -13,10 +18,25 @@ interface recipe {
 	userId: number;
 	cuisineId: number;
 }
-const RecipeCard: React.FC<recipe> = (props: any) => {
-	console.log(props, "<<<<props on a card");
+const RecipeCard: React.FC<recipe> = (props) => {
+	const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const isLoading = useAppSelector(state => state.singleRecipe.isLoading)
+// useEffect(()=>{
+//   if (isLoading){
+//     
+
+//   }
+
+// }, [])
+
 	return (
-		<div>
+    
+		<div onClick={async()=>{
+      dispatch(recipeId(props.recipeId))
+      // dispatch(getSingleRecipe(props.recipeId))
+      navigate(`/recipe/${props.recipeId}`)
+    }}>
 			<img src={props.recipeImg} />
       <h3>{props.recipeTitle}</h3>
       <p>{props.tagLine}</p>

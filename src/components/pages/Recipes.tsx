@@ -21,6 +21,7 @@ const Recipes: React.FC = () => {
 					return (
 						<li key={recipe.recipeId}>
 							{/* to keep typescript happy, need to spread props you're passing dowd and declare interface on the  component page  */}
+
 							<RecipeCard {...recipe} />
 						</li>
 					);
