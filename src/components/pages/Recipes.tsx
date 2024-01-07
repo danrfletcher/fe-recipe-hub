@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getAllRecipes } from "../../features/allRecipesSlice";
 import RecipeCard from "../RecipeCard";
+import { Ingredients } from "../Ingredients";
+
 
 const Recipes: React.FC = () => {
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
@@ -14,20 +16,23 @@ const Recipes: React.FC = () => {
 	console.log(listOfRecipes);
 
 	return (
-		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
-			<h2>Recipes</h2>
-			<div className="recipe-div">
-				{listOfRecipes.map((recipe) => {
-					return (
-						<li key={recipe.recipeId}>
-							{/* to keep typescript happy, need to spread props you're passing dowd and declare interface on the  component page  */}
+		<>
+			<Ingredients />
+			<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
+				<h2>Recipes</h2>
+				<div className="recipe-div">
+					{listOfRecipes.map((recipe) => {
+						return (
+							<li key={recipe.recipeId}>
+								{/* to keep typescript happy, need to spread props you're passing dowd and declare interface on the  component page  */}
 
-							<RecipeCard {...recipe} />
-						</li>
-					);
-				})}
+								<RecipeCard {...recipe} />
+							</li>
+						);
+					})}
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
