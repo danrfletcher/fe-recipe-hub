@@ -2,9 +2,24 @@ import { AppThunk } from "../app/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { api } from "../utils/api-utils";
 
+export interface Recipe {
+	recipeId: string;
+	recipeTitle: string;
+	tagLine: string;
+	difficulty: number;
+	timeToPrepare: number;
+	recipeMethod: string;
+	postedOn: string;
+	recipeImg: string;
+	cuisine: string;
+	forkedFromId: number;
+	originalRecipeId: number;
+	userId: number;
+	cuisineId: number;
+}
 
 interface RecipesState {
-	allRecipes: any[];
+	allRecipes: Recipe[];
 }
 
 const initialState: RecipesState = {
@@ -25,7 +40,6 @@ export const getAllRecipes = (): AppThunk => {
 	return async (dispatch) => {
 		try {
 			const response = await api.get("/recipes");
-
 			dispatch(getRecipes(response.data));
 		} catch (error) {
 			console.log(error);

@@ -1,46 +1,24 @@
-import { useNavigate} from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { getSingleRecipe, recipeId } from "../features/singleRecipeSlice";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom"
+import { useAppDispatch } from "../app/hooks";
+import { recipeId } from "../features/singleRecipeSlice";
+import { Recipe } from "../features/allRecipesSlice";
 
-interface recipe {
-	recipeId: string;
-	recipeTitle: string;
-	tagLine: string;
-	difficulty: number;
-	timeToPrepare: number;
-	recipeMethod: string;
-	postedOn: string;
-	recipeImg: string;
-	cuisine: string;
-	forkedFromId: number;
-	originalRecipeId: number;
-	userId: number;
-	cuisineId: number;
-}
-const RecipeCard: React.FC<recipe> = (props) => {
+const RecipeCard: React.FC<Recipe> = (props) => {
+	
 	const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-  const isLoading = useAppSelector(state => state.singleRecipe.isLoading)
-// useEffect(()=>{
-//   if (isLoading){
-//     
+	const navigate = useNavigate()
 
-//   }
-
-// }, [])
+	const handleClick = () => {
+		navigate(`/recipe/${props.recipeId}`)
+		dispatch(recipeId(props.recipeId))
+	}
 
 	return (
-    
-		<div onClick={async()=>{
-      dispatch(recipeId(props.recipeId))
-      // dispatch(getSingleRecipe(props.recipeId))
-      navigate(`/recipe/${props.recipeId}`)
-    }}>
+		<div onClick={handleClick}>
 			<img src={props.recipeImg} />
-      <h3>{props.recipeTitle}</h3>
-      <p>{props.tagLine}</p>
-      <span>Dificulty: {props.difficulty}</span><br /><span>preparation time: {props.timeToPrepare} mins</span>
+			<h3>{props.recipeTitle}</h3>
+			<p>{props.tagLine}</p>
+			<span>Difficulty: {props.difficulty}</span><br /><span>preparation time: {props.timeToPrepare} mins</span>
 		</div>
 	);
 };
