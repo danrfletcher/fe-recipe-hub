@@ -7,6 +7,9 @@ interface AuthState {
 	token: string | null;
 	userId: number | null;
 	username: string | null;
+	name: string | null
+	profileImg: string | undefined
+	bio: string | null
 	hasRegistered: boolean;
 	isError: boolean;
 	error: string | null
@@ -18,6 +21,9 @@ const initialState: AuthState = {
 	token: null,
 	userId: null,
 	username: null,
+	name: null,
+	profileImg: undefined,
+	bio: null,
 	hasRegistered: false,
 	isError: false,
 	error: null,
@@ -38,9 +44,16 @@ const authSlice = createSlice({
 			state.isLoading = false
 			state.hasRegistered = false
 		},
+		userDetails: (state, action: PayloadAction<any>) => {
+			state.name = action.payload.name
+			state.profileImg = action.payload.profileImg
+			state.bio = action.payload.bio
+		},
 		registrationSuccess: (state) => {
 			state.hasRegistered = true
 			state.isLoading = false
+			state.error = null
+			state.isError = false
 		},
 		authFail: (state, action: PayloadAction<string>) => {
 			state.isError = true;
@@ -79,6 +92,17 @@ export const login =
 			}
 		};
 
+export const getUserData =
+	(username: string): AppThunk =>
+		async (dispatch) => {
+			try {
+				const response = await api.get(`/user/${username}`)
+				dispatch(userDetails(response.data))
+			} catch (error: any) {
+				console.log(error)
+			}
+		}
+
 export const registerUser = (
 	username: string,
 	name: string,
@@ -101,5 +125,13 @@ export const registerUser = (
 		}
 	};
 
-export const { loginSuccess, logout, authFail, loading, registrationSuccess } = authSlice.actions;
+export const {
+	loginSuccess,
+	userDetails,
+	registrationSuccess,
+	authFail,
+	logout,
+	loading
+} = authSlice.actions;
+
 export default authSlice.reducer;
