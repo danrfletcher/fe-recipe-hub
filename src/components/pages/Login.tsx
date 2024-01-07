@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { loading, login } from "../../features/auth/authSlice";
+import { getUserData, loading, login } from "../../features/auth/authSlice";
 import { useEffect } from "react";
 // import { updateUser } from "../../features/userSlice";
 
@@ -25,6 +25,7 @@ const Login: React.FC = () => {
 	const submitForm: SubmitHandler<FormValues> = (data) => {
 		dispatch(loading())
 		dispatch(login(data.username, data.password));
+		dispatch(getUserData(data.username))
 	};
 
 	useEffect(() => {
