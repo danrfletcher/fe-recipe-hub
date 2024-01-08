@@ -381,3 +381,12 @@ div.slide-out {
 	height: 40vh;
 	width: 100vw;
 }
+
+/* Loading */
+
+.loading-wrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
