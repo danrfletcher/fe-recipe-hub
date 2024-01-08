@@ -5,7 +5,7 @@ import { api } from "../utils/api-utils";
 export interface Cuisine {
 	cuisineId: number | null;
 	cuisineName: string | null;
-	cuisineImg: string | null;
+	cuisineImg: string | undefined;
 	description: string | null;
 	recipeCount: number | null;
 }
@@ -32,7 +32,6 @@ export const getAllCuisines = (): AppThunk =>{
   return async (dispatch)=>{
     try {
       const response = await api.get('/cuisines');
-      console.log(response.data,"<<< response API")
       dispatch(getCuisines(response.data))
     }
     catch (error){
