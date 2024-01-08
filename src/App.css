@@ -705,10 +705,6 @@ div.slide-out {
 	box-shadow: 0 0 6px 1px #222222;
 }
 
-.recipe-img:active {
-	transform: scale(0.98);
-}
-
 .recipe-facts-wrapper {
 	display: flex;
 	justify-content: space-between;
