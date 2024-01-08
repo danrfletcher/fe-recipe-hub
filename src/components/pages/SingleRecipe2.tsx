@@ -3,7 +3,7 @@ import { useAppSelector } from "../../app/hooks";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
-const SingleRecipe: React.FC = () => {
+const SingleRecipe2: React.FC = () => {
 
     const isNavToggled = useAppSelector((state) => state.navToggle.value);
     /*const [isIngredientsOpen, setIsIngredientsOpen] = useState(false);
@@ -200,4 +200,4 @@ const SingleRecipe: React.FC = () => {
     )
 }
 
-export default SingleRecipe
+export default SingleRecipe2
