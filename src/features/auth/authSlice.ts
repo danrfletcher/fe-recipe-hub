@@ -71,6 +71,13 @@ const authSlice = createSlice({
 		},
 		loading: (state) => {
 			state.isLoading = true
+		},
+		clearErrors: (state) => {
+			state.isError = false
+			state.error = null
+		},
+		resetRegisteredStatus: (state) => {
+			state.hasRegistered = false
 		}
 	},
 	extraReducers: (builder) => {
@@ -131,7 +138,9 @@ export const {
 	registrationSuccess,
 	authFail,
 	logout,
-	loading
+	loading,
+	clearErrors,
+	resetRegisteredStatus
 } = authSlice.actions;
 
 export default authSlice.reducer;

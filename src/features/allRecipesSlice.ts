@@ -30,7 +30,7 @@ const recipesSlice = createSlice({
 	name: "recipes",
 	initialState,
 	reducers: {
-		getRecipes: (state, action: PayloadAction<any>) => {
+		getRecipes: (state, action: PayloadAction<Recipe[]>) => {
 			state.allRecipes = action.payload;
 		},
 	},

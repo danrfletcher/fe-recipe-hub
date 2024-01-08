@@ -6,7 +6,7 @@ const Home: React.FC = () => {
 
   return (
     <div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
-      <h2>Home</h2>
+      <h2>Home</h2>      
     </div>
   )
 }
