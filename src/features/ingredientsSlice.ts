@@ -36,7 +36,7 @@ export const getAllIngredients = (): AppThunk => {
 	return async (dispatch) => {
 		try {
 			const response = await api.get('/ingredients')
-			console.log(response, "<<<< server response")
+
 			dispatch(ingredients(response.data))
 		}
 		catch (error) {
