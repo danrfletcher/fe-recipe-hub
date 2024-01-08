@@ -12,7 +12,6 @@ const Home: React.FC = () => {
   const isNavToggled = useAppSelector((state) => state.navToggle.value);
   const recipes = useAppSelector((state) => state.recipes.allRecipes)
   const cuisines = useAppSelector((state) => state.cuisines.allCuisines)
-  const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)]
 
   const dispatch = useAppDispatch()
 
@@ -29,23 +28,23 @@ const Home: React.FC = () => {
         <section>
           <div className="feat-recipe-wrapper">
             <h2 className="home-sub-header">Featured recipe</h2>
-            <Link to={`/recipe/${randomRecipe.recipeId}`}>
+            <Link to={`/recipe/${recipes[1].recipeId}`}>
               <img
                 className="feat-recipe-img"
-                src={randomRecipe.recipeImg}
+                src={recipes[1].recipeImg}
                 alt="An image of the dish" />
             </Link>
             <div className="recipe-facts-wrapper">
               <h3 className="recipe-title feat-recipe-el">
-                {randomRecipe.recipeTitle}
+                {recipes[1].recipeTitle}
               </h3>
               <p className="feat-recipe-el difficulty-rating">
-                {setDifficulty(randomRecipe.difficulty)}
+                {setDifficulty(recipes[1].difficulty)}
               </p>
             </div>
-            <p className="feat-recipe-el">{randomRecipe.tagLine}</p>
+            <p className="feat-recipe-el">{recipes[1].tagLine}</p>
             <p className="recipe-facts recipe-el">
-              Prep time: {formatTime(randomRecipe.timeToPrepare)}
+              Prep time: {formatTime(recipes[1].timeToPrepare)}
             </p>
           </div>
           <div className="feat-categories-wrapper">
