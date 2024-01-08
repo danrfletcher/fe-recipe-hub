@@ -381,3 +381,19 @@ div.slide-out {
 	height: 40vh;
 	width: 100vw;
 }
+
+/* Loading */
+
+@keyframes loading-icon {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.loading-icon {
+	background: none;
+	animation: loading-icon 6s linear infinite ;
+}
