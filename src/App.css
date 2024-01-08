@@ -280,8 +280,6 @@ div.slide-out {
 	.recipe-img {
 		border-radius: 2px;
 		max-width: 490px;
-		box-shadow: 0 0 2px 1px #222222;
-		appearance: none;
 	}
 }
 
@@ -303,6 +301,8 @@ div.slide-out {
 
 .recipe-img {
 	object-fit: cover;
+	box-shadow: 0 0 2px 1px #222222;
+	appearance: none;
 	height: 25vh;
 	width: 100vw;
 	cursor: pointer;
