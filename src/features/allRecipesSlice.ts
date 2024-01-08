@@ -3,19 +3,19 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { api } from "../utils/api-utils";
 
 export interface Recipe {
-	recipeId: string;
-	recipeTitle: string;
-	tagLine: string;
-	difficulty: number;
-	timeToPrepare: number;
-	recipeMethod: string;
-	postedOn: string;
-	recipeImg: string;
-	cuisine: string;
-	forkedFromId: number;
-	originalRecipeId: number;
-	userId: number;
-	cuisineId: number;
+	recipeId: string | null;
+	recipeTitle: string | null;
+	tagLine: string | null;
+	difficulty: string | null;
+	timeToPrepare: string | null;
+	recipeMethod: string | null;
+	postedOn: string | null;
+	recipeImg: string | null;
+	cuisine: string | null;
+	forkedFromId: string | null;
+	originalRecipeId: string | null;
+	userId: string | null;
+	cuisineId: string | null;
 }
 
 interface RecipesState {
