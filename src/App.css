@@ -198,23 +198,23 @@ div.slide-out {
 	border-radius: 50px;
 	padding: 0.6em 1.4em;
 	font-size: 1rem;
-	box-shadow: 0 0 2px black;
+	box-shadow: 0 0 2px #222222;
 	transition: 0.3s;
 }
 
 .auth-btn {
 	background: #734060;
-	color: white;
+	color: #FFFFFF;
 }
 
 .back-btn {
 	background: #404673;
-	color: white;
+	color: #FFFFFF;
 }
 
 .auth-btn:disabled,
 .back-btn:disabled {
-	background: white;
+	background: #FFFFFF;
 	color: gray;
 }
 
@@ -278,9 +278,8 @@ div.slide-out {
 	}
 
 	.recipe-img {
-		border-radius: 5px;
-		max-width: 500px;
-		appearance: none;
+		border-radius: 2px;
+		max-width: 490px;
 	}
 }
 
@@ -292,7 +291,7 @@ div.slide-out {
 }
 
 .recipe-info-wrapper {
-	margin: 0.4em 0.6em 0.6em;
+	padding: 0em 0.6em 0.6em;
 }
 
 .recipe-el {
@@ -302,10 +301,11 @@ div.slide-out {
 
 .recipe-img {
 	object-fit: cover;
+	box-shadow: 0 0 2px 1px #222222;
+	appearance: none;
 	height: 25vh;
 	width: 100vw;
 	cursor: pointer;
-	box-shadow: 0 0 2px 1px #222222;
 	transition: 0.3s;
 }
 
@@ -346,10 +346,14 @@ div.slide-out {
 	position: sticky;
 	margin: 0.2em auto 1em;
 	background: #921538;
-	color: white;
+	color: #FFFFFF;
 	font-size: 1.2rem;
 	box-shadow: 0 0 10px 1px #FFFFFF;
 	appearance: none;
+}
+
+.sticky-btn:hover {
+	background: #660f27;
 }
 
 .sticky-btn-a {
@@ -358,4 +362,22 @@ div.slide-out {
 
 .sticky-btn-b {
 	top: 5em;
+}
+
+.fork-btn {
+	margin: 1.5em auto;
+	background: #404673;
+	color: #FFFFFF;
+}
+
+.fork-btn:hover {
+	background: #525A94;
+}
+
+/* Single Recipe */
+
+.single-recipe-img {
+	object-fit: cover;
+	height: 40vh;
+	width: 100vw;
 }
