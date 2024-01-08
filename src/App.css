@@ -797,7 +797,7 @@ div.slide-out {
 
 .home-sub-header {
 	align-self: flex-start;
-	margin-bottom: 0.5em;
+	margin-bottom: 0.8em;
 	color: #660f27;
 }
 
@@ -836,12 +836,11 @@ div.slide-out {
 }
 
 .cuisine-item {
-	margin: 2% 0;
-	border: 1px solid hsl(343, 74%, 23%, 30%);
-	border-radius: 10px;
-	padding: 2%;
+	margin-bottom: 1em;
+	padding: 0;
 	text-align: start;
-	width: 44%;
+	width: 46%;
+	appearance: none;
 }
 
 .cuisine-contents-wrapper {
@@ -851,5 +850,12 @@ div.slide-out {
 
 .cuisine-img {
 	align-self: center;
+	aspect-ratio: 1/1;
+	border-radius: 4px;
 	width: 100%;
+}
+
+.cuisine-title {
+	padding-top: 0.4em;
+	color: #660f27;
 }
