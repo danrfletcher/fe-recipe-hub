@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { authFail, loading, registerUser } from "../../features/auth/authSlice";
+import { authFail, clearErrors, loading, registerUser } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -49,7 +49,13 @@ const Register: React.FC = () => {
 	}, [hasRegistered]);
 
 	return (
-		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
+		<div
+			onClick={() => dispatch(clearErrors())}
+			className={isNavToggled ? (
+				"page-slide-in"
+			) : (
+				"page-slide-out"
+			)}>
 			<h2 className="auth-header">Register</h2>
 			<form
 				className="auth-form"

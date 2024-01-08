@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { getUserData, loading, login } from "../../features/auth/authSlice";
+import { clearErrors, getUserData, loading, login } from "../../features/auth/authSlice";
 import { useEffect } from "react";
 
 interface FormValues {
@@ -34,7 +34,13 @@ const Login: React.FC = () => {
 	}, [isAuthenticated]);
 
 	return (
-		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
+		<div
+			onClick={() => dispatch(clearErrors())}
+			className={isNavToggled ? (
+				"page-slide-in"
+			) : (
+				"page-slide-out"
+			)}>
 			<h2 className="auth-header">Welcome to Umami</h2>
 			<form className="auth-form" onSubmit={handleSubmit(submitForm)}>
 				<div className="input-wrapper">
@@ -69,10 +75,10 @@ const Login: React.FC = () => {
 				) : (
 					null
 				)}
-				<button 
-				className="styled-btn auth-btn" 
-				type="submit"
-				disabled={isLoading}>
+				<button
+					className="styled-btn auth-btn"
+					type="submit"
+					disabled={isLoading}>
 					Log in
 				</button>
 			</form>
