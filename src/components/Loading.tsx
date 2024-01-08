@@ -1,11 +1,14 @@
-import { ScaleLoader } from "react-spinners"
+import { GridLoader } from "react-spinners"
 
 const Loading: React.FC = () => {
   return (
-    <>
-      <h2>Loading content...</h2>
-      <ScaleLoader />
-    </>
+    <div className="loading-wrapper">
+      <GridLoader
+        className="spinner"
+        color="#660f27"
+        size={50}
+        speedMultiplier={0.8} />
+    </div>
   )
 }
 
