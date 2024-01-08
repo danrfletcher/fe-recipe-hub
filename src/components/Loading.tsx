@@ -6,7 +6,7 @@ const Loading: React.FC = () => {
       <GridLoader
         className="spinner"
         color="#660f27"
-        size={50}
+        size={45}
         speedMultiplier={0.8} />
     </div>
   )
