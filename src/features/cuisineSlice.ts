@@ -3,11 +3,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { api } from "../utils/api-utils";
 
 export interface Cuisine {
-	cuisineId: number | null;
-	cuisineName: string | null;
-	cuisineImg: string | undefined;
-	description: string | null;
-	recipeCount: number | null;
+	cuisineId: number;
+	cuisineName: string;
+	cuisineImg: string;
+	description: string;
+	recipeCount: number;
 }
 
 interface CuisinesState {

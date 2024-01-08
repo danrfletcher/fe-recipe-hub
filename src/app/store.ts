@@ -5,6 +5,7 @@ import recipesReducer from "../features/allRecipesSlice";
 import singleRecipeReducer from "../features/singleRecipeSlice.ts"
 import ingredientsReducer from "../features/ingredientsSlice.ts"
 import cuisinesReducer from "../features/cuisineSlice.ts"
+import createRecipeReducer from "../features/createRecipeSlice.ts"
 import footerReducer from "../features/footerSlice.ts"
 
 export const store = configureStore({
@@ -15,6 +16,7 @@ export const store = configureStore({
     singleRecipe: singleRecipeReducer,
     ingredients: ingredientsReducer,
     cuisines: cuisinesReducer,
+    createRecipe: createRecipeReducer,
     footer: footerReducer
 	},
 	middleware: (getDefaultMiddleware) =>

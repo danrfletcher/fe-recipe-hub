@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { api } from "../utils/api-utils";
 
 export interface Recipe {
-	recipeId: string;
+	recipeId: any;
 	recipeTitle: string;
 	tagLine: string;
 	difficulty: number;
