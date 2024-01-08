@@ -5,6 +5,7 @@ import Loading from "../Loading";
 import { setDifficulty } from "../../utils/react-utils";
 import { formatTime } from "../../utils/formatting-utils";
 import { getAllCuisines } from "../../features/cuisineSlice";
+import { Link } from "react-router-dom";
 
 const Home: React.FC = () => {
 
@@ -20,8 +21,6 @@ const Home: React.FC = () => {
     dispatch(getAllCuisines())
   }, [])
 
-  console.log(cuisines.length)
-
   return (
     <div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
       {!recipes.length ? (
@@ -30,10 +29,12 @@ const Home: React.FC = () => {
         <section>
           <div className="feat-recipe-wrapper">
             <h2 className="home-sub-header">Featured recipe</h2>
-            <img
-              className="feat-recipe-img"
-              src={randomRecipe.recipeImg}
-              alt="An image of the dish" />
+            <Link to={`/recipe/${randomRecipe.recipeId}`}>
+              <img
+                className="feat-recipe-img"
+                src={randomRecipe.recipeImg}
+                alt="An image of the dish" />
+            </Link>
             <div className="recipe-facts-wrapper">
               <h3 className="recipe-title feat-recipe-el">
                 {randomRecipe.recipeTitle}
@@ -44,7 +45,7 @@ const Home: React.FC = () => {
             </div>
             <p className="feat-recipe-el">{randomRecipe.tagLine}</p>
             <p className="recipe-facts recipe-el">
-              {formatTime(randomRecipe.timeToPrepare)}
+              Prep time: {formatTime(randomRecipe.timeToPrepare)}
             </p>
           </div>
           <div className="feat-categories-wrapper">
@@ -54,11 +55,11 @@ const Home: React.FC = () => {
                 return (
                   <li className="cuisine-item" key={cuisine.cuisineId}>
                     <div className="cuisine-contents-wrapper">
-                      <h4>{cuisine.cuisineName}</h4>
-                      <img 
-                      className="cuisine-img"
-                      src={cuisine.cuisineImg} 
-                      alt="Cuisine image" />
+                      <img
+                        className="cuisine-img"
+                        src={cuisine.cuisineImg}
+                        alt="Cuisine image" />
+                      <h4 className="cuisine-title">{cuisine.cuisineName}</h4>
                     </div>
                   </li>
                 )
