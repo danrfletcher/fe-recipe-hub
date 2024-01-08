@@ -32,7 +32,6 @@ export const getAllCuisines = (): AppThunk =>{
   return async (dispatch)=>{
     try {
       const response = await api.get('/cuisines');
-      console.log(response.data,"<<< response API")
       dispatch(getCuisines(response.data))
     }
     catch (error){
