@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getAllRecipes } from "../../features/allRecipesSlice";
 import RecipeCard from "../RecipeCard";
+import { Link } from "react-router-dom";
 
 const Recipes: React.FC = () => {
 
@@ -18,11 +19,11 @@ const Recipes: React.FC = () => {
 		<>
 			<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
 				<h2 className="cursive-header">Find the recipes you love</h2>
-				<button className={isNavToggled ? (
+			<Link to={'/recipes/add_recipe'}>	<button className={isNavToggled ? (
 					"styled-btn sticky-btn sticky-btn-a"
 				) : (
 					"styled-btn sticky-btn sticky-btn-b"
-				)}>Add a recipe</button>
+				)}>Add a recipe</button></Link>
 				<div className="recipe-div">
 					{listOfRecipes.map((recipe) => {
 						return (
