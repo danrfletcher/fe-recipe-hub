@@ -12,7 +12,6 @@ const Home: React.FC = () => {
   const isNavToggled = useAppSelector((state) => state.navToggle.value);
   const recipes = useAppSelector((state) => state.recipes.allRecipes)
   const cuisines = useAppSelector((state) => state.cuisines.allCuisines)
-  const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)]
 
   const dispatch = useAppDispatch()
 
@@ -29,24 +28,29 @@ const Home: React.FC = () => {
         <section>
           <div className="feat-recipe-wrapper">
             <h2 className="home-sub-header">Featured recipe</h2>
-            <Link to={`/recipe/${randomRecipe.recipeId}`}>
+            <Link to={`/recipe/${recipes[4].recipeId}`}>
               <img
                 className="feat-recipe-img"
-                src={randomRecipe.recipeImg}
+                src={recipes[4].recipeImg}
                 alt="An image of the dish" />
             </Link>
             <div className="recipe-facts-wrapper">
               <h3 className="recipe-title feat-recipe-el">
-                {randomRecipe.recipeTitle}
+                {recipes[4].recipeTitle}
               </h3>
               <p className="feat-recipe-el difficulty-rating">
-                {setDifficulty(randomRecipe.difficulty)}
+                {setDifficulty(recipes[4].difficulty)}
               </p>
             </div>
-            <p className="feat-recipe-el">{randomRecipe.tagLine}</p>
-            <p className="recipe-facts recipe-el">
-              Prep time: {formatTime(randomRecipe.timeToPrepare)}
-            </p>
+            <p className="feat-recipe-el">{recipes[4].tagLine}</p>
+            <div className="recipe-facts-wrapper">
+              <p className="recipe-facts recipe-el">
+                Prep time: {formatTime(recipes[4].timeToPrepare)}
+              </p>
+              <p className="recipe-facts recipe-el">
+                <b>{recipes[4].ratingCount}</b> reviews / <b>{recipes[4].averageRating.toFixed(1)}</b> average
+              </p>
+            </div>
           </div>
           <div className="feat-categories-wrapper">
             <h2 className="home-sub-header">Popular cuisines</h2>
