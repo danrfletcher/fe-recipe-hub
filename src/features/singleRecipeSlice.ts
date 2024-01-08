@@ -9,28 +9,28 @@ interface SingleRecipe extends Recipe {
 
 interface SingleRecipeState {
   recipe: SingleRecipe,
-  recipeId: string | null,
+  recipeId: string,
   isLoading: boolean
 }
 
 const initialState: SingleRecipeState = {
   recipe: {
-    recipeId: null,
-    recipeTitle: null,
-    tagLine: null,
-    difficulty: null,
-    timeToPrepare: null,
-    recipeMethod: null,
-    postedOn: null,
-    recipeImg: null,
-    cuisine: null,
-    forkedFromId: null,
-    originalRecipeId: null,
-    userId: null,
-    cuisineId: null,
+    recipeId: "",
+    recipeTitle: "",
+    tagLine: "",
+    difficulty: 0,
+    timeToPrepare: 0,
+    recipeMethod: "",
+    postedOn: "",
+    recipeImg: "",
+    cuisine: "",
+    forkedFromId: 0,
+    originalRecipeId: 0,
+    userId: 0,
+    cuisineId: 0,
     recipeIngredients: []
   },
-  recipeId: null,
+  recipeId: "",
   isLoading: false
 };
 
