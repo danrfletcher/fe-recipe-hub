@@ -303,7 +303,7 @@ div.slide-out {
 	object-fit: cover;
 	box-shadow: 0 0 2px 1px #222222;
 	appearance: none;
-	height: 25vh;
+	height: 25lvh;
 	width: 100vw;
 	cursor: pointer;
 	transition: 0.3s;
