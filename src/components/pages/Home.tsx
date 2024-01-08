@@ -28,24 +28,29 @@ const Home: React.FC = () => {
         <section>
           <div className="feat-recipe-wrapper">
             <h2 className="home-sub-header">Featured recipe</h2>
-            <Link to={`/recipe/${recipes[1].recipeId}`}>
+            <Link to={`/recipe/${recipes[4].recipeId}`}>
               <img
                 className="feat-recipe-img"
-                src={recipes[1].recipeImg}
+                src={recipes[4].recipeImg}
                 alt="An image of the dish" />
             </Link>
             <div className="recipe-facts-wrapper">
               <h3 className="recipe-title feat-recipe-el">
-                {recipes[1].recipeTitle}
+                {recipes[4].recipeTitle}
               </h3>
               <p className="feat-recipe-el difficulty-rating">
-                {setDifficulty(recipes[1].difficulty)}
+                {setDifficulty(recipes[4].difficulty)}
               </p>
             </div>
-            <p className="feat-recipe-el">{recipes[1].tagLine}</p>
-            <p className="recipe-facts recipe-el">
-              Prep time: {formatTime(recipes[1].timeToPrepare)}
-            </p>
+            <p className="feat-recipe-el">{recipes[4].tagLine}</p>
+            <div className="recipe-facts-wrapper">
+              <p className="recipe-facts recipe-el">
+                Prep time: {formatTime(recipes[4].timeToPrepare)}
+              </p>
+              <p className="recipe-facts recipe-el">
+                <b>{recipes[4].ratingCount}</b> reviews / <b>{recipes[4].averageRating.toFixed(1)}</b> average
+              </p>
+            </div>
           </div>
           <div className="feat-categories-wrapper">
             <h2 className="home-sub-header">Popular cuisines</h2>

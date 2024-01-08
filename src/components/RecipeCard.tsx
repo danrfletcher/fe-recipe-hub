@@ -32,6 +32,17 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 					{props.tagLine}
 				</p>
 				<div className="recipe-facts-wrapper">
+					{props.averageRating ? (
+						<p className="recipe-facts recipe-el">
+							Average score of <b>{props.averageRating.toFixed(1)}</b> from <b>{props.ratingCount}</b> reviews.
+						</p>
+					) : (
+						<p className="recipe-facts recipe-el">
+							This recipe has not been rated yet.
+						</p>
+					)}
+				</div>
+				<div className="recipe-facts-wrapper">
 					<p className="recipe-facts recipe-el">
 						Difficulty: {setDifficulty(props.difficulty)}
 					</p>
@@ -39,7 +50,9 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 						Prep time: {formatTime(props.timeToPrepare)}
 					</p>
 				</div>
-				<button className="styled-btn fork-btn">Fork this recipe</button>
+				<button className="styled-btn fork-btn">
+					Fork this recipe
+				</button>
 			</div>
 		</div>
 	);
