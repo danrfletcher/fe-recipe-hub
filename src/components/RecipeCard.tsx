@@ -3,7 +3,7 @@ import { useAppDispatch } from "../app/hooks";
 import { recipeId } from "../features/singleRecipeSlice";
 import { Recipe } from "../features/allRecipesSlice";
 import { formatTime, lengthenDate } from "../utils/formatting-utils";
-import { LuChefHat } from "react-icons/lu";
+import { setDifficulty } from "../utils/react-utils";
 
 const RecipeCard: React.FC<Recipe> = (props) => {
 
@@ -13,17 +13,6 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 	const handleClick = () => {
 		navigate(`/recipe/${props.recipeId}`)
 		dispatch(recipeId(props.recipeId))
-	}
-
-	const setDifficulty = (rating: number) => {
-		const array = []
-		for (let i = 0; i < rating; i++) {
-			array.push(<LuChefHat className="difficulty-icon" key={i} />)
-		}
-		for (let i = rating; i < 5; i++) {
-			array.push(<LuChefHat key={i} />)
-		}
-		return array
 	}
 
 	return (
@@ -43,6 +32,17 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 					{props.tagLine}
 				</p>
 				<div className="recipe-facts-wrapper">
+					{props.averageRating ? (
+						<p className="recipe-facts recipe-el">
+							Average score of <b>{props.averageRating.toFixed(1)}</b> from <b>{props.ratingCount}</b> reviews.
+						</p>
+					) : (
+						<p className="recipe-facts recipe-el">
+							This recipe has not been rated yet.
+						</p>
+					)}
+				</div>
+				<div className="recipe-facts-wrapper">
 					<p className="recipe-facts recipe-el">
 						Difficulty: {setDifficulty(props.difficulty)}
 					</p>
@@ -50,7 +50,9 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 						Prep time: {formatTime(props.timeToPrepare)}
 					</p>
 				</div>
-				<button className="styled-btn fork-btn">Fork this recipe</button>
+				<button className="styled-btn fork-btn">
+					Fork this recipe
+				</button>
 			</div>
 		</div>
 	);

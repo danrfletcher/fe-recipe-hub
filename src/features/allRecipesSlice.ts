@@ -16,6 +16,10 @@ export interface Recipe {
 	originalRecipeId: number;
 	userId: number;
 	cuisineId: number;
+	forkCount: number;
+	directForkCount: number;
+	ratingCount: number;
+	averageRating: number;
 }
 
 interface RecipesState {
