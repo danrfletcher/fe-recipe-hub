@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { clearErrors, getUserData, loading, login } from "../../features/auth/authSlice";
+import { clearErrors, getUserData, loading, login, resetRegisteredStatus } from "../../features/auth/authSlice";
 import { useEffect } from "react";
 
 interface FormValues {
@@ -84,7 +84,10 @@ const Login: React.FC = () => {
 			</form>
 			<p>
 				Not signed up?{" "}
-				<Link className="nav-link" to="/register">
+				<Link
+					onFocus={() => dispatch(resetRegisteredStatus())}
+					className="nav-link"
+					to="/register">
 					Register
 				</Link>
 			</p>
