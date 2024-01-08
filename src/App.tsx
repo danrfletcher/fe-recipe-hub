@@ -8,6 +8,7 @@ import Recipes from './components/pages/Recipes'
 import Login from './components/pages/Login'
 import Register from './components/pages/Register'
 import Error from './components/Error'
+import SingleRecipe from './components/pages/SingleRecipe'
 
 const App: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
           <Route path='/login' element={<Login />}></Route>
           <Route path='/register' element={<Register />}></Route>
           <Route path='/*' element={<Error />}></Route>
+          <Route path='/single-recipe' element={<SingleRecipe />}></Route>
         </Routes>
       </main>
       <Footer />
