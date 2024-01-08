@@ -384,16 +384,9 @@ div.slide-out {
 
 /* Loading */
 
-@keyframes loading-icon {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-}
-
-.loading-icon {
-	background: none;
-	animation: loading-icon 6s linear infinite ;
+.loading-wrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
