@@ -33,21 +33,12 @@ h1 {
   }
 }
 
-a {
-  text-decoration: none;
-  background: none;
-  color: #660f27;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-a:hover {
-  text-decoration: 1px underline;
-  text-underline-offset: 3px;
-}
-
 main {
   padding-bottom: 1.2em;
+}
+
+button {
+  cursor: pointer;
 }
 
 footer {
@@ -56,4 +47,9 @@ footer {
   background: #660f27;
   height: 1.2em;
   width: 100%;
+}
+
+li {
+  list-style: none;
+  padding: 0.5em;
 }

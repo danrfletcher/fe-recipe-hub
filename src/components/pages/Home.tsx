@@ -1,7 +1,7 @@
 import { useAppSelector } from "../../app/hooks";
 
 const Home: React.FC = () => {
-
+  
   const isNavToggled = useAppSelector((state) => state.navToggle.value);
 
   return (
