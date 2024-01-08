@@ -3,11 +3,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { api } from "../utils/api-utils";
 
 export interface Cuisine {
-	cuisineId: string | null;
+	cuisineId: number | null;
 	cuisineName: string | null;
 	cuisineImg: string | null;
 	description: string | null;
-	recipeCount: string | null;
+	recipeCount: number | null;
 }
 
 interface CuisinesState {
@@ -22,7 +22,7 @@ const cuisinesSlice = createSlice({
 	name: "cuisines",
 	initialState,
 	reducers: {
-		getCuisines: (state, action: PayloadAction<any>) => {
+		getCuisines: (state, action: PayloadAction<Cuisine[]>) => {
 			state.allCuisines = action.payload;
 		},
 	},
