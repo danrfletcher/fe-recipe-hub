@@ -1,6 +1,7 @@
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { getAllCuisines } from "../../features/cuisineSlice";
+import { useEffect } from "react";
 
 interface FormValues {
 	recipeTitle: string;
@@ -17,12 +18,18 @@ interface FormValues {
 }
 export const CreateRecipe: React.FC = () => {
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
+  const cuisines = useAppSelector((state)=> state.cuisines.allCuisines)
 	const dispatch = useAppDispatch();
 	const { register, handleSubmit } = useForm<FormValues>();
-
-  dispatch(getAllCuisines())
   
-	const submitForm: SubmitHandler<FormValues> = (data) => {};
+  useEffect(()=>{
+    dispatch(getAllCuisines())
+
+  }, [])
+  
+	const submitForm: SubmitHandler<FormValues> = (data) => {
+    console.log(data)
+  };
 
 	return (
 		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
@@ -64,7 +71,7 @@ export const CreateRecipe: React.FC = () => {
 						className="input-field"
 						{...register("difficulty")}
 						required
-						value="placeholder"
+						defaultValue="placeholder"
 					>
 						<option value="placeholder" disabled>
 							How difficult is this recipe?
@@ -109,14 +116,17 @@ export const CreateRecipe: React.FC = () => {
 					<select
 						id="cuisine"
 						className="input-field"
-						value="placeholder"
+						defaultValue="placeholder"
 						{...register("cuisine")}
 						required
 					>
 						<option value="placeholder" disabled>
 							e.g. Italian
 						</option>
-					{	//map over the cuisine array return <option> for each
+					{ 
+            cuisines.map((cuisine) =>{
+            return  <option key={cuisine.cuisineId}>{cuisine.cuisineName}</option>
+            })
           }
 					</select>
 				</div>
