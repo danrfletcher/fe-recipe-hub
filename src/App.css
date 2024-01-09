@@ -752,14 +752,14 @@ div.slide-out {
 	color: #660f27;
 }
 
-.add-recipe-btn {
+.large-red-btn {
 	margin: 0.2em auto 1em;
 	background: #921538;
 	color: #FFFFFF;
 	font-size: 1.2rem;
 }
 
-.add-recipe-btn:hover, #create-recipe-btn:hover {
+.large-red-btn:hover, #create-recipe-btn:hover {
 	background: #660f27;
 }
 
@@ -973,4 +973,18 @@ div.slide-out {
 	margin-left: 10px;
 	margin-right: 10px;
 	border-radius: 10px;
+}
+
+/* RecipeSuccess */
+
+.recipe-success-header {
+	font-size: 2.5em;
+}
+
+.recipe-success-img {
+	margin: 2em auto;
+}
+
+.recipe-success-text {
+	text-align: justify;
 }
