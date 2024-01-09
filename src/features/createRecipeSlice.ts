@@ -20,11 +20,9 @@ interface CreateRecipe {
 	recipeId: number | null;
 	ingredientIds: any[];
 	quantity: string[];
-
 }
 
 // interface postIngredients {}
-
 const initialState: CreateRecipe = {
 	recipeTitle: null,
 	tagLine: null,
@@ -40,7 +38,6 @@ const initialState: CreateRecipe = {
 	recipeId: null,
 	ingredientIds: [],
 	quantity: [],
-
 };
 
 const createRecipeSlice = createSlice({
@@ -53,13 +50,13 @@ const createRecipeSlice = createSlice({
 		ingredientsToPost: (state, action: PayloadAction<any>) => {
 			state.ingredientIds.push(action.payload);
 		},
-    quantityToPost: (state, action: PayloadAction<any>) => {	
+    quantityToPost: (state, action: PayloadAction<any>) => {
 			state.quantity.push(action.payload);
 		},
     clearPost: (state) =>{
       state.quantity = [],
       state.ingredientIds = []
-    }
+    },
 	},
 });
 
@@ -82,5 +79,5 @@ export const postRecipe = (object: CreateRecipe, token: string, ingredientObj: a
 
 // export const postIngredientsToRecipe =()
 
-export const { recipeToPost, ingredientsToPost, quantityToPost, clearPost } = createRecipeSlice.actions;
+export const { recipeToPost, ingredientsToPost, quantityToPost, clearPost} = createRecipeSlice.actions;
 export default createRecipeSlice.reducer;
