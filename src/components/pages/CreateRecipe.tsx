@@ -236,26 +236,30 @@ export const CreateRecipe: React.FC = () => {
 				<label htmlFor="recipeMethod" className="input-label">
 					Ingredients
 				</label>
-				<div className="ingredients-list">
-					<div>
-						{ingredientsToAdd.length ? (
-							ingredientsToAdd.map((ingredient) => {
-								return <li className="recipe-list-item recipe-list-ingredient" key={ingredient}>{ingredient}</li>;
-							})
-						) : (
-							null
-						)}
+				{ingredientsToAdd.length ? (
+					<div className="ingredients-list">
+						<div>
+							{ingredientsToAdd.length ? (
+								ingredientsToAdd.map((ingredient) => {
+									return <li className="recipe-list-item recipe-list-ingredient" key={ingredient}>{ingredient}</li>;
+								})
+							) : (
+								null
+							)}
+						</div>
+						<div>
+							{quantityToAdd.length ? (
+								quantityToAdd.map((quantity, index) => {
+									return <li className="recipe-list-item recipe-list-quantity" key={index}>{quantity}</li>;
+								})
+							) : (
+								null
+							)}
+						</div>
 					</div>
-					<div>
-						{quantityToAdd.length ? (
-							quantityToAdd.map((quantity, index) => {
-								return <li className="recipe-list-item recipe-list-quantity" key={index}>{quantity}</li>;
-							})
-						) : (
-							null
-						)}
-					</div>
-				</div>
+				) : (
+					null
+				)}
 
 				<div className="recipe-form-internal-wrapper ingredient-field-wrapper">
 					<label htmlFor="ingredient-field">
