@@ -74,7 +74,7 @@ export const CreateRecipe: React.FC = () => {
 		return findId(lookupIngredients, ingredient);
 	});
 
-	const submitForm: SubmitHandler<FormValues> = async (data) => {
+	const submitForm: SubmitHandler<FormValues> = (data) => {
 		dispatch(
 			postRecipe(
 				{
@@ -232,7 +232,7 @@ export const CreateRecipe: React.FC = () => {
 						required
 					/>
 				</div>
-
+{/* why is the label below htmlfor as recipeMethod? */}
 				<label htmlFor="recipeMethod" className="input-label">
 					Ingredients
 				</label>
