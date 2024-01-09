@@ -6,7 +6,7 @@ import { getAllIngredients } from "../../features/ingredientsSlice";
 import {
 	postRecipe,
 } from "../../features/createRecipeSlice";
-
+import { forkedIngredientsInitial, forkedIngredientsToPost, forkedQuantitiesInitial, forkedQuantitiesToPost } from "../../features/forkedIngredientsSlice";
 interface FormValues {
 	recipeTitle: string;
 	tagLine: string;
