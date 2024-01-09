@@ -74,7 +74,7 @@ export const CreateRecipe: React.FC = () => {
 		return findId(lookupIngredients, ingredient);
 	});
 
-	const submitForm: SubmitHandler<FormValues> = (data) => {
+	const submitForm: SubmitHandler<FormValues> = async (data) => {
 		dispatch(
 			postRecipe(
 				{
@@ -100,7 +100,7 @@ export const CreateRecipe: React.FC = () => {
 			)
 		)
 		reset()
-		navigate("/recipes")
+		navigate(`/recipes/add_recipe/success`)
 	};
 
 	return (
