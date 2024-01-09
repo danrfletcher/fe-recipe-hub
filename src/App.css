@@ -447,7 +447,7 @@ div.slide-out {
 .similarSPR>div {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content:space-around
+	justify-content: space-around
 }
 
 .similarSPR>div>div {
@@ -477,53 +477,65 @@ div.slide-out {
 }
 
 @media (max-width: 650px) {
-	div.titleSPR{
+	div.titleSPR {
 		width: 100%;
 		gap: 30px;
 		padding-left: 25px;
 		padding-right: 30px;
 	}
+
 	.topSPR>img {
 		display: none;
 	}
-	.secondImgSPR{
+
+	.secondImgSPR {
 		display: revert;
 		width: 100%;
 	}
+
 	.similarSPR>div>div {
 		width: 23%;
 	}
 }
+
 @media (max-width: 500px) {
-	.mostPopularSPR{
+	.mostPopularSPR {
 		display: none;
 	}
-	.recipeSPR{
+
+	.recipeSPR {
 		width: 100%;
 		margin-left: 10px;
 	}
+
 	.topSPR>div>h2 {
 		width: 100%;
 	}
-	.cuisineSPR{
+
+	.cuisineSPR {
 		width: 100%;
 	}
-	div.titleSPR{
+
+	div.titleSPR {
 		gap: 20px;
 	}
-	.timingSPR{
+
+	.timingSPR {
 		width: 100%;
 	}
+
 	.similarSPR>div>div {
 		width: 30%;
 	}
-	.textSPR{
+
+	.textSPR {
 		margin-left: 30px;
 		margin-right: 20px;
 	}
-	.similarSPR{
+
+	.similarSPR {
 		margin-left: 10px;
-	}	
+	}
 }
 
 /*------------------------------------------------------------------------------------------------*/
@@ -856,13 +868,13 @@ div.slide-out {
 /* Footer */
 
 #scroll-up-btn {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  border: none;
-  border-radius: 8px 0 0 0;
-  background: #222222;
-  fill: #FFFFFF;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	border: none;
+	border-radius: 8px 0 0 0;
+	background: #222222;
+	fill: #FFFFFF;
 	font-size: 3rem;
 	width: 70px;
 	cursor: pointer;
@@ -883,7 +895,7 @@ div.slide-out {
 }
 
 .add-btn {
-	margin: 1.2em auto;
+	margin: 2em auto 1em;
 	background: #525A94;
 	width: 9.5em;
 	color: #FFFFFF;
@@ -891,4 +903,48 @@ div.slide-out {
 
 #create-recipe-btn {
 	margin-top: 2em;
+}
+
+.ingredients-list {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	margin: 0 5% 5%;
+	border-radius: 10px;
+	padding: 1em;
+	box-shadow: inset 0 0 4px #222222;
+	line-height: 1.5rem;
+	appearance: none;
+	min-height: 20px;
+}
+
+.recipe-list-ingredient {
+	grid-column: 1;
+	text-align: start;
+}
+
+.recipe-list-quantity {
+	grid-column: 2;
+	text-align: end;
+}
+
+.recipe-form-internal-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 5%;
+}
+
+#ingredient-field, #quantity-field {
+	margin-right: 0;
+	border-radius: 10px;
+}
+
+#ingredient-field {
+	margin-bottom: 1.2em;
+}
+
+.recipe-list-item {
+	background: none;
+	padding: 0;
 }
