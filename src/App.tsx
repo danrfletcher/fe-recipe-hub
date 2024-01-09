@@ -12,6 +12,7 @@ import LoginSuccess from './components/pages/LoginSuccess'
 import SingleRecipe from './components/pages/SingleRecipe'
 import SingleRecipe2 from './components/pages/SingleRecipe2'
 import { CreateRecipe } from './components/pages/CreateRecipe'
+import { CreateFork } from './components/pages/CreateFork'
 
 const App: React.FC = () => {
   return (
@@ -27,6 +28,7 @@ const App: React.FC = () => {
           <Route path='/login' element={<Login />}></Route>
           <Route path='/login/success' element={<LoginSuccess />}></Route>
           <Route path='/register' element={<Register />}/>
+          <Route path='/create_fork' element={<CreateFork />}></Route>
           <Route path='/*' element={<Error />}></Route>
           <Route path='/single-recipe2' element={<SingleRecipe2 />}></Route>
         </Routes>
@@ -35,5 +37,6 @@ const App: React.FC = () => {
     </>
   )
 }
+
 
 export default App

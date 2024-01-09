@@ -4,6 +4,7 @@ import { recipeId } from "../features/singleRecipeSlice";
 import { Recipe } from "../features/allRecipesSlice";
 import { formatTime, lengthenDate } from "../utils/formatting-utils";
 import { setDifficulty } from "../utils/react-utils";
+import { Link } from "react-router-dom";
 
 const RecipeCard: React.FC<Recipe> = (props) => {
 
@@ -50,9 +51,9 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 						Prep time: {formatTime(props.timeToPrepare)}
 					</p>
 				</div>
-				<button className="styled-btn fork-btn">
+				<Link to={'/create_fork'}><button className="styled-btn fork-btn">
 					Fork this recipe
-				</button>
+				</button></Link>
 			</div>
 		</div>
 	);
