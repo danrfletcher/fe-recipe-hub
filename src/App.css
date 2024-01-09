@@ -965,6 +965,10 @@ div.slide-out {
 	padding: 0;
 }
 
+.create-recipe-error-section>p {
+	margin: 5%;
+}
+
 .ready-text {
 	margin-left: 10px;
 	margin-right: 10px;
