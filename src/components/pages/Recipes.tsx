@@ -8,6 +8,7 @@ const Recipes: React.FC = () => {
 
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
 	const listOfRecipes = useAppSelector((state) => state.recipes.allRecipes);
+	const user = useAppSelector((state) => state.auth.username)
 
 	const dispatch = useAppDispatch();
 
@@ -15,13 +16,19 @@ const Recipes: React.FC = () => {
 		dispatch(getAllRecipes());
 	}, []);
 
+	console.log(user)
+
 	return (
 		<>
 			<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
 				<h2 className="cursive-header">
 					Find the recipes you love
 				</h2>
-				<Link to={'/recipes/add_recipe'}>
+				<Link to={user ? (
+					'/recipes/add_recipe'
+				) : (
+					'/login'
+				)}>
 					<button className="styled-btn add-recipe-btn">
 						Add a recipe
 					</button></Link>
