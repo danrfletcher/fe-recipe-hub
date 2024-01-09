@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { api } from "../utils/api-utils";
 import { CreateRecipe } from "../components/pages/CreateRecipe";
 import { getSingleRecipe } from "./singleRecipeSlice";
+import { Ingredient } from "./ingredientsSlice";
 
 interface CreateRecipe {
 	recipeTitle: string | null;
@@ -15,15 +16,11 @@ interface CreateRecipe {
 	forkedFromId: number | null;
 	originalRecipeId: number | null;
 	userId: number | null;
-	cuisineId: any |number | null;
-	// ingredients state for posting to the recipe
+	cuisineId: any | number | null;
 	recipeId: number | null;
 	ingredientIds: any[];
 	quantity: string[];
-
 }
-
-// interface postIngredients {}
 
 const initialState: CreateRecipe = {
 	recipeTitle: null,
@@ -40,7 +37,6 @@ const initialState: CreateRecipe = {
 	recipeId: null,
 	ingredientIds: [],
 	quantity: [],
-
 };
 
 const createRecipeSlice = createSlice({
@@ -50,37 +46,33 @@ const createRecipeSlice = createSlice({
 		recipeToPost: (state, action: PayloadAction<CreateRecipe>) => {
 			state.recipeTitle = action.payload.recipeTitle;
 		},
-		ingredientsToPost: (state, action: PayloadAction<any>) => {
+		ingredientsToPost: (state, action: PayloadAction<Ingredient>) => {
 			state.ingredientIds.push(action.payload);
 		},
-    quantityToPost: (state, action: PayloadAction<any>) => {	
+		quantityToPost: (state, action: PayloadAction<string>) => {
 			state.quantity.push(action.payload);
 		},
-    clearPost: (state) =>{
-      state.quantity = [],
-      state.ingredientIds = []
-    }
+		clearPost: (state) => {
+			state.quantity = []
+			state.ingredientIds = []
+		}
 	},
 });
 
-export const postRecipe = (object: CreateRecipe, token: string, ingredientObj: any): AppThunk => {
+export const postRecipe = (object: CreateRecipe, token: string, ingredientObj: object): AppThunk => {
 	return async (dispatch) => {
 		try {
-			// console.log(object, "<<<obj I'm sending");
-			const response = await api.post("/recipes", object, {headers:{Authorization: token}});
-      dispatch(getSingleRecipe(response.data.recipeId))
-      if(response.status == 201){
-      await api.post(`ingredients/recipes/${response.data.recipeId}/ingredients`,ingredientObj )
-       dispatch(clearPost())
-    }
-			console.log(response, "<<<response");
+			const response = await api.post("/recipes", object, { headers: { Authorization: token } });
+			dispatch(getSingleRecipe(response.data.recipeId))
+			if (response.status == 201) {
+				await api.post(`ingredients/recipes/${response.data.recipeId}/ingredients`, ingredientObj)
+				dispatch(clearPost())
+			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
 };
-
-// export const postIngredientsToRecipe =()
 
 export const { recipeToPost, ingredientsToPost, quantityToPost, clearPost } = createRecipeSlice.actions;
 export default createRecipeSlice.reducer;
