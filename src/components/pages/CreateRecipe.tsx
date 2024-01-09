@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { getAllCuisines } from "../../features/cuisineSlice";
 import { useEffect } from "react";
 import {
+	clearPost,
 	ingredientsToPost,
 	postRecipe,
 	quantityToPost,
@@ -273,29 +274,39 @@ export const CreateRecipe: React.FC = () => {
 						{...register("quantity")} />
 				</div>
 
-				<button
-					className="styled-btn add-btn"
-					onClick={(e) => {
-						e.preventDefault();
-						const values = getValues();
-						console.log(values)
-						if (ingredients.find((object) => object.ingredientName == values.ingredientsId)) {
-							if (ingredientsToAdd.includes(values.ingredientsId)) {
-								console.log("No duplicate items")
-							} else {
-								if (!values.quantity) {
-									console.log("Specify quantity")
+				<div className="create-recipe-btn-container">
+					<button
+						className="styled-btn add-btn"
+						onClick={(e) => {
+							e.preventDefault();
+							const values = getValues();
+							console.log(values)
+							if (ingredients.find((object) => object.ingredientName == values.ingredientsId)) {
+								if (ingredientsToAdd.includes(values.ingredientsId)) {
+									console.log("No duplicate items")
 								} else {
-									dispatch(ingredientsToPost(values.ingredientsId));
-									dispatch(quantityToPost(values.quantity));
+									if (!values.quantity) {
+										console.log("Specify quantity")
+									} else {
+										dispatch(ingredientsToPost(values.ingredientsId));
+										dispatch(quantityToPost(values.quantity));
+									}
 								}
+							} else {
+								console.log("Please add an item")
 							}
-						} else {
-							console.log("Please add an item")
-						}
+						}}>
+						Add ingredient
+					</button>
+					<button 
+					className="styled-btn clear-all-btn"
+					onClick={(e) => {
+						e.preventDefault()
+						dispatch(clearPost())
 					}}>
-					Add ingredient
-				</button>
+						Clear all
+					</button>
+				</div>
 
 				<p className="auth-header-cursive ready-text">Ready to go?</p>
 				<button
