@@ -27,7 +27,7 @@ const Recipes: React.FC = () => {
 				) : (
 					'/login'
 				)}>
-					<button className="styled-btn add-recipe-btn">
+					<button className="styled-btn large-red-btn">
 						Add a recipe
 					</button></Link>
 				<div className="recipe-div">
