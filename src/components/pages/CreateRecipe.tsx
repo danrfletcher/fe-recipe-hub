@@ -9,6 +9,7 @@ import {
 	quantityToPost,
 } from "../../features/createRecipeSlice";
 import { getAllIngredients } from "../../features/ingredientsSlice";
+import { useNavigate } from "react-router-dom";
 
 interface FormValues {
 	recipeTitle: string;
@@ -35,6 +36,8 @@ export const CreateRecipe: React.FC = () => {
 	const singleRecipeState = useAppSelector((state) => state.singleRecipe.recipe);
 	const ingredientsToAdd = useAppSelector((state) => state.createRecipe.ingredientIds);
 	const quantityToAdd = useAppSelector((state) => state.createRecipe.quantity);
+
+	const navigate = useNavigate()
 
 	const dispatch = useAppDispatch();
 	const {
@@ -89,7 +92,9 @@ export const CreateRecipe: React.FC = () => {
 				token,
 				{ ingredientIds: arrayOfIngIds, quantity: quantityToAdd }
 			)
-		);
+		)
+		reset()
+		navigate(`/recipe/${singleRecipeState.recipeId}`)
 	};
 
 	return (
@@ -302,7 +307,6 @@ export const CreateRecipe: React.FC = () => {
 						onClick={(e) => {
 							e.preventDefault()
 							dispatch(clearPost())
-							reset()
 						}}>
 						Clear list
 					</button>
