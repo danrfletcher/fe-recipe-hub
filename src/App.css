@@ -896,9 +896,10 @@ div.slide-out {
 	padding: 0.9em 0.9em;
 }
 
-.create-recipe-btn-container {
+.btn-container {
 	display: flex;
 	justify-content: space-between;
+	background: none;
 }
 
 .add-btn {
@@ -987,4 +988,19 @@ div.slide-out {
 
 .recipe-success-text {
 	text-align: justify;
+}
+
+/* Error */
+
+.error-container {
+	margin-top: 30%;
+	margin-bottom: 30%;
+	padding: 2em 0;
+	background: rgb(15, 39, 102, 20%);
+}
+
+.error-header {
+	margin: 1em auto 0.8em;
+	background: none;
+	font-size: 10vw;
 }

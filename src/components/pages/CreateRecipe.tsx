@@ -298,7 +298,7 @@ export const CreateRecipe: React.FC = () => {
 						{...register("quantity")} />
 				</div>
 
-				<div className="create-recipe-btn-container">
+				<div className="btn-container">
 					<button
 						className="styled-btn add-btn"
 						onClick={(e) => {
