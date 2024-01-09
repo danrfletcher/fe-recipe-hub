@@ -533,6 +533,14 @@ div.slide-out {
 .auth-header {
 	margin: 1.2em 0 0;
 	color: #660f27;
+	font-size: 1.5rem;
+}
+
+.auth-header-cursive {
+	margin-top: 0.6em;
+	color: #660f27;
+	font-size: 2rem;
+	font-family: 'Dancing Script', cursive;
 }
 
 .auth-img {
@@ -730,26 +738,15 @@ div.slide-out {
 	color: #660f27;
 }
 
-.sticky-btn {
-	position: sticky;
+.add-recipe-btn {
 	margin: 0.2em auto 1em;
 	background: #921538;
 	color: #FFFFFF;
 	font-size: 1.2rem;
-	box-shadow: 0 0 10px 1px #FFFFFF;
-	appearance: none;
 }
 
-.sticky-btn:hover {
+.add-recipe-btn:hover {
 	background: #660f27;
-}
-
-.sticky-btn-a {
-	top: 1.5em;
-}
-
-.sticky-btn-b {
-	top: 5em;
 }
 
 .fork-btn {
@@ -869,4 +866,29 @@ div.slide-out {
 	font-size: 3rem;
 	width: 70px;
 	cursor: pointer;
+}
+
+/* CreateRecipe */
+
+#recipeMethod {
+	margin-bottom: 5%;
+	padding: 0.5em 0.9em;
+	border-radius: 10px;
+	line-height: 2em;
+	font-family: 'Roboto Slab', serif;
+}
+
+#recipeMethod:focus {
+	padding: 0.9em 0.9em;
+}
+
+.add-btn {
+	margin: 1.2em auto;
+	background: #525A94;
+	width: 9.5em;
+	color: #FFFFFF;
+}
+
+#create-recipe-btn {
+	margin-top: 2em;
 }
