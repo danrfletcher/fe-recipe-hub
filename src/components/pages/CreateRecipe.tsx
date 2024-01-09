@@ -3,10 +3,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { getAllCuisines } from "../../features/cuisineSlice";
 import { useEffect } from "react";
 import {
+	clearErrors,
 	clearPost,
 	ingredientsToPost,
 	postRecipe,
 	quantityToPost,
+	setError
 } from "../../features/createRecipeSlice";
 import { getAllIngredients } from "../../features/ingredientsSlice";
 import { useNavigate } from "react-router-dom";
@@ -36,6 +38,8 @@ export const CreateRecipe: React.FC = () => {
 	const singleRecipeState = useAppSelector((state) => state.singleRecipe.recipe);
 	const ingredientsToAdd = useAppSelector((state) => state.createRecipe.ingredientIds);
 	const quantityToAdd = useAppSelector((state) => state.createRecipe.quantity);
+	const error = useAppSelector((state) => state.createRecipe.error)
+	const isError = useAppSelector((state) => state.createRecipe.isError)
 
 	const navigate = useNavigate()
 
@@ -88,6 +92,8 @@ export const CreateRecipe: React.FC = () => {
 					recipeId: singleRecipeState.recipeId,
 					ingredientIds: arrayOfIngIds,
 					quantity: [],
+					error: null,
+					isError: false
 				},
 				token,
 				{ ingredientIds: arrayOfIngIds, quantity: quantityToAdd }
@@ -98,7 +104,18 @@ export const CreateRecipe: React.FC = () => {
 	};
 
 	return (
-		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
+		<div
+			onTouchEnd={() => {
+				if (isError) dispatch(clearErrors())
+			}}
+			onMouseUp={() => {
+				if (isError) dispatch(clearErrors())
+			}}
+			className={isNavToggled ? (
+				"page-slide-in"
+			) : (
+				"page-slide-out"
+			)}>
 			<h2 className="auth-header">Feeling inspired?</h2>
 			<h3 className="auth-header-cursive">Create a new recipe</h3>
 			<form className="auth-form" onSubmit={handleSubmit(submitForm)}>
@@ -285,10 +302,12 @@ export const CreateRecipe: React.FC = () => {
 							const values = getValues();
 							if (ingredients.find((object) => object.ingredientName == values.ingredientsId)) {
 								if (ingredientsToAdd.includes(values.ingredientsId)) {
-									console.log("No duplicate items")
+									dispatch(setError("Sorry, no duplicate items!"))
+									resetField("ingredientsId")
+									resetField("quantity")
 								} else {
 									if (!values.quantity) {
-										console.log("Specify quantity")
+										dispatch(setError("Please specify a quantity"))
 									} else {
 										dispatch(ingredientsToPost(values.ingredientsId));
 										dispatch(quantityToPost(values.quantity));
@@ -297,7 +316,7 @@ export const CreateRecipe: React.FC = () => {
 									}
 								}
 							} else {
-								console.log("Please add an item")
+								dispatch(setError("Please add an ingredient"))
 							}
 						}}>
 						Add ingredient
@@ -311,6 +330,14 @@ export const CreateRecipe: React.FC = () => {
 						Clear list
 					</button>
 				</div>
+
+				{isError ? (
+					<div className="error-section create-recipe-error-section">
+						<p>{error}</p>
+					</div>
+				) : (
+					null
+				)}
 
 				<p className="auth-header-cursive ready-text">Ready to go?</p>
 				<button

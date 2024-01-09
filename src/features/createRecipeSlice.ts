@@ -20,6 +20,8 @@ interface CreateRecipe {
 	recipeId: number | null;
 	ingredientIds: any[];
 	quantity: string[];
+	error: string | null;
+	isError: boolean;
 }
 
 const initialState: CreateRecipe = {
@@ -37,6 +39,8 @@ const initialState: CreateRecipe = {
 	recipeId: null,
 	ingredientIds: [],
 	quantity: [],
+	error: null,
+	isError: false
 };
 
 const createRecipeSlice = createSlice({
@@ -55,6 +59,14 @@ const createRecipeSlice = createSlice({
 		clearPost: (state) => {
 			state.quantity = []
 			state.ingredientIds = []
+		},
+		setError: (state, action: PayloadAction<string>) => {
+			state.isError = true
+			state.error = action.payload
+		},
+		clearErrors: (state) => {
+			state.isError = false
+			state.error = null
 		}
 	},
 });
@@ -74,5 +86,13 @@ export const postRecipe = (object: CreateRecipe, token: string, ingredientObj: o
 	};
 };
 
-export const { recipeToPost, ingredientsToPost, quantityToPost, clearPost } = createRecipeSlice.actions;
+export const {
+	recipeToPost,
+	ingredientsToPost,
+	quantityToPost,
+	clearPost,
+	setError,
+	clearErrors
+} = createRecipeSlice.actions;
+
 export default createRecipeSlice.reducer;
