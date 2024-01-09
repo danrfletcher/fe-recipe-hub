@@ -1,12 +1,21 @@
 import { useEffect } from "react";
-import { useAppSelector,useAppDispatch } from "../../app/hooks";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { getAllCuisines } from "../../features/cuisineSlice";
 import { getAllIngredients } from "../../features/ingredientsSlice";
 import {
+	clearErrors,
 	postRecipe,
+	setError,
 } from "../../features/createRecipeSlice";
-import { forkedIngredientsInitial, forkedIngredientsToPost, forkedQuantitiesInitial, forkedQuantitiesToPost } from "../../features/forkedIngredientsSlice";
+import {
+  clearForkedIngredients,
+	forkedIngredientsInitial,
+	forkedIngredientsToPost,
+	forkedQuantitiesInitial,
+	forkedQuantitiesToPost,
+} from "../../features/forkedIngredientsSlice";
+
 interface FormValues {
 	recipeTitle: string;
 	tagLine: string;
@@ -23,25 +32,27 @@ interface FormValues {
 	quantity: any;
 }
 
-
 export const CreateFork: React.FC = () => {
-	const { register, handleSubmit, getValues } = useForm<FormValues>();
+	const { register, handleSubmit, getValues, resetField } =
+		useForm<FormValues>();
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
-  const stateInfo = useAppSelector((state) => state.auth);
-  const cuisines = useAppSelector((state) => state.cuisines.allCuisines);
+	const stateInfo = useAppSelector((state) => state.auth);
+	const cuisines = useAppSelector((state) => state.cuisines.allCuisines);
 	const ingredients = useAppSelector((state) => state.ingredients.ingredients);
 	const dispatch = useAppDispatch();
-  const singleRecipeState = useAppSelector(
+	const error = useAppSelector((state) => state.createRecipe.error);
+	const isError = useAppSelector((state) => state.createRecipe.isError);
+	const singleRecipeState = useAppSelector(
 		(state) => state.singleRecipe.recipe
 	);
-  
-  	const forkedIngredientsToDisplay = useAppSelector(
+
+	const forkedIngredientsToDisplay = useAppSelector(
 		(state) => state.forkedIngredients.forkedIngredients
-	)
-	
+	);
+
 	const forkedQuantitiesToDisplay = useAppSelector(
 		(state) => state.forkedIngredients.forkedQuantities
-	)
+	);
 
 	const token = `Bearer ${stateInfo.token}`;
 
@@ -57,7 +68,7 @@ export const CreateFork: React.FC = () => {
 		(acc, cur) => ({ ...acc, [cur.cuisineName]: cur.cuisineId }),
 		{}
 	);
-  const lookupIngredients: any = ingredients.reduce(
+	const lookupIngredients: any = ingredients.reduce(
 		(acc, cur) => ({ ...acc, [cur.ingredientName]: cur.ingredientId }),
 		{}
 	);
@@ -70,8 +81,8 @@ export const CreateFork: React.FC = () => {
 	const arrayOfIngIds = forkedIngredientsToDisplay.map((ingredient) => {
 		return findId(lookupIngredients, ingredient);
 	});
-	
-  const submitForm: SubmitHandler<FormValues> = (data) => {
+
+	const submitForm: SubmitHandler<FormValues> = (data) => {
 		dispatch(
 			postRecipe(
 				{
@@ -83,27 +94,40 @@ export const CreateFork: React.FC = () => {
 					recipeImg: data.recipeImg,
 					cuisine: data.cuisine,
 					forkedFromId: singleRecipeState.recipeId,
-					originalRecipeId: !singleRecipeState.originalRecipeId ? singleRecipeState.recipeId : singleRecipeState.originalRecipeId,
+					originalRecipeId: !singleRecipeState.originalRecipeId
+						? singleRecipeState.recipeId
+						: singleRecipeState.originalRecipeId,
 					userId: stateInfo.userId,
 					cuisineId: findId(lookupCuisines, data.cuisine),
 					recipeId: singleRecipeState.recipeId,
 					ingredientIds: arrayOfIngIds,
 					quantity: [],
+					error: null,
+					isError: false,
 				},
 				token,
-				{ ingredientIds: arrayOfIngIds, quantity: forkedQuantitiesToDisplay}
+				{ ingredientIds: arrayOfIngIds, quantity: forkedQuantitiesToDisplay }
 			)
 		);
 	};
 
+	const recipeIngredientsForForking: any[] =
+		singleRecipeState.recipeIngredients;
+	let ingredientNames: string[] = recipeIngredientsForForking.map(
+		(ingredient) => ingredient.ingredientName
+	);
+	const ingredientQuantity: string[] = recipeIngredientsForForking.map(
+		(ingredient) => ingredient.quantity
+	);
 
-	const recipeIngredientsForForking : any[] = singleRecipeState.recipeIngredients;
-	let ingredientNames : string[] = recipeIngredientsForForking.map(ingredient => ingredient.ingredientName);
-	const ingredientQuantity: string[] = recipeIngredientsForForking.map(ingredient => ingredient.quantity);
-  
-  // ----------------------------------------------------------
+	// ----------------------------------------------------------
 	return (
-		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
+		<div onTouchEnd={() => {
+      if (isError) dispatch(clearErrors())
+    }}
+    onMouseUp={() => {
+      if (isError) dispatch(clearErrors())
+    }} className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
 			<h2 className="auth-header">Feeling inspired?</h2>
 			<h3 className="auth-header-cursive">Create a new recipe</h3>
 			<form className="auth-form" onSubmit={handleSubmit(submitForm)}>
@@ -118,7 +142,8 @@ export const CreateFork: React.FC = () => {
 						id="recipeTitle"
 						className="input-field"
 						{...register("recipeTitle")}
-						required />
+						required
+					/>
 				</div>
 				<div className="input-wrapper">
 					<label htmlFor="tagLine" className="input-label">
@@ -132,7 +157,8 @@ export const CreateFork: React.FC = () => {
 						autoComplete="on"
 						className="input-field"
 						{...register("tagLine")}
-						required />
+						required
+					/>
 				</div>
 				<div className="input-wrapper">
 					<label htmlFor="difficulty" className="input-label">
@@ -143,7 +169,8 @@ export const CreateFork: React.FC = () => {
 						className="input-field"
 						{...register("difficulty")}
 						required
-						defaultValue={singleRecipeState.difficulty}>
+						defaultValue={singleRecipeState.difficulty}
+					>
 						<option value="placeholder" disabled>
 							Click to select a rating
 						</option>
@@ -191,7 +218,8 @@ export const CreateFork: React.FC = () => {
 						className="input-field"
 						defaultValue={singleRecipeState.cuisine}
 						{...register("cuisine")}
-						required>
+						required
+					>
 						<option className="" value="placeholder" disabled>
 							Click to select a cuisine
 						</option>
@@ -203,6 +231,7 @@ export const CreateFork: React.FC = () => {
 					</select>
 				</div>
 				<div className="input-wrapper">
+
 					<label htmlFor="recipeMethod" className="input-label">
 						Method
 					</label>
@@ -217,20 +246,42 @@ export const CreateFork: React.FC = () => {
 						required
 					/>
 				</div>
-				<div>
-					<p className="input-label">
-						Ingredients:
-					</p>
-					<div className="input-wrapper" id="ingredients-input">
-						{ingredientNames.length ? (
-							forkedIngredientsToDisplay.map((ingredient) => {
-								return <p key={ingredient}>{ingredient}</p>;
-							})
-						) : null}
+
+					{/* htmlFor = recipeMethod??? */}
+					<label htmlFor="recipeMethod" className="input-label">
+						Ingredients
+					</label>
+					<div className="ingredients-list">
+						<div>
+							{ingredientNames.length
+								? forkedIngredientsToDisplay.map((ingredient) => {
+										return (
+											<li
+												className="recipe-list-item recipe-list-quantity"
+												key={ingredient}
+											>
+												{ingredient}
+											</li>
+										);
+								  })
+								: null}
+						</div>
+						<div>
+							{forkedQuantitiesToDisplay.length
+								? forkedQuantitiesToDisplay.map((quantity, index) => {
+										return <li className="recipe-list-item recipe-list-quantity" key={index}>{quantity}</li>;
+								  })
+								: null}
+						</div>
+					</div>
+						
+					<div className="recipe-form-internal-wrapper ingredient-field-wrapper">
+						<label htmlFor="ingredient-field">Ingredient:</label>
 						<input
 							type="text"
 							list="ingredientsList"
 							className="input-field"
+              id="ingredient-field"
 							multiple={true}
 							{...register("ingredientsId")}
 						/>
@@ -239,58 +290,79 @@ export const CreateFork: React.FC = () => {
 								return (
 									<option
 										key={ingredient.ingredientId}
-										data-value={ingredient.ingredientId}>
+										data-value={ingredient.ingredientId}
+									>
 										{ingredient.ingredientName}
 									</option>
 								);
 							})}
 						</datalist>
 					</div>
+				<div className="recipe-form-internal-wrapper">
+					<label htmlFor="quantity-field">Quantitiy:</label>
+					<input
+						type="text"
+						className="input-field"
+						id="quantity-field"
+						placeholder="e.g. 500g"
+						{...register("quantity")}
+					/>
+				</div>
+
+				<div className="btn-container">
 					<button
 						className="styled-btn add-btn"
 						onClick={(e) => {
 							e.preventDefault();
 							const values = getValues();
-							//if ingredient doesn't exist on the ingredient array it will not be added.
-							if (ingredients.find((ingredient) => ingredient.ingredientName == values.ingredientsId)) {
-								dispatch(forkedIngredientsToPost(values.ingredientsId));
+							if (
+								ingredients.find(
+									(object) => object.ingredientName == values.ingredientsId
+								)
+							) {
+								if (forkedIngredientsToDisplay.includes(values.ingredientsId)) {
+									dispatch(setError("Sorry, no duplicate items!"));
+									resetField("ingredientsId");
+									resetField("quantity");
+								} else {
+									if (!values.quantity) {
+										dispatch(setError("Please specify a quantity"));
+									} else {
+										dispatch(forkedIngredientsToPost(values.ingredientsId));
+										dispatch(forkedQuantitiesToPost(values.quantity));
+										resetField("ingredientsId");
+										resetField("quantity");
+									}
+								}
+							} else {
+								dispatch(setError("Please add an ingredient"));
 							}
-						}}>
+						}}
+					>
 						Add ingredient
 					</button>
-				</div>
-				<div>
-					<p className="input-label">
-						Quantities:
-					</p>
-					<div className="input-wrapper" id="quantity-input">
-						{forkedQuantitiesToDisplay.length ? (
-							forkedQuantitiesToDisplay.map((quantity, index) => {
-								return <p key={index}>{quantity}</p>;
-							})
-						) : null}
-						<input
-							type="text"
-							className="input-field"
-							{...register("quantity")} />
-					</div>
 					<button
-						className="styled-btn add-btn"
+						className="styled-btn clear-all-btn"
 						onClick={(e) => {
 							e.preventDefault();
-							const values = getValues();
-							if (values.quantity && forkedQuantitiesToDisplay.length < forkedIngredientsToDisplay.length) {
-								dispatch(forkedQuantitiesToPost(values.quantity));
-							}
-						}}>
-						Add quantity
+							dispatch(clearForkedIngredients());
+						}}
+					>
+						Clear list
 					</button>
 				</div>
+				{isError ? (
+					<div className="error-section create-recipe-error-section">
+						<p>{error}</p>
+					</div>
+				) : null}
+
 				<p className="auth-header-cursive">All done?</p>
 				<button
 					type="submit"
 					className="styled-btn auth-btn"
-					id="create-recipe-btn">
+					id="create-recipe-btn"
+				>
 					Create this recipe
 				</button>
 			</form>
