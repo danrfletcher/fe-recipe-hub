@@ -550,6 +550,8 @@ div.slide-out {
 
 .auth-header-cursive {
 	margin-top: 0.6em;
+	padding: 0.5em 0;
+	background-color: hsl(343, 74%, 23%, 5%);
 	color: #660f27;
 	font-size: 2rem;
 	font-family: 'Dancing Script', cursive;
@@ -947,4 +949,10 @@ div.slide-out {
 .recipe-list-item {
 	background: none;
 	padding: 0;
+}
+
+.ready-text {
+	margin-left: 10px;
+	margin-right: 10px;
+	border-radius: 10px;
 }
