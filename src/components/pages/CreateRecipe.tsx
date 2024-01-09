@@ -137,7 +137,7 @@ export const CreateRecipe: React.FC = () => {
 						required
 						defaultValue="placeholder">
 						<option value="placeholder" disabled>
-							Click to select a rating
+							Select a rating
 						</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -187,7 +187,7 @@ export const CreateRecipe: React.FC = () => {
 						{...register("cuisine")}
 						required>
 						<option className="" value="placeholder" disabled>
-							Click to select a cuisine
+							Select a cuisine
 						</option>
 						{cuisines.map((cuisine) => {
 							return (
@@ -204,7 +204,7 @@ export const CreateRecipe: React.FC = () => {
 					<textarea
 						id="recipeMethod"
 						rows={5}
-						placeholder="Enter each step on a new line..."
+						placeholder="Please enter each step on a new line"
 						autoComplete="on"
 						className="input-field"
 						{...register("recipeMethod")}
@@ -245,6 +245,7 @@ export const CreateRecipe: React.FC = () => {
 						list="ingredientsList"
 						className="input-field"
 						id="ingredient-field"
+						placeholder="Search"
 						multiple={true}
 						{...register("ingredientsId")} />
 					<datalist id="ingredientsList">
@@ -268,6 +269,7 @@ export const CreateRecipe: React.FC = () => {
 						type="text"
 						className="input-field"
 						id="quantity-field"
+						placeholder="e.g. 500g"
 						{...register("quantity")} />
 				</div>
 
@@ -295,7 +297,7 @@ export const CreateRecipe: React.FC = () => {
 					Add ingredient
 				</button>
 
-				<p className="auth-header-cursive">Ready to go?</p>
+				<p className="auth-header-cursive ready-text">Ready to go?</p>
 				<button
 					type="submit"
 					className="styled-btn auth-btn"
