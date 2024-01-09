@@ -100,7 +100,7 @@ export const CreateRecipe: React.FC = () => {
 			)
 		)
 		reset()
-		navigate(`/recipe/${singleRecipeState.recipeId}`)
+		navigate("/recipes")
 	};
 
 	return (
