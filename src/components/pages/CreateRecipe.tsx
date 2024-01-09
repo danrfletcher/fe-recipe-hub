@@ -3,11 +3,15 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { getAllCuisines } from "../../features/cuisineSlice";
 import { useEffect } from "react";
 import {
+	clearErrors,
+	clearPost,
 	ingredientsToPost,
 	postRecipe,
 	quantityToPost,
+	setError
 } from "../../features/createRecipeSlice";
 import { getAllIngredients } from "../../features/ingredientsSlice";
+import { useNavigate } from "react-router-dom";
 
 interface FormValues {
 	recipeTitle: string;
@@ -26,25 +30,35 @@ interface FormValues {
 }
 
 export const CreateRecipe: React.FC = () => {
+
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
 	const cuisines = useAppSelector((state) => state.cuisines.allCuisines);
 	const ingredients = useAppSelector((state) => state.ingredients.ingredients);
-	const dispatch = useAppDispatch();
-	const { register, handleSubmit, getValues } = useForm<FormValues>();
 	const stateInfo = useAppSelector((state) => state.auth);
-	const singleRecipeState = useAppSelector(
-		(state) => state.singleRecipe.recipe
-	);
-	const token = `Bearer ${stateInfo.token}`;
+	const singleRecipeState = useAppSelector((state) => state.singleRecipe.recipe);
+	const ingredientsToAdd = useAppSelector((state) => state.createRecipe.ingredientIds);
+	const quantityToAdd = useAppSelector((state) => state.createRecipe.quantity);
+	const error = useAppSelector((state) => state.createRecipe.error)
+	const isError = useAppSelector((state) => state.createRecipe.isError)
 
-	// ------------------------------------------------------
+	const navigate = useNavigate()
+
+	const dispatch = useAppDispatch();
+	const {
+		register,
+		handleSubmit,
+		getValues,
+		resetField,
+		reset
+	} = useForm<FormValues>();
+
+	const token = `Bearer ${stateInfo.token}`;
 
 	useEffect(() => {
 		dispatch(getAllCuisines());
 		dispatch(getAllIngredients());
 	}, []);
-	//----------------------------------------------------------
-	// cuisine/ingredient lookup objects
+
 	const lookupCuisines: any = cuisines.reduce(
 		(acc, cur) => ({ ...acc, [cur.cuisineName]: cur.cuisineId }),
 		{}
@@ -53,23 +67,14 @@ export const CreateRecipe: React.FC = () => {
 		(acc, cur) => ({ ...acc, [cur.ingredientName]: cur.ingredientId }),
 		{}
 	);
-	// function to lookup the id of ingredients/cuisines by name
 	const findId = (array: string[], name: any) => {
 		return array[name];
 	};
-	// -----------------------------------------------------
-	const ingredientsToAdd = useAppSelector(
-		(state) => state.createRecipe.ingredientIds
-	);
-	const quantityToAdd = useAppSelector((state) => state.createRecipe.quantity);
-	// converts the ingredients names to ingredients Ids
 	const arrayOfIngIds = ingredientsToAdd.map((ingredient) => {
 		return findId(lookupIngredients, ingredient);
 	});
 
-	// --------------------------------------------------------------
-	const submitForm: SubmitHandler<FormValues> = (data) => {
-		console.log(data);
+	const submitForm: SubmitHandler<FormValues> = async (data) => {
 		dispatch(
 			postRecipe(
 				{
@@ -87,19 +92,34 @@ export const CreateRecipe: React.FC = () => {
 					recipeId: singleRecipeState.recipeId,
 					ingredientIds: arrayOfIngIds,
 					quantity: [],
+					error: null,
+					isError: false
 				},
 				token,
 				{ ingredientIds: arrayOfIngIds, quantity: quantityToAdd }
 			)
-		);
+		)
+		reset()
+		navigate(`/recipes/add_recipe/success`)
 	};
 
-	// -----------------------------------------------------------
 	return (
-		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
+		<div
+			onTouchEnd={() => {
+				if (isError) dispatch(clearErrors())
+			}}
+			onMouseUp={() => {
+				if (isError) dispatch(clearErrors())
+			}}
+			className={isNavToggled ? (
+				"page-slide-in"
+			) : (
+				"page-slide-out"
+			)}>
 			<h2 className="auth-header">Feeling inspired?</h2>
 			<h3 className="auth-header-cursive">Create a new recipe</h3>
 			<form className="auth-form" onSubmit={handleSubmit(submitForm)}>
+
 				<div className="input-wrapper">
 					<label htmlFor="recipeTitle" className="input-label">
 						Recipe Title
@@ -112,6 +132,7 @@ export const CreateRecipe: React.FC = () => {
 						{...register("recipeTitle")}
 						required />
 				</div>
+
 				<div className="input-wrapper">
 					<label htmlFor="tagLine" className="input-label">
 						Recipe Tagline
@@ -125,6 +146,7 @@ export const CreateRecipe: React.FC = () => {
 						{...register("tagLine")}
 						required />
 				</div>
+
 				<div className="input-wrapper">
 					<label htmlFor="difficulty" className="input-label">
 						Difficulty Rating
@@ -136,7 +158,7 @@ export const CreateRecipe: React.FC = () => {
 						required
 						defaultValue="placeholder">
 						<option value="placeholder" disabled>
-							Click to select a rating
+							Select a rating
 						</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -145,6 +167,7 @@ export const CreateRecipe: React.FC = () => {
 						<option value="5">5</option>
 					</select>
 				</div>
+
 				<div className="input-wrapper">
 					<label htmlFor="timeToPrepare" className="input-label">
 						Preparation Time (Minutes)
@@ -159,6 +182,7 @@ export const CreateRecipe: React.FC = () => {
 						required
 					/>
 				</div>
+
 				<div className="input-wrapper">
 					<label htmlFor="recipeImg" className="input-label">
 						Recipe Image URL
@@ -172,6 +196,7 @@ export const CreateRecipe: React.FC = () => {
 						required
 					/>
 				</div>
+
 				<div className="input-wrapper">
 					<label htmlFor="cuisine" className="input-label">
 						Select Cuisine
@@ -183,7 +208,7 @@ export const CreateRecipe: React.FC = () => {
 						{...register("cuisine")}
 						required>
 						<option className="" value="placeholder" disabled>
-							Click to select a cuisine
+							Select a cuisine
 						</option>
 						{cuisines.map((cuisine) => {
 							return (
@@ -192,6 +217,7 @@ export const CreateRecipe: React.FC = () => {
 						})}
 					</select>
 				</div>
+
 				<div className="input-wrapper">
 					<label htmlFor="recipeMethod" className="input-label">
 						Method
@@ -199,92 +225,130 @@ export const CreateRecipe: React.FC = () => {
 					<textarea
 						id="recipeMethod"
 						rows={5}
-						placeholder="Enter each step on a new line..."
+						placeholder="Please enter each step on a new line"
 						autoComplete="on"
 						className="input-field"
 						{...register("recipeMethod")}
 						required
 					/>
 				</div>
-				<div>
-					<p className="input-label">
-						Ingredients:
-					</p>
-					<div className="input-wrapper" id="ingredients-input">
-						{ingredientsToAdd.length ? (
-							ingredientsToAdd.map((ingredient) => {
-								return <p key={ingredient}>{ingredient}</p>;
-							})
-						) : (
-							null
-						)}
-						<input
-							type="text"
-							list="ingredientsList"
-							className="input-field"
-							multiple={true}
-							{...register("ingredientsId")}
-						/>
-						<datalist id="ingredientsList">
-							{ingredients.map((ingredient) => {
-								return (
-									<option
-										key={ingredient.ingredientId}
-										data-value={ingredient.ingredientId}>
-										{ingredient.ingredientName}
-									</option>
-								);
-							})}
-						</datalist>
+
+				<label htmlFor="recipeMethod" className="input-label">
+					Ingredients
+				</label>
+				{ingredientsToAdd.length ? (
+					<div className="ingredients-list">
+						<div>
+							{ingredientsToAdd.length ? (
+								ingredientsToAdd.map((ingredient) => {
+									return <li className="recipe-list-item recipe-list-ingredient" key={ingredient}>{ingredient}</li>;
+								})
+							) : (
+								null
+							)}
+						</div>
+						<div>
+							{quantityToAdd.length ? (
+								quantityToAdd.map((quantity, index) => {
+									return <li className="recipe-list-item recipe-list-quantity" key={index}>{quantity}</li>;
+								})
+							) : (
+								null
+							)}
+						</div>
 					</div>
+				) : (
+					null
+				)}
+
+				<div className="recipe-form-internal-wrapper ingredient-field-wrapper">
+					<label htmlFor="ingredient-field">
+						Ingredient:
+					</label>
+					<input
+						type="text"
+						list="ingredientsList"
+						className="input-field"
+						id="ingredient-field"
+						placeholder="Search"
+						multiple={true}
+						{...register("ingredientsId")} />
+					<datalist id="ingredientsList">
+						{ingredients.map((ingredient) => {
+							return (
+								<option
+									key={ingredient.ingredientId}
+									data-value={ingredient.ingredientId}>
+									{ingredient.ingredientName}
+								</option>
+							);
+						})}
+					</datalist>
+				</div>
+
+				<div className="recipe-form-internal-wrapper">
+					<label htmlFor="quantity-field">
+						Quantity:
+					</label>
+					<input
+						type="text"
+						className="input-field"
+						id="quantity-field"
+						placeholder="e.g. 500g"
+						{...register("quantity")} />
+				</div>
+
+				<div className="btn-container">
 					<button
 						className="styled-btn add-btn"
 						onClick={(e) => {
 							e.preventDefault();
 							const values = getValues();
-							//if ingredient doesn't exist on the ingredient array it will not be added.
 							if (ingredients.find((object) => object.ingredientName == values.ingredientsId)) {
-								dispatch(ingredientsToPost(values.ingredientsId));
+								if (ingredientsToAdd.includes(values.ingredientsId)) {
+									dispatch(setError("Sorry, no duplicate items!"))
+									resetField("ingredientsId")
+									resetField("quantity")
+								} else {
+									if (!values.quantity) {
+										dispatch(setError("Please specify a quantity"))
+									} else {
+										dispatch(ingredientsToPost(values.ingredientsId));
+										dispatch(quantityToPost(values.quantity));
+										resetField("ingredientsId")
+										resetField("quantity")
+									}
+								}
+							} else {
+								dispatch(setError("Please add an ingredient"))
 							}
 						}}>
 						Add ingredient
 					</button>
-				</div>
-				<div>
-					<p className="input-label">
-						Quantities:
-					</p>
-					<div className="input-wrapper" id="quantity-input">
-						{quantityToAdd.length ? (
-							quantityToAdd.map((quantity, index) => {
-								return <p key={index}>{quantity}</p>;
-							})
-						) : (
-							null
-						)}
-						<input
-							type="text"
-							className="input-field"
-							{...register("quantity")} />
-					</div>
 					<button
-						className="styled-btn add-btn"
+						className="styled-btn clear-all-btn"
 						onClick={(e) => {
-							e.preventDefault();
-							const values = getValues();
-							if (values.quantity && quantityToAdd.length < ingredientsToAdd.length) {
-								dispatch(quantityToPost(values.quantity));
-							}
+							e.preventDefault()
+							dispatch(clearPost())
 						}}>
-						Add quantity
+						Clear list
 					</button>
 				</div>
-				<p className="auth-header-cursive">All done?</p>
+
+				{isError ? (
+					<div className="error-section create-recipe-error-section">
+						<p>{error}</p>
+					</div>
+				) : (
+					null
+				)}
+
+				<p className="auth-header-cursive ready-text">Ready to go?</p>
 				<button
 					type="submit"
 					className="styled-btn auth-btn"
 					id="create-recipe-btn">
-					Create this recipe
+					Create recipe
 				</button>
 			</form>
 		</div>
