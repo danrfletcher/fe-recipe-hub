@@ -935,13 +935,13 @@ div.slide-out {
 	margin: 0 5%;
 }
 
+.ingredient-field-wrapper {
+	margin-bottom: 5%;
+}
+
 #ingredient-field, #quantity-field {
 	margin-right: 0;
 	border-radius: 10px;
-}
-
-#ingredient-field {
-	margin-bottom: 1.2em;
 }
 
 .recipe-list-item {

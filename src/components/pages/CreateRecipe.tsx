@@ -236,7 +236,7 @@ export const CreateRecipe: React.FC = () => {
 					</div>
 				</div>
 
-				<div className="recipe-form-internal-wrapper">
+				<div className="recipe-form-internal-wrapper ingredient-field-wrapper">
 					<label htmlFor="ingredient-field">
 						Ingredient:
 					</label>
