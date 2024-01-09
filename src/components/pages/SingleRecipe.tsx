@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getSingleRecipe } from "../../features/singleRecipeSlice";
 import Loading from "../Loading";
 import { Ingredient } from "../../features/ingredientsSlice";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const SingleRecipe: React.FC = () => {
 
@@ -46,6 +46,9 @@ const SingleRecipe: React.FC = () => {
 					</div>
 				</>
 			)}
+      	<Link to={'/create_fork'}><button className="styled-btn fork-btn">
+					Fork this recipe
+				</button></Link>
 		</div>
 	);
 };
