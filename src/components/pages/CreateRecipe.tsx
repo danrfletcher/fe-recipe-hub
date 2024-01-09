@@ -29,16 +29,21 @@ interface FormValues {
 export const CreateRecipe: React.FC = () => {
 
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
-
-	const dispatch = useAppDispatch();
-	const { register, handleSubmit, getValues } = useForm<FormValues>();
-
 	const cuisines = useAppSelector((state) => state.cuisines.allCuisines);
 	const ingredients = useAppSelector((state) => state.ingredients.ingredients);
 	const stateInfo = useAppSelector((state) => state.auth);
-	const singleRecipeState = useAppSelector(
-		(state) => state.singleRecipe.recipe
-	);
+	const singleRecipeState = useAppSelector((state) => state.singleRecipe.recipe);
+	const ingredientsToAdd = useAppSelector((state) => state.createRecipe.ingredientIds);
+	const quantityToAdd = useAppSelector((state) => state.createRecipe.quantity);
+
+	const dispatch = useAppDispatch();
+	const {
+		register,
+		handleSubmit,
+		getValues,
+		resetField,
+		reset
+	} = useForm<FormValues>();
 
 	const token = `Bearer ${stateInfo.token}`;
 
@@ -51,20 +56,13 @@ export const CreateRecipe: React.FC = () => {
 		(acc, cur) => ({ ...acc, [cur.cuisineName]: cur.cuisineId }),
 		{}
 	);
-
 	const lookupIngredients: any = ingredients.reduce(
 		(acc, cur) => ({ ...acc, [cur.ingredientName]: cur.ingredientId }),
 		{}
 	);
-
 	const findId = (array: string[], name: any) => {
 		return array[name];
 	};
-
-	const ingredientsToAdd = useAppSelector((state) => state.createRecipe.ingredientIds);
-
-	const quantityToAdd = useAppSelector((state) => state.createRecipe.quantity);
-
 	const arrayOfIngIds = ingredientsToAdd.map((ingredient) => {
 		return findId(lookupIngredients, ingredient);
 	});
@@ -280,7 +278,6 @@ export const CreateRecipe: React.FC = () => {
 						onClick={(e) => {
 							e.preventDefault();
 							const values = getValues();
-							console.log(values)
 							if (ingredients.find((object) => object.ingredientName == values.ingredientsId)) {
 								if (ingredientsToAdd.includes(values.ingredientsId)) {
 									console.log("No duplicate items")
@@ -290,6 +287,8 @@ export const CreateRecipe: React.FC = () => {
 									} else {
 										dispatch(ingredientsToPost(values.ingredientsId));
 										dispatch(quantityToPost(values.quantity));
+										resetField("ingredientsId")
+										resetField("quantity")
 									}
 								}
 							} else {
@@ -298,13 +297,14 @@ export const CreateRecipe: React.FC = () => {
 						}}>
 						Add ingredient
 					</button>
-					<button 
-					className="styled-btn clear-all-btn"
-					onClick={(e) => {
-						e.preventDefault()
-						dispatch(clearPost())
-					}}>
-						Clear all
+					<button
+						className="styled-btn clear-all-btn"
+						onClick={(e) => {
+							e.preventDefault()
+							dispatch(clearPost())
+							reset()
+						}}>
+						Clear list
 					</button>
 				</div>
 

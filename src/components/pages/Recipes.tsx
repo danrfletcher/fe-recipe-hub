@@ -16,8 +16,6 @@ const Recipes: React.FC = () => {
 		dispatch(getAllRecipes());
 	}, []);
 
-	console.log(user)
-
 	return (
 		<>
 			<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
