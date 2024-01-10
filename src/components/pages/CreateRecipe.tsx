@@ -193,8 +193,7 @@ export const CreateRecipe: React.FC = () => {
 						id="recipeImg"
 						className="input-field"
 						{...register("recipeImg")}
-						required
-					/>
+						required />
 				</div>
 
 				<div className="input-wrapper">
@@ -229,15 +228,14 @@ export const CreateRecipe: React.FC = () => {
 						autoComplete="on"
 						className="input-field"
 						{...register("recipeMethod")}
-						required
-					/>
+						required />
 				</div>
-{/* why is the label below htmlfor as recipeMethod? */}
-				<label htmlFor="recipeMethod" className="input-label">
+
+				<label htmlFor="recipeIng" className="input-label">
 					Ingredients
 				</label>
 				{ingredientsToAdd.length ? (
-					<div className="ingredients-list">
+					<div className="ingredients-list" id="recipeIng">
 						<div>
 							{ingredientsToAdd.length ? (
 								ingredientsToAdd.map((ingredient) => {
