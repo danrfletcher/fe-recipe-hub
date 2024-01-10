@@ -5,9 +5,9 @@ const RecipeMethod: React.FC = () => {
     const listMethod: string[] = recipeData.recipeMethod.split('%');
     return (
         <div>
-            <p>Method</p>
+            <p className="profile-header">Method</p>
             <ol>
-            {listMethod.map((methodStep, index) => (
+                {listMethod.map((methodStep, index) => (
                     <li key={index} className="listMethod">{methodStep}</li>
                 ))}
             </ol>
