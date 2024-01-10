@@ -1,16 +1,15 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useAppDispatch } from "../app/hooks";
 import { recipeId } from "../features/singleRecipeSlice";
 import { Recipe, getForksById } from "../features/allRecipesSlice";
 import { formatTime, lengthenDate } from "../utils/formatting-utils";
 import { setDifficulty } from "../utils/react-utils";
-import { Link } from "react-router-dom";
+import { TbArrowFork } from "react-icons/tb";
 
 const RecipeCard: React.FC<Recipe> = (props) => {
 
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
-  const params = useParams()
 	const handleClick = () => {
 		navigate(`/recipe/${props.recipeId}`)
 		dispatch(recipeId(props.recipeId))
@@ -31,8 +30,8 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 						{props.recipeTitle}
 					</h3>
 					{props.originalRecipeId ? (
-						<p className="recipe-el recipe-title">
-							(Forked)
+						<p className="recipe-el recipe-title fork-icon">
+							<TbArrowFork />
 						</p>
 					) : (
 						null
@@ -72,40 +71,21 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 					</p>
 				</div>
 				<div className="btn-container-alt">
-          
 					{props.forkCount | props.directForkCount ? (
 						// <Link to={`/recipe/${props.recipeId}/forks`}>
-							<button
-              className="styled-btn fork-btn"
-              
-              onClick={() => {
-                  console.log(props.recipeId,"<<<<<<OG ID in recCard")
-									dispatch(getForksById({
-										forkedFromId: props.recipeId
-									}))
-                  // dispatch(getSingleRecipe(props.recipeId))
-                  navigate(`/recipe/${props.recipeId}/forks/${props.originalRecipeId}/`)
-								}}>
-								View forks
-							</button>
+						<button
+							className="styled-btn fork-btn"
+							onClick={() => {
+								console.log(props.recipeId, "<<<<<<OG ID in recCard")
+								dispatch(getForksById({
+									forkedFromId: props.recipeId
+								}))
+								// dispatch(getSingleRecipe(props.recipeId))
+								navigate(`/recipe/${props.recipeId}/forks/${props.originalRecipeId}/`)
+							}}>
+							View forks
+						</button>
 						// </Link>
-					) : (
-						null
-					)}
-					{props.originalRecipeId ? (
-						<Link to={`/recipe/${props.originalRecipeId}`}>
-							<button
-								className="styled-btn fork-btn"
-								onClick={() => {
-                  console.log(props.originalRecipeId,"<<<<<<OG ID in recCard")
-									dispatch(getForksById({
-										originalRecipeId: params.originalRecipeId
-									}))
-                  // navigate(`/recipe/${props.originalRecipeId}`)
-								}}>
-								View original
-							</button>
-						</Link>
 					) : (
 						null
 					)}

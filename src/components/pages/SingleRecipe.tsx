@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getSingleRecipe } from "../../features/singleRecipeSlice";
-import { getAllRecipes } from "../../features/allRecipesSlice";
 import Loading from "../Loading";
 import { useParams, Link } from "react-router-dom";
 import SimilarRecipes from "../SimilarRecipes";

@@ -393,6 +393,10 @@ div.slide-out {
 	background: #525A94;
 }
 
+.fork-icon {
+	fill: #660f27;
+}
+
 /* Single Recipe */
 
 .single-recipe-img {
@@ -478,6 +482,7 @@ div.slide-out {
 }
 
 .cuisine-img {
+	object-fit: cover;
 	align-self: center;
 	aspect-ratio: 1/1;
 	border-radius: 4px;
