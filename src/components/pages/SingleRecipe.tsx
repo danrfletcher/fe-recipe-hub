@@ -6,7 +6,7 @@ import Loading from "../Loading";
 import { useParams, Link } from "react-router-dom";
 import { LuChefHat } from "react-icons/lu";
 import SimilarCuisine from "../SimilarCuisine";
-import MostPopularRecipies from "../MostPopularRecipies";
+import MostPopularRecipes from "../PopularRecipes";
 import ReviewStars from "../ReviewStars";
 import RecipeMethod from "../RecipeMethod";
 import { Ingredients } from "../Ingredients";
@@ -67,7 +67,7 @@ const SingleRecipe: React.FC = () => {
 								<Ingredients />
 								<RecipeMethod />
 							</div>
-							<MostPopularRecipies />
+							<MostPopularRecipes />
 						</div>
 						<div className="buttonsSPR">
 							{/*add links to the buttons*/}

@@ -3,7 +3,7 @@ import { Recipe } from "../features/allRecipesSlice";
 import { LuChefHat } from "react-icons/lu";
 import ReviewStars from "./ReviewStars";
 
-const MostPopularRecipies: React.FC = () => {
+const MostPopularRecipes: React.FC = () => {
 	const allRecipes = useAppSelector((state) => state.recipes.allRecipes);
 
 	// set difficulty make as component
@@ -49,4 +49,4 @@ const MostPopularRecipies: React.FC = () => {
 	);
 };
 
-export default MostPopularRecipies;
+export default MostPopularRecipes;
