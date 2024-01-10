@@ -2,6 +2,7 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import navReducer from "../features/navSlice";
 import authReducer from "../features/auth/authSlice";
 import recipesReducer from "../features/allRecipesSlice";
+import fileUploadReducer from "../features/fileUploadSlice.ts";
 import singleRecipeReducer from "../features/singleRecipeSlice.ts"
 import ingredientsReducer from "../features/ingredientsSlice.ts"
 import cuisinesReducer from "../features/cuisineSlice.ts"
@@ -19,7 +20,8 @@ export const store = configureStore({
     cuisines: cuisinesReducer,
     createRecipe: createRecipeReducer,
     footer: footerReducer,
-    forkedIngredients: forkedingredientsReducer
+    forkedIngredients: forkedingredientsReducer,
+    fileUpload: fileUploadReducer
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
