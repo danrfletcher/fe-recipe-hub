@@ -12,6 +12,7 @@ import {
 } from "../../features/createRecipeSlice";
 import { getAllIngredients } from "../../features/ingredientsSlice";
 import { useNavigate } from "react-router-dom";
+import { FileUpload } from "../FileUpload";
 
 interface FormValues {
 	recipeTitle: string;
@@ -118,6 +119,7 @@ export const CreateRecipe: React.FC = () => {
 			)}>
 			<h2 className="auth-header">Feeling inspired?</h2>
 			<h3 className="auth-header-cursive">Create a new recipe</h3>
+      <FileUpload />
 			<form className="auth-form" onSubmit={handleSubmit(submitForm)}>
 
 				<div className="input-wrapper">

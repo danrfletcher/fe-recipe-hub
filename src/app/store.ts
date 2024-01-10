@@ -7,6 +7,7 @@ import ingredientsReducer from "../features/ingredientsSlice.ts"
 import cuisinesReducer from "../features/cuisineSlice.ts"
 import createRecipeReducer from "../features/createRecipeSlice.ts"
 import footerReducer from "../features/footerSlice.ts"
+import fileUploadReducer from "../features/fileUpload.ts";
 
 export const store = configureStore({
 	reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
     ingredients: ingredientsReducer,
     cuisines: cuisinesReducer,
     createRecipe: createRecipeReducer,
-    footer: footerReducer
+    footer: footerReducer,
+    fileUpload: fileUploadReducer
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
