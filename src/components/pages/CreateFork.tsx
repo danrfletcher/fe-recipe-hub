@@ -16,6 +16,7 @@ import {
 	forkedQuantitiesToPost,
 } from "../../features/forkedIngredientsSlice";
 import { formatMethod } from "../../utils/formatting-utils";
+import { useNavigate } from "react-router-dom";
 
 interface FormValues {
 	recipeTitle: string;
@@ -45,12 +46,15 @@ export const CreateFork: React.FC = () => {
 	const error = useAppSelector((state) => state.createRecipe.error);
 	const isError = useAppSelector((state) => state.createRecipe.isError);
 
+	const navigate = useNavigate()
+
 	const dispatch = useAppDispatch();
 	const {
 		register,
 		handleSubmit,
 		getValues,
-		resetField
+		resetField,
+		reset
 	} = useForm<FormValues>();
 
 	const token = `Bearer ${stateInfo.token}`;
@@ -104,6 +108,8 @@ export const CreateFork: React.FC = () => {
 				{ ingredientIds: arrayOfIngIds, quantity: forkedQuantitiesToDisplay }
 			)
 		);
+		reset()
+		navigate(`/recipes/create_fork/success`)
 	};
 
 	const recipeIngredientsForForking: any[] =
@@ -253,13 +259,9 @@ export const CreateFork: React.FC = () => {
 				{forkedIngredientsToDisplay.length ? (
 					<div className="ingredients-list" id="recipeIng">
 						<div>
-							{ingredientNames.length ? (
-								forkedIngredientsToDisplay.map((ingredient) => {
-									return <li className="recipe-list-item recipe-list-ingredient" key={ingredient}>{ingredient}</li>
-								})
-							) : (
-								null
-							)}
+							{forkedIngredientsToDisplay.map((ingredient) => {
+								return <li className="recipe-list-item recipe-list-ingredient" key={ingredient}>{ingredient}</li>
+							})}
 						</div>
 						<div>
 							{forkedQuantitiesToDisplay.length ? (
@@ -368,27 +370,3 @@ export const CreateFork: React.FC = () => {
 		</div>
 	);
 };
-
-{/* <div className="ingredients-list">
-					<div>
-						{ingredientNames.length
-							? forkedIngredientsToDisplay.map((ingredient) => {
-								return (
-									<li
-										className="recipe-list-item recipe-list-quantity"
-										key={ingredient}
-									>
-										{ingredient}
-									</li>
-								);
-							})
-							: null}
-					</div>
-					<div>
-						{forkedQuantitiesToDisplay.length
-							? forkedQuantitiesToDisplay.map((quantity, index) => {
-								return <li className="recipe-list-item recipe-list-quantity" key={index}>{quantity}</li>;
-							})
-							: null}
-					</div>
-				</div> */}
