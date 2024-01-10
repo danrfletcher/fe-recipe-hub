@@ -46,7 +46,7 @@ const SingleRecipe: React.FC = () => {
 					</div>
 				</>
 			)}
-      	<Link to={'/create_fork'}><button className="styled-btn fork-btn">
+      	<Link to={'/recipes/create_fork'}><button className="styled-btn fork-btn">
 					Fork this recipe
 				</button></Link>
 		</div>

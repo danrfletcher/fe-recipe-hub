@@ -75,7 +75,7 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 					Fork this recipe
 				</button></Link> */}
 				<div className="btn-container-alt">
-					{props.forkCount ? (
+					{props.forkCount | props.directForkCount ? (
 						<Link to={`/recipe/${props.recipeId}/forks`}>
 							<button className="styled-btn fork-btn">
 								View forks
