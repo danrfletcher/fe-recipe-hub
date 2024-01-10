@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { api } from "../utils/api-utils";
 
 export interface Recipe {
-	recipeId: string;
+	recipeId: any;
 	recipeTitle: string;
 	tagLine: string;
 	difficulty: number;
@@ -16,8 +16,10 @@ export interface Recipe {
 	originalRecipeId: number;
 	userId: number;
 	cuisineId: number;
-	averageRating: number;  //changed
-	ratingCount: number; //changed
+	forkCount: number;
+	directForkCount: number;
+	ratingCount: number;
+	averageRating: number;
 }
 
 interface RecipesState {
@@ -48,6 +50,17 @@ export const getAllRecipes = (): AppThunk => {
 		}
 	};
 };
+
+export const getForksById = (id: string | undefined): AppThunk => {
+	return async (dispatch) => {
+		try {
+			const response = await api.get(`/recipes/forks?forkedFromId=${id}`)
+			dispatch(getRecipes(response.data))
+		} catch (error) {
+			console.log(error)
+		}
+	}
+}
 
 export const { getRecipes } = recipesSlice.actions;
 export default recipesSlice.reducer;

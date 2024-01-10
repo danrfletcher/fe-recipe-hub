@@ -11,6 +11,11 @@ import Error from './components/Error'
 import LoginSuccess from './components/pages/LoginSuccess'
 import SingleRecipe from './components/pages/SingleRecipe'
 import SingleRecipe2 from './components/pages/SingleRecipe2'
+import { CreateRecipe } from './components/pages/CreateRecipe'
+import CreateRecipeSuccess from './components/pages/CreateRecipeSuccess'
+import { CreateFork } from './components/pages/CreateFork'
+import ForkedRecipes from './components/pages/ForkedRecipes'
+import CreateForkSuccess from './components/pages/CreateForkSuccess'
 
 const App: React.FC = () => {
   return (
@@ -19,14 +24,19 @@ const App: React.FC = () => {
       <Nav />
       <main>
         <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/recipes' element={<Recipes />}></Route>
+          <Route path='/' element={<Home />}/>
+          <Route path='/recipes' element={<Recipes />}/>
           <Route path='/recipe/:recipeId' element={<SingleRecipe />} />
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/login/success' element={<LoginSuccess />}></Route>
+          <Route path='/recipe/:recipeId/forks' element={<ForkedRecipes />} />
+          <Route path='/recipes/add_recipe' element={<CreateRecipe />}/>
+          <Route path='/recipes/add_recipe/success' element={<CreateRecipeSuccess />}/>
+          <Route path='/recipes/create_fork' element={<CreateFork />}/>
+          <Route path='/recipes/create_fork/success' element={<CreateForkSuccess />}/>
+          <Route path='/login' element={<Login />}/>
+          <Route path='/login/success' element={<LoginSuccess />}/>
           <Route path='/register' element={<Register />}/>
-          <Route path='/*' element={<Error />}></Route>
-          <Route path='/single-recipe2' element={<SingleRecipe2 />}></Route>
+          <Route path='/*' element={<Error />}/>
+          <Route path='/single-recipe2' element={<SingleRecipe2 />}/>
         </Routes>
       </main>
       <Footer />

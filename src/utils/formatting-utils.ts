@@ -110,4 +110,16 @@ const formatTime = (time: number): string => {
   }
 }
 
-export { lengthenDate, formatTime };
+const formatMethod = (method: string): string => {
+  const result = []
+  for (let char of method) {
+    if (char === "%") {
+      result.push("\n")
+    } else {
+      result.push(char)
+    }
+  }
+  return result.join("")
+}
+
+export { lengthenDate, formatTime, formatMethod };

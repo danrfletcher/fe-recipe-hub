@@ -28,9 +28,11 @@ const initialState: SingleRecipeState = {
     originalRecipeId: 0,
     userId: 0,
     cuisineId: 0,
-    recipeIngredients: [],
-    averageRating: 0,  //changed
-    ratingCount: 0,  //changed
+    forkCount: 0,
+    directForkCount: 0,
+    ratingCount: 0,
+    averageRating: 0,
+    recipeIngredients: []
   },
   recipeId: "",
   isLoading: false
