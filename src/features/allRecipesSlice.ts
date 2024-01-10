@@ -40,11 +40,19 @@ const recipesSlice = createSlice({
 	},
 });
 
-export const getAllRecipes = (): AppThunk => {
+export const getAllRecipes = (searchTerm?: string | boolean, cuisine?: string | boolean, sort?: string | boolean): AppThunk => {
 	return async (dispatch) => {
 		try {
-			const response = await api.get("/recipes");
-			dispatch(getRecipes(response.data));
+			let endpoint = "/recipes";
+            if (searchTerm) {
+                endpoint += `/search?search=${encodeURIComponent(searchTerm)}`;
+            }
+			const response = await api.get(endpoint);
+			if (sort) {
+				dispatch(getRecipes(response.data.reverse()));
+			} else {
+				dispatch(getRecipes(response.data));
+			}
 		} catch (error) {
 			console.log(error);
 		}
