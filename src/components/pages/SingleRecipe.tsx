@@ -3,19 +3,25 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getSingleRecipe } from "../../features/singleRecipeSlice";
 import { getAllRecipes } from "../../features/allRecipesSlice";
 import Loading from "../Loading";
-import { Ingredient } from "../../features/ingredientsSlice";
+// import { Ingredient } from "../../features/ingredientsSlice";
 import { useParams, Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { LuChefHat } from "react-icons/lu";
 import SimilarCuisine from "../SimilarCuisine";
 import MostPopularRecipies from "../MostPopularRecipies";
 import ReviewStars from "../ReviewStars";
+import RecipeMethod from "../RecipeMethod";
+import { Ingredients } from "../Ingredients";
+
+
+
 
 const SingleRecipe: React.FC = () => {
+
 	const recipeData = useAppSelector((state) => state.singleRecipe.recipe);
 	// Without useParams, map() in line 35 will not work - useParams takes the recipeId from the URL and fixes this issue
-	const { recipeId } = useParams();
+	const { recipeId } = useParams()
 	const isLoading = useAppSelector((state) => state.singleRecipe.isLoading);
 
 	const dispatch = useAppDispatch();
@@ -23,6 +29,10 @@ const SingleRecipe: React.FC = () => {
 		dispatch(getSingleRecipe(recipeId));
 		dispatch(getAllRecipes());
 	}, []);
+
+
+
+
 
 	// set difficulty
 	//----------------------------------------------------------------------------------------
@@ -50,7 +60,7 @@ const SingleRecipe: React.FC = () => {
 							<div className="titleSPR">
 								<h2>{recipeData.recipeTitle}</h2>
 								<div className="detailsSPR">
-									<p>User id: {recipeData.userId}</p>
+									<p>Posted by: Username</p> {/*add username */}
 									<p>on {recipeData.postedOn.split(" ")[0]}</p>
 								</div>
 								<p className="cuisineSPR">Cuisine: {recipeData.cuisine}</p>
@@ -65,89 +75,17 @@ const SingleRecipe: React.FC = () => {
 						</div>
 						<div className="mainSPR">
 							<div className="recipeSPR">
-								<div>
-									<p>Ingredients</p>
-									<ul>
-										{recipeData.recipeIngredients.map(
-											(ingredient: Ingredient) => {
-												return (
-													<li
-														key={ingredient.ingredientId}
-														className="ingrList"
-													>
-														<div className="ingDetailsSPR">
-															<p>{ingredient.quantity}</p>
-															<p>{ingredient.ingredientName}</p>
-														</div>
-
-														<div className="nutrDetailsSPR"></div>
-													</li>
-												);
-											}
-										)}
-									</ul>
-								</div>
-								<div>
-									<p>Method</p>
-									<ol>
-										<p>{recipeData.recipeMethod}</p>
-									</ol>
-								</div>
+								<Ingredients/>								
+								<RecipeMethod/>
 							</div>
+							<MostPopularRecipies />
 						</div>
-					</div>
-					<MostPopularRecipies/>
-
-					{/* <div className="buttonsSPR">
+						<div className="buttonsSPR">  {/*add links to this buttons*/}
 							<button className="buttonSPR">Fork this recipe</button>
 							<button className="buttonSPR">View all forks</button>
-						</div> */}
-					{/* <div className="commentsSPR">
-							<p>3 Comments</p>
-							<div className="addCommentSPR">
-								<p>User</p>
-								<input id="newComment" placeholder="Add a comment..." />
-								<button>Comment</button>
-							</div>
-							<div className="oldCommentSPR">
-								<div>
-									<p>Gordon Ramsay</p>
-									<p> on 2nd January 2024</p>
-								</div>
-                the comment
-								<p>This is an example of a comment on the recipe. Where’s the lamb sauce?!</p>
-								<div>
-									<FontAwesomeIcon icon={faThumbsUp} className="thumbSPR" />
-									<p>5</p>
-									<FontAwesomeIcon icon={faThumbsDown} className="thumbSPR" />
-								</div>
-							</div>
-							<div className="oldCommentSPR">
-								<div>
-									<p>Gordon Ramsay</p>
-									<p> on 2nd January 2024</p>
-								</div>
-								<p>This is an example of a comment on the recipe. Where’s the lamb sauce?!</p>
-								<div>
-									<FontAwesomeIcon icon={faThumbsUp} className="thumbSPR" />
-									<p>5</p>
-									<FontAwesomeIcon icon={faThumbsDown} className="thumbSPR" />
-								</div>
-							</div>
-							<div className="oldCommentSPR">
-								<div>
-									<p>Gordon Ramsay</p>
-									<p> on 2nd January 2024</p>
-								</div>
-								<p>This is an example of a comment on the recipe. Where’s the lamb sauce?!</p>
-								<div>
-									<FontAwesomeIcon icon={faThumbsUp} className="thumbSPR" />
-									<p>5</p>
-									<FontAwesomeIcon icon={faThumbsDown} className="thumbSPR" />
-								</div>
-							</div>
-						</div> */}
-					<SimilarCuisine />
+						</div>
+						<SimilarCuisine />
+					</div>
 				</>
 			)}
 
