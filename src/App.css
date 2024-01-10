@@ -742,7 +742,8 @@ div.slide-out {
 	margin: 0.2em auto 1em;
 	background: #921538;
 	color: #FFFFFF;
-	font-size: 1.2rem;
+	font-size: 1rem;
+	min-width: 135px;
 }
 
 .add-recipe-btn:hover {
@@ -891,4 +892,64 @@ div.slide-out {
 
 #create-recipe-btn {
 	margin-top: 2em;
+}
+
+#formBasicEmail {
+	border-radius: 50px;
+	font-size: 1rem;
+	margin-left: 10px;
+	min-height: 43px;
+}
+
+.search-recipe-wrapper {
+	display: flex;
+}
+
+.form-control {
+	width: 93.5% !important;
+}
+
+.recipe-nav-head {
+	display: flex;
+	align-items: center;
+	margin: 0px 10px;
+}
+
+.accordion-button:not(.collapsed) {
+    color: white !important;
+    background-color: white !important; 
+    box-shadow: white !important;
+	border: none;
+}
+
+.accordion-button {
+	margin-top: -15px !important;
+	border: 1px solid black;
+	padding-right: 5px !important;
+}
+
+.accordion {
+	--bs-accordion-btn-focus-border-color: transparent !important;
+	--bs-accordion-btn-focus-box-shadow: transparent !important;
+	--bs-accordion-bg: transparent !important;
+	--bs-accordion-border-color: transparent !important;
+}
+
+form > * {
+	box-shadow: none !important;
+}
+
+.recipe-filter-options {
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	& > * {
+		margin-right: 5px;
+	}
+}
+
+.dropdown-toggle {
+	border-radius: 50px !important;
+	border: none !important;
+	background-color: #921538 !important;
 }
