@@ -27,7 +27,7 @@ const App: React.FC = () => {
           <Route path='/' element={<Home />}/>
           <Route path='/recipes' element={<Recipes />}/>
           <Route path='/recipe/:recipeId' element={<SingleRecipe />} />
-          <Route path='/recipe/:recipeId/forks' element={<ForkedRecipes />} />
+          <Route path='/recipe/:recipeId/forks/:originalRecipeId' element={<ForkedRecipes />} />
           <Route path='/recipes/add_recipe' element={<CreateRecipe />}/>
           <Route path='/recipes/add_recipe/success' element={<CreateRecipeSuccess />}/>
           <Route path='/recipes/create_fork' element={<CreateFork />}/>

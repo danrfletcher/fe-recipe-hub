@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useAppDispatch } from "../app/hooks";
 import { recipeId } from "../features/singleRecipeSlice";
 import { Recipe, getForksById } from "../features/allRecipesSlice";
@@ -10,7 +10,7 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
-
+  const params = useParams()
 	const handleClick = () => {
 		navigate(`/recipe/${props.recipeId}`)
 		dispatch(recipeId(props.recipeId))
@@ -72,18 +72,23 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 					</p>
 				</div>
 				<div className="btn-container-alt">
+          
 					{props.forkCount | props.directForkCount ? (
-						<Link to={`/recipe/${props.recipeId}/forks`}>
+						// <Link to={`/recipe/${props.recipeId}/forks`}>
 							<button
-								className="styled-btn fork-btn"
-								onClick={() => {
+              className="styled-btn fork-btn"
+              
+              onClick={() => {
+                  console.log(props.recipeId,"<<<<<<OG ID in recCard")
 									dispatch(getForksById({
 										forkedFromId: props.recipeId
 									}))
+                  // dispatch(getSingleRecipe(props.recipeId))
+                  navigate(`/recipe/${props.recipeId}/forks/${props.originalRecipeId}/`)
 								}}>
 								View forks
 							</button>
-						</Link>
+						// </Link>
 					) : (
 						null
 					)}
@@ -92,9 +97,11 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 							<button
 								className="styled-btn fork-btn"
 								onClick={() => {
+                  console.log(props.originalRecipeId,"<<<<<<OG ID in recCard")
 									dispatch(getForksById({
-										originalRecipeId: props.originalRecipeId
+										originalRecipeId: params.originalRecipeId
 									}))
+                  // navigate(`/recipe/${props.originalRecipeId}`)
 								}}>
 								View original
 							</button>
