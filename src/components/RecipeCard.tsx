@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch } from "../app/hooks";
 import { recipeId } from "../features/singleRecipeSlice";
-import { Recipe, getForksById } from "../features/allRecipesSlice";
+import { Recipe } from "../features/allRecipesSlice";
 import { formatTime, lengthenDate } from "../utils/formatting-utils";
 import { setDifficulty } from "../utils/react-utils";
 import { TbArrowFork } from "react-icons/tb";
@@ -69,26 +69,6 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 					<p className="recipe-facts recipe-el">
 						Prep time: {formatTime(props.timeToPrepare)}
 					</p>
-				</div>
-				<div className="btn-container-alt">
-					{props.forkCount | props.directForkCount ? (
-						// <Link to={`/recipe/${props.recipeId}/forks`}>
-						<button
-							className="styled-btn fork-btn"
-							onClick={() => {
-								console.log(props.recipeId, "<<<<<<OG ID in recCard")
-								dispatch(getForksById({
-									forkedFromId: props.recipeId
-								}))
-								// dispatch(getSingleRecipe(props.recipeId))
-								navigate(`/recipe/${props.recipeId}/forks/${props.originalRecipeId}/`)
-							}}>
-							View forks
-						</button>
-						// </Link>
-					) : (
-						null
-					)}
 				</div>
 			</div>
 		</div>

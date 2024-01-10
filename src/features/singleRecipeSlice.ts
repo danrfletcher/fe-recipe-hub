@@ -46,7 +46,6 @@ const singleRecipeSlice = createSlice({
     singleRecipe: (state, action: PayloadAction<SingleRecipe>) => {
       state.recipe = action.payload
       state.isLoading = false
-      // state.recipeId = action.payload.recipeId
     },
     recipeId: (state, action: PayloadAction<string>) => {
       state.recipeId = action.payload
@@ -59,7 +58,6 @@ export const getSingleRecipe = (recipeId: number | string | undefined ): AppThun
   return async (dispatch) => {
     try {
       const response = await api.get(`/recipes/${recipeId}`);
-      console.log(recipeId)
       dispatch(singleRecipe(response.data))
       dispatch(getUserById(response.data.userId))
     }
