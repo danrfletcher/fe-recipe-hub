@@ -20,6 +20,7 @@ export interface Recipe {
 	directForkCount: number;
 	ratingCount: number;
 	averageRating: number;
+	username: string
 }
 
 interface RecipesState {

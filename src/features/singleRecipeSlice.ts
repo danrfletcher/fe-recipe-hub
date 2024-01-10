@@ -33,6 +33,7 @@ const initialState: SingleRecipeState = {
     directForkCount: 0,
     ratingCount: 0,
     averageRating: 0,
+    username: "",
     recipeIngredients: []
   },
   recipeId: "",
