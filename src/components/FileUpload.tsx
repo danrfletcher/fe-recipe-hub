@@ -9,17 +9,17 @@ const dispatch =useAppDispatch()
 
 
 
-  const submitForm: SubmitHandler<any> = (data)=>{
+  const submitForm: SubmitHandler<any> = async (data)=>{
    const formData = new FormData()
-   formData.append('files[]', data.filename)
-    console.log(data, "<<<FD")
+   formData.append('file', data.file[0])
+   console.log(data.file[0], "<<<FD")
 
-    dispatch(getUrl(data))
+    dispatch(getUrl(formData))
   }
 
  
   return (
-    <form encType="multipart/form-data" onSubmit={handleSubmit(submitForm)}><input type="file" id="filename" {...register('file')}></input>
+    <form onSubmit={handleSubmit(submitForm)}><input type="file" id="filename" {...register('file')}></input>
     <input type="submit"/></form>
   )
 }

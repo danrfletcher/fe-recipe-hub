@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { api } from "../utils/api-utils";
 
 interface FileUploadState {
-  imageUrl: string | null 
+  imageUrl: string | null
 }
 
 const initialState: FileUploadState = {
@@ -27,16 +27,13 @@ export const getUrl = (formData: any): AppThunk =>{
 console.log('>>>', formData);
 try {
       // await formData.append('file[]', formData);
-     
-    
-      const response = await api.post(`/image`, { Headers:{
-                  method: 'POST',
-                  'Content-Type': 'multipart/form-data',
-                  body: formData,} })
+
+
+      const response = await api.post(`/image`, formData)
       console.log(response.data,"<<<<")
       dispatch(getFileUrl(response.data))
     }
-    
+
     catch(error){
       console.log(error)
     }
