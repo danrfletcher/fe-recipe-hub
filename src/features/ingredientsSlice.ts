@@ -11,6 +11,7 @@ export interface Ingredient {
 	fiber: string
 	fat: string
 	protein: string
+	quantity: string     //changed
 }
 
 interface IngredientState {

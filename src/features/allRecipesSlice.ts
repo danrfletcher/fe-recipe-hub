@@ -16,6 +16,8 @@ export interface Recipe {
 	originalRecipeId: number;
 	userId: number;
 	cuisineId: number;
+	averageRating: number;  //changed
+	ratingCount: number; //changed
 }
 
 interface RecipesState {

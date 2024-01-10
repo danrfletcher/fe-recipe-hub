@@ -1,9 +1,19 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getSingleRecipe } from "../../features/singleRecipeSlice";
+import { getAllRecipes } from "../../features/allRecipesSlice";
 import Loading from "../Loading";
 import { Ingredient } from "../../features/ingredientsSlice";
 import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { LuChefHat } from "react-icons/lu";
+import SimilarCuisine from "../SimilarCuisine";
+import MostPopularRecipies from "./MostPopularRecipies";
+import ReviewStars from "./ReviewStars";
+
+
+
 
 const SingleRecipe: React.FC = () => {
 
@@ -13,10 +23,30 @@ const SingleRecipe: React.FC = () => {
 	const isLoading = useAppSelector((state) => state.singleRecipe.isLoading);
 
 	const dispatch = useAppDispatch();
-
 	useEffect(() => {
 		dispatch(getSingleRecipe(recipeId));
+		dispatch(getAllRecipes());
 	}, []);
+
+
+
+	
+
+   	// set difficulty 
+	//----------------------------------------------------------------------------------------
+	const setDifficulty = (rating: number) => {
+		const array = []
+		for (let i = 0; i < rating; i++) {
+			array.push(<LuChefHat className="difficulty-icon" key={i} />)
+		}
+		for (let i = rating; i < 5; i++) {
+			array.push(<LuChefHat key={i} className="empty-icon" />)
+		}
+		return array
+	}
+	//-------------------------------------------------------------------------------------------
+
+
 
 	return (
 		<div>
@@ -24,25 +54,126 @@ const SingleRecipe: React.FC = () => {
 				<Loading />
 			) : (
 				<>
-					<h2>{recipeData.recipeTitle}</h2>
-					<p>{recipeData.tagLine}</p>
-					<img src={recipeData.recipeImg} className="single-recipe-img" />
-					<br />
-					<span>Prep time: {recipeData.timeToPrepare} mins </span>
-					<span>Difficulty: {recipeData.difficulty}</span>
-					<h3>Ingredients</h3>
-					<ul>
-						{recipeData.recipeIngredients.map((ingredient: Ingredient) => {
-							return (
-								<li key={ingredient.ingredientId}>
-									{ingredient.ingredientName}
-								</li>
-							)
-						})}
-					</ul>
-					<div>
-						<h3>Method</h3>
-						<p>{recipeData.recipeMethod}</p>
+					<div className="SPR">	
+						<div className="topSPR">
+							<img src={recipeData.recipeImg} />
+							<div className="titleSPR">
+								<h2>{recipeData.recipeTitle}</h2>
+								<div className="detailsSPR">
+									<p>User id: {recipeData.userId}</p>
+									<p>on {recipeData.postedOn.split(" ")[0]}</p>
+								</div>
+								<p className="cuisineSPR">Cuisine: {recipeData.cuisine}</p>
+								<ReviewStars/>
+								<p className="metaSPR">{recipeData.tagLine}</p>
+								<img className="secondImgSPR" src={recipeData.recipeImg} />
+								<div className="timingSPR">
+									<p>Prep time: {recipeData.timeToPrepare} mins</p>
+									<p>Difficulty: {setDifficulty(recipeData.difficulty)}</p>
+								</div>
+							</div>
+						</div>
+						<div className="mainSPR">
+							<div className="recipeSPR">
+								<div>
+									<p>Ingredients</p>
+									<ul>
+										{recipeData.recipeIngredients.map((ingredient: Ingredient) => {
+											return (
+												<li key={ingredient.ingredientId} className="ingrList">
+													<div className="ingDetailsSPR">
+														<p>{ingredient.quantity}</p>
+														<p>{ingredient.ingredientName}</p>
+													</div>
+													<div className="nutrDetailsSPR">
+														<div>
+															<p>{ingredient.calories}</p>
+															<p>CALORIES</p>
+														</div>
+														<div>
+															<p>{ingredient.fat}</p>
+															<p>FAT</p>
+														</div>
+														<div>
+															<p>{ingredient.carbohydrate}</p>
+															<p>CARBS</p>
+														</div>
+														<div>
+															<p>{ingredient.sugar}</p>
+															<p>SUGAR</p>
+														</div>
+														<div>
+															<p>{ingredient.protein}</p>
+															<p>PROTEIN</p>
+														</div>
+														<div>
+															<p>{ingredient.fiber}</p>
+															<p>FIBER</p>
+														</div>
+													</div>
+												</li>
+											)
+										})}
+									</ul>
+								</div>
+								<div>
+									<p>Method</p>
+									<ol>
+										<p>{recipeData.recipeMethod}</p>
+									</ol>
+								</div>
+							</div>
+							<MostPopularRecipies/>
+						</div>
+						<div className="buttonsSPR">
+							<button className="buttonSPR">Fork this recipe</button>
+							<button className="buttonSPR">View all forks</button>
+						</div>
+						<div className="commentsSPR">
+							<p>3 Comments</p>
+							<div className="addCommentSPR">
+								<p>User</p>
+								<input id="newComment" placeholder="Add a comment..." />
+								<button>Comment</button>
+							</div>
+							<div className="oldCommentSPR">
+								<div>
+									<p>Gordon Ramsay</p>
+									<p> on 2nd January 2024</p>
+								</div>
+								<p>This is an example of a comment on the recipe. Where’s the lamb sauce?!</p>
+								<div>
+									<FontAwesomeIcon icon={faThumbsUp} className="thumbSPR" />
+									<p>5</p>
+									<FontAwesomeIcon icon={faThumbsDown} className="thumbSPR" />
+								</div>
+							</div>
+							<div className="oldCommentSPR">
+								<div>
+									<p>Gordon Ramsay</p>
+									<p> on 2nd January 2024</p>
+								</div>
+								<p>This is an example of a comment on the recipe. Where’s the lamb sauce?!</p>
+								<div>
+									<FontAwesomeIcon icon={faThumbsUp} className="thumbSPR" />
+									<p>5</p>
+									<FontAwesomeIcon icon={faThumbsDown} className="thumbSPR" />
+								</div>
+							</div>
+							<div className="oldCommentSPR">
+								<div>
+									<p>Gordon Ramsay</p>
+									<p> on 2nd January 2024</p>
+								</div>
+								<p>This is an example of a comment on the recipe. Where’s the lamb sauce?!</p>
+								<div>
+									<FontAwesomeIcon icon={faThumbsUp} className="thumbSPR" />
+									<p>5</p>
+									<FontAwesomeIcon icon={faThumbsDown} className="thumbSPR" />
+								</div>
+							</div>
+						</div>
+						<SimilarCuisine />
 					</div>
 				</>
 			)}

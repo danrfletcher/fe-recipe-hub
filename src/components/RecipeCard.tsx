@@ -21,7 +21,7 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 			array.push(<LuChefHat className="difficulty-icon" key={i} />)
 		}
 		for (let i = rating; i < 5; i++) {
-			array.push(<LuChefHat key={i} />)
+			array.push(<LuChefHat key={i} className="empty-icon"/>)  //changed
 		}
 		return array
 	}
