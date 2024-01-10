@@ -23,13 +23,15 @@ const ForkedRecipes: React.FC = () => {
 
   useEffect(() => {
     dispatch(getForksById(props))
-    dispatch(getSingleRecipe(props.forkedFromId))
+    dispatch(getSingleRecipe(recipeData.originalRecipeId))
   }, [])
 
   const handleClick = () => {
     navigate(`/recipe/${recipeData.recipeId}`)
     dispatch(recipeId(recipeData.recipeId))
   }
+
+  console.log(recipeData.originalRecipeId)
 
   return (
     <>
