@@ -71,6 +71,9 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 						Prep time: {formatTime(props.timeToPrepare)}
 					</p>
 				</div>
+				{/* <Link to={'/create_fork'}><button className="styled-btn fork-btn">
+					Fork this recipe
+				</button></Link> */}
 				<div className="btn-container-alt">
 					{props.forkCount ? (
 						<Link to={`/recipe/${props.recipeId}/forks`}>
