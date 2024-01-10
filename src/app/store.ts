@@ -7,17 +7,19 @@ import ingredientsReducer from "../features/ingredientsSlice.ts"
 import cuisinesReducer from "../features/cuisineSlice.ts"
 import createRecipeReducer from "../features/createRecipeSlice.ts"
 import footerReducer from "../features/footerSlice.ts"
+import recipeSearchReducer from "../features/recipeSearchSlice.ts"
 
 export const store = configureStore({
 	reducer: {
-		navToggle: navReducer,
-		auth: authReducer,
-		recipes: recipesReducer,
+	navToggle: navReducer,
+	auth: authReducer,
+	recipes: recipesReducer,
     singleRecipe: singleRecipeReducer,
     ingredients: ingredientsReducer,
     cuisines: cuisinesReducer,
     createRecipe: createRecipeReducer,
-    footer: footerReducer
+    footer: footerReducer,
+	recipeSearch: recipeSearchReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
