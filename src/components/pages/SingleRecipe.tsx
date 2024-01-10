@@ -40,7 +40,7 @@ const SingleRecipe: React.FC = () => {
 								<img className="secondImgSPR recipe-el" src={recipeData.recipeImg} />
 								<div className="detailsSPR">
 									{recipeData.postedOn ? (
-										<p className="timestamp recipe-el">Published on {lengthenDate(recipeData.postedOn)}</p>
+										<p className="timestamp recipe-el">Published by <b>{recipeData.username}</b> on {lengthenDate(recipeData.postedOn)}</p>
 									) : (
 										null
 									)}
