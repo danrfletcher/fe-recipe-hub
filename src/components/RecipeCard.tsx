@@ -4,6 +4,7 @@ import { recipeId } from "../features/singleRecipeSlice";
 import { Recipe } from "../features/allRecipesSlice";
 import { formatTime, lengthenDate } from "../utils/formatting-utils";
 import { setDifficulty } from "../utils/react-utils";
+import { Link } from "react-router-dom";
 
 const RecipeCard: React.FC<Recipe> = (props) => {
 
@@ -25,9 +26,18 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 				<p className="recipe-el timestamp">
 					{lengthenDate(props.postedOn)}
 				</p>
-				<h3 className="recipe-el recipe-title">
-					{props.recipeTitle}
-				</h3>
+				<div className="recipe-facts-wrapper">
+					<h3 className="recipe-el recipe-title">
+						{props.recipeTitle}
+					</h3>
+					{props.originalRecipeId ? (
+						<p className="recipe-el recipe-title">
+							(Forked)
+						</p>
+					) : (
+						null
+					)}
+				</div>
 				<p className="recipe-el">
 					{props.tagLine}
 				</p>
@@ -43,6 +53,17 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 					)}
 				</div>
 				<div className="recipe-facts-wrapper">
+					{props.forkCount ? (
+						props.forkCount === 1 ? (
+							<p className="recipe-facts recipe-el">This recipe has been forked once.</p>
+						) : (
+							<p className="recipe-facts recipe-el">This recipe has been forked {props.forkCount} times.</p>
+						)
+					) : (
+						<p className="recipe-facts recipe-el">This recipe has not been forked yet.</p>
+					)}
+				</div>
+				<div className="recipe-facts-wrapper">
 					<p className="recipe-facts recipe-el">
 						Difficulty: {setDifficulty(props.difficulty)}
 					</p>
@@ -50,9 +71,26 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 						Prep time: {formatTime(props.timeToPrepare)}
 					</p>
 				</div>
-				<button className="styled-btn fork-btn">
-					Fork this recipe
-				</button>
+				<div className="btn-container-alt">
+					{props.forkCount ? (
+						<Link to={`/recipe/${props.recipeId}/forks`}>
+							<button className="styled-btn fork-btn">
+								View forks
+							</button>
+						</Link>
+					) : (
+						null
+					)}
+					{props.originalRecipeId ? (
+						<Link to={`/recipe/${props.originalRecipeId}`}>
+							<button className="styled-btn fork-btn">
+								View original
+							</button>
+						</Link>
+					) : (
+						null
+					)}
+				</div>
 			</div>
 		</div>
 	);
