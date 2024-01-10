@@ -29,10 +29,10 @@ const App: React.FC = () => {
           <Route path='/recipe/:recipeId/forks' element={<ForkedRecipes />} />
           <Route path='/recipes/add_recipe' element={<CreateRecipe />}/>
           <Route path='/recipes/add_recipe/success' element={<CreateRecipeSuccess />}/>
+          <Route path='/recipes/create_fork' element={<CreateFork />}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/login/success' element={<LoginSuccess />}/>
           <Route path='/register' element={<Register />}/>
-          <Route path='/create_fork' element={<CreateFork />}/>
           <Route path='/*' element={<Error />}/>
           <Route path='/single-recipe2' element={<SingleRecipe2 />}/>
         </Routes>
