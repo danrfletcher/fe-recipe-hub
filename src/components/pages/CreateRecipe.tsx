@@ -8,11 +8,10 @@ import {
 	ingredientsToPost,
 	postRecipe,
 	quantityToPost,
-	setError
+	setError,
 } from "../../features/createRecipeSlice";
 import { getAllIngredients } from "../../features/ingredientsSlice";
 import { useNavigate } from "react-router-dom";
-import { FileUpload } from "../FileUpload";
 
 interface FormValues {
 	recipeTitle: string;
@@ -31,27 +30,25 @@ interface FormValues {
 }
 
 export const CreateRecipe: React.FC = () => {
-
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
 	const cuisines = useAppSelector((state) => state.cuisines.allCuisines);
 	const ingredients = useAppSelector((state) => state.ingredients.ingredients);
 	const stateInfo = useAppSelector((state) => state.auth);
-	const singleRecipeState = useAppSelector((state) => state.singleRecipe.recipe);
-	const ingredientsToAdd = useAppSelector((state) => state.createRecipe.ingredientIds);
+	const singleRecipeState = useAppSelector(
+		(state) => state.singleRecipe.recipe
+	);
+	const ingredientsToAdd = useAppSelector(
+		(state) => state.createRecipe.ingredientIds
+	);
 	const quantityToAdd = useAppSelector((state) => state.createRecipe.quantity);
-	const error = useAppSelector((state) => state.createRecipe.error)
-	const isError = useAppSelector((state) => state.createRecipe.isError)
+	const error = useAppSelector((state) => state.createRecipe.error);
+	const isError = useAppSelector((state) => state.createRecipe.isError);
 
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	const dispatch = useAppDispatch();
-	const {
-		register,
-		handleSubmit,
-		getValues,
-		resetField,
-		reset
-	} = useForm<FormValues>();
+	const { register, handleSubmit, getValues, resetField, reset } =
+		useForm<FormValues>();
 
 	const token = `Bearer ${stateInfo.token}`;
 
@@ -94,34 +91,29 @@ export const CreateRecipe: React.FC = () => {
 					ingredientIds: arrayOfIngIds,
 					quantity: [],
 					error: null,
-					isError: false
+					isError: false,
 				},
 				token,
 				{ ingredientIds: arrayOfIngIds, quantity: quantityToAdd }
 			)
-		)
-		reset()
-		navigate(`/recipes/add_recipe/success`)
+		);
+		reset();
+		navigate(`/recipes/add_recipe/success`);
 	};
 
 	return (
 		<div
 			onTouchEnd={() => {
-				if (isError) dispatch(clearErrors())
+				if (isError) dispatch(clearErrors());
 			}}
 			onMouseUp={() => {
-				if (isError) dispatch(clearErrors())
+				if (isError) dispatch(clearErrors());
 			}}
-			className={isNavToggled ? (
-				"page-slide-in"
-			) : (
-				"page-slide-out"
-			)}>
+			className={isNavToggled ? "page-slide-in" : "page-slide-out"}
+		>
 			<h2 className="auth-header">Feeling inspired?</h2>
 			<h3 className="auth-header-cursive">Create a new recipe</h3>
-      <FileUpload />
 			<form className="auth-form" onSubmit={handleSubmit(submitForm)}>
-
 				<div className="input-wrapper">
 					<label htmlFor="recipeTitle" className="input-label">
 						Recipe Title
@@ -132,7 +124,8 @@ export const CreateRecipe: React.FC = () => {
 						id="recipeTitle"
 						className="input-field"
 						{...register("recipeTitle")}
-						required />
+						required
+					/>
 				</div>
 
 				<div className="input-wrapper">
@@ -146,7 +139,8 @@ export const CreateRecipe: React.FC = () => {
 						autoComplete="on"
 						className="input-field"
 						{...register("tagLine")}
-						required />
+						required
+					/>
 				</div>
 
 				<div className="input-wrapper">
@@ -158,7 +152,8 @@ export const CreateRecipe: React.FC = () => {
 						className="input-field"
 						{...register("difficulty")}
 						required
-						defaultValue="placeholder">
+						defaultValue="placeholder"
+					>
 						<option value="placeholder" disabled>
 							Select a rating
 						</option>
@@ -208,7 +203,8 @@ export const CreateRecipe: React.FC = () => {
 						className="input-field"
 						defaultValue="placeholder"
 						{...register("cuisine")}
-						required>
+						required
+					>
 						<option className="" value="placeholder" disabled>
 							Select a cuisine
 						</option>
@@ -241,32 +237,38 @@ export const CreateRecipe: React.FC = () => {
 				{ingredientsToAdd.length ? (
 					<div className="ingredients-list">
 						<div>
-							{ingredientsToAdd.length ? (
-								ingredientsToAdd.map((ingredient) => {
-									return <li className="recipe-list-item recipe-list-ingredient" key={ingredient}>{ingredient}</li>;
-								})
-							) : (
-								null
-							)}
+							{ingredientsToAdd.length
+								? ingredientsToAdd.map((ingredient) => {
+										return (
+											<li
+												className="recipe-list-item recipe-list-ingredient"
+												key={ingredient}
+											>
+												{ingredient}
+											</li>
+										);
+								  })
+								: null}
 						</div>
 						<div>
-							{quantityToAdd.length ? (
-								quantityToAdd.map((quantity, index) => {
-									return <li className="recipe-list-item recipe-list-quantity" key={index}>{quantity}</li>;
-								})
-							) : (
-								null
-							)}
+							{quantityToAdd.length
+								? quantityToAdd.map((quantity, index) => {
+										return (
+											<li
+												className="recipe-list-item recipe-list-quantity"
+												key={index}
+											>
+												{quantity}
+											</li>
+										);
+								  })
+								: null}
 						</div>
 					</div>
-				) : (
-					null
-				)}
+				) : null}
 
 				<div className="recipe-form-internal-wrapper ingredient-field-wrapper">
-					<label htmlFor="ingredient-field">
-						Ingredient:
-					</label>
+					<label htmlFor="ingredient-field">Ingredient:</label>
 					<input
 						type="text"
 						list="ingredientsList"
@@ -274,13 +276,15 @@ export const CreateRecipe: React.FC = () => {
 						id="ingredient-field"
 						placeholder="Search"
 						multiple={true}
-						{...register("ingredientsId")} />
+						{...register("ingredientsId")}
+					/>
 					<datalist id="ingredientsList">
 						{ingredients.map((ingredient) => {
 							return (
 								<option
 									key={ingredient.ingredientId}
-									data-value={ingredient.ingredientId}>
+									data-value={ingredient.ingredientId}
+								>
 									{ingredient.ingredientName}
 								</option>
 							);
@@ -289,15 +293,14 @@ export const CreateRecipe: React.FC = () => {
 				</div>
 
 				<div className="recipe-form-internal-wrapper">
-					<label htmlFor="quantity-field">
-						Quantity:
-					</label>
+					<label htmlFor="quantity-field">Quantity:</label>
 					<input
 						type="text"
 						className="input-field"
 						id="quantity-field"
 						placeholder="e.g. 500g"
-						{...register("quantity")} />
+						{...register("quantity")}
+					/>
 				</div>
 
 				<div className="btn-container">
@@ -306,33 +309,39 @@ export const CreateRecipe: React.FC = () => {
 						onClick={(e) => {
 							e.preventDefault();
 							const values = getValues();
-							if (ingredients.find((object) => object.ingredientName == values.ingredientsId)) {
+							if (
+								ingredients.find(
+									(object) => object.ingredientName == values.ingredientsId
+								)
+							) {
 								if (ingredientsToAdd.includes(values.ingredientsId)) {
-									dispatch(setError("Sorry, no duplicate items!"))
-									resetField("ingredientsId")
-									resetField("quantity")
+									dispatch(setError("Sorry, no duplicate items!"));
+									resetField("ingredientsId");
+									resetField("quantity");
 								} else {
 									if (!values.quantity) {
-										dispatch(setError("Please specify a quantity"))
+										dispatch(setError("Please specify a quantity"));
 									} else {
 										dispatch(ingredientsToPost(values.ingredientsId));
 										dispatch(quantityToPost(values.quantity));
-										resetField("ingredientsId")
-										resetField("quantity")
+										resetField("ingredientsId");
+										resetField("quantity");
 									}
 								}
 							} else {
-								dispatch(setError("Please add an ingredient"))
+								dispatch(setError("Please add an ingredient"));
 							}
-						}}>
+						}}
+					>
 						Add ingredient
 					</button>
 					<button
 						className="styled-btn clear-all-btn"
 						onClick={(e) => {
-							e.preventDefault()
-							dispatch(clearPost())
-						}}>
+							e.preventDefault();
+							dispatch(clearPost());
+						}}
+					>
 						Clear list
 					</button>
 				</div>
@@ -341,15 +350,14 @@ export const CreateRecipe: React.FC = () => {
 					<div className="error-section create-recipe-error-section">
 						<p>{error}</p>
 					</div>
-				) : (
-					null
-				)}
+				) : null}
 
 				<p className="auth-header-cursive ready-text">Ready to go?</p>
 				<button
 					type="submit"
 					className="styled-btn auth-btn"
-					id="create-recipe-btn">
+					id="create-recipe-btn"
+				>
 					Create recipe
 				</button>
 			</form>
