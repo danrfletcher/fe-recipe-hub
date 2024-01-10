@@ -13,6 +13,7 @@ import SingleRecipe from './components/pages/SingleRecipe'
 import SingleRecipe2 from './components/pages/SingleRecipe2'
 import { CreateRecipe } from './components/pages/CreateRecipe'
 import CreateRecipeSuccess from './components/pages/CreateRecipeSuccess'
+import ForkedRecipes from './components/pages/ForkedRecipes'
 
 const App: React.FC = () => {
   return (
@@ -24,6 +25,7 @@ const App: React.FC = () => {
           <Route path='/' element={<Home />}/>
           <Route path='/recipes' element={<Recipes />}/>
           <Route path='/recipe/:recipeId' element={<SingleRecipe />} />
+          <Route path='/recipe/:recipeId/forks' element={<ForkedRecipes />} />
           <Route path='/recipes/add_recipe' element={<CreateRecipe />}/>
           <Route path='/recipes/add_recipe/success' element={<CreateRecipeSuccess />}/>
           <Route path='/login' element={<Login />}/>
