@@ -13,12 +13,12 @@ const ForkedRecipes: React.FC = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const props = {
+  const params = {
     forkedFromId: recipeId
   }
 
   useEffect(() => {
-    dispatch(getForksById(props))
+    dispatch(getForksById(params))
   }, [])
 
   return (
