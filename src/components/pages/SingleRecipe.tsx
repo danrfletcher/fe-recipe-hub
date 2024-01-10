@@ -1,54 +1,75 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getSingleRecipe } from "../../features/singleRecipeSlice";
+import { getAllRecipes } from "../../features/allRecipesSlice";
 import Loading from "../Loading";
-import { Ingredient } from "../../features/ingredientsSlice";
 import { useParams, Link } from "react-router-dom";
+import SimilarRecipes from "../SimilarRecipes";
+import ReviewStars from "../ReviewStars";
+import RecipeMethod from "../RecipeMethod";
+import { Ingredients } from "../Ingredients";
+import { setDifficulty } from "../../utils/react-utils";
+import { lengthenDate } from "../../utils/formatting-utils";
+import "../styles.css"
 
 const SingleRecipe: React.FC = () => {
 
 	const recipeData = useAppSelector((state) => state.singleRecipe.recipe);
-	// Without useParams, map() in line 35 will not work - useParams takes the recipeId from the URL and fixes this issue
-	const { recipeId } = useParams()
+	const { recipeId } = useParams();
+	const isNavToggled = useAppSelector((state) => state.navToggle.value)
 	const isLoading = useAppSelector((state) => state.singleRecipe.isLoading);
 
 	const dispatch = useAppDispatch();
+  
 // this will initially set the state which we will be accessing later with recipeData
 	useEffect(() => {
 		 dispatch(getSingleRecipe(recipeId));
 	}, []);
 
 	return (
-		<div>
+		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
 			{isLoading ? (
 				<Loading />
 			) : (
 				<>
-					<h2>{recipeData.recipeTitle}</h2>
-					<p>{recipeData.tagLine}</p>
-					<img src={recipeData.recipeImg} className="single-recipe-img" />
-					<br />
-					<span>Prep time: {recipeData.timeToPrepare} mins </span>
-					<span>Difficulty: {recipeData.difficulty}</span>
-					<h3>Ingredients</h3>
-					<ul>
-						{recipeData.recipeIngredients.map((ingredient: Ingredient) => {
-							return (
-								<li key={ingredient.ingredientId}>
-									{ingredient.ingredientName}
-								</li>
-							)
-						})}
-					</ul>
-					<div>
-						<h3>Method</h3>
-						<p>{recipeData.recipeMethod}</p>
+					<div className="SPR">
+						<div className="topSPR">
+							<img src={recipeData.recipeImg} />
+							<div className="titleSPR">
+								<h2 className="recipe-title">{recipeData.recipeTitle}</h2>
+								<img className="secondImgSPR recipe-el" src={recipeData.recipeImg} />
+								<div className="detailsSPR">
+									{recipeData.postedOn ? (
+										<p className="timestamp recipe-el">Published on {lengthenDate(recipeData.postedOn)}</p>
+									) : (
+										null
+									)}
+								</div>
+								<p className="recipe-el">{recipeData.tagLine}</p>
+								<p className="cuisineSPR recipe-el">Cuisine: {recipeData.cuisine}</p>
+								<div className="reviewSPR">
+									<ReviewStars />
+									<p className="recipe-el"><b>{recipeData.averageRating.toFixed(1)}</b> average / <b>{recipeData.ratingCount}</b> reviews</p>
+								</div>
+								<div className="timingSPR">
+									<p className="recipe-el">Prep time: {recipeData.timeToPrepare} mins</p>
+									<p className="recipe-el">Difficulty: {setDifficulty(recipeData.difficulty)}</p>
+								</div>
+							</div>
+						</div>
+						<div className="mainSPR">
+							<div className="recipeSPR">
+								<Ingredients />
+								<RecipeMethod />
+							</div>
+						</div>
+						<Link to={"/recipes/create_fork"}>
+							<button className="styled-btn fork-btn spr-btn">Fork this recipe</button>
+						</Link>
+						<SimilarRecipes />
 					</div>
 				</>
 			)}
-      	<Link to={'/recipes/create_fork'}><button className="styled-btn fork-btn">
-					Fork this recipe
-				</button></Link>
 		</div>
 	);
 };

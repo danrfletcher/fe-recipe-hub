@@ -56,8 +56,13 @@ li {
 
 b {
   color: #404673;
+  background: transparent;
 }
 
 p {
   background: none;
+}
+
+svg {
+  background: transparent;
 }
