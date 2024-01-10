@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch } from "../app/hooks";
 import { recipeId } from "../features/singleRecipeSlice";
-import { Recipe } from "../features/allRecipesSlice";
+import { Recipe, getForksById } from "../features/allRecipesSlice";
 import { formatTime, lengthenDate } from "../utils/formatting-utils";
 import { setDifficulty } from "../utils/react-utils";
 import { Link } from "react-router-dom";
@@ -71,13 +71,16 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 						Prep time: {formatTime(props.timeToPrepare)}
 					</p>
 				</div>
-				{/* <Link to={'/create_fork'}><button className="styled-btn fork-btn">
-					Fork this recipe
-				</button></Link> */}
 				<div className="btn-container-alt">
 					{props.forkCount | props.directForkCount ? (
 						<Link to={`/recipe/${props.recipeId}/forks`}>
-							<button className="styled-btn fork-btn">
+							<button
+								className="styled-btn fork-btn"
+								onClick={() => {
+									dispatch(getForksById({
+										forkedFromId: props.recipeId
+									}))
+								}}>
 								View forks
 							</button>
 						</Link>
@@ -86,7 +89,13 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 					)}
 					{props.originalRecipeId ? (
 						<Link to={`/recipe/${props.originalRecipeId}`}>
-							<button className="styled-btn fork-btn">
+							<button
+								className="styled-btn fork-btn"
+								onClick={() => {
+									dispatch(getForksById({
+										originalRecipeId: props.originalRecipeId
+									}))
+								}}>
 								View original
 							</button>
 						</Link>

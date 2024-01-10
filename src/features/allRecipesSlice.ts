@@ -51,10 +51,10 @@ export const getAllRecipes = (): AppThunk => {
 	};
 };
 
-export const getForksById = (id: string | undefined): AppThunk => {
+export const getForksById = (params: any): AppThunk => {
 	return async (dispatch) => {
 		try {
-			const response = await api.get(`/recipes/forks?forkedFromId=${id}`)
+			const response = await api.get(`/recipes/forks?${Object.keys(params)}=${params[Object.keys(params)[0]]}`)
 			dispatch(getRecipes(response.data))
 		} catch (error) {
 			console.log(error)
