@@ -20,9 +20,10 @@ const SingleRecipe: React.FC = () => {
 	const isLoading = useAppSelector((state) => state.singleRecipe.isLoading);
 
 	const dispatch = useAppDispatch();
+  
+// this will initially set the state which we will be accessing later with recipeData
 	useEffect(() => {
-		dispatch(getSingleRecipe(recipeId));
-		dispatch(getAllRecipes());
+		 dispatch(getSingleRecipe(recipeId));
 	}, []);
 
 	return (

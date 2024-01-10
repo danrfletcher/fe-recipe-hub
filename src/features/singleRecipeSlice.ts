@@ -2,6 +2,7 @@ import { AppThunk } from "../app/store"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { api } from "../utils/api-utils";
 import { Recipe } from "./allRecipesSlice";
+import { getUserById } from "./userSlice";
 
 interface SingleRecipe extends Recipe {
   recipeIngredients: []
@@ -9,7 +10,7 @@ interface SingleRecipe extends Recipe {
 
 interface SingleRecipeState {
   recipe: SingleRecipe,
-  recipeId: string,
+  recipeId: string | undefined,
   isLoading: boolean
 }
 
@@ -45,7 +46,7 @@ const singleRecipeSlice = createSlice({
     singleRecipe: (state, action: PayloadAction<SingleRecipe>) => {
       state.recipe = action.payload
       state.isLoading = false
-      state.recipeId = action.payload.recipeId
+      // state.recipeId = action.payload.recipeId
     },
     recipeId: (state, action: PayloadAction<string>) => {
       state.recipeId = action.payload
@@ -54,11 +55,13 @@ const singleRecipeSlice = createSlice({
   }
 })
 
-export const getSingleRecipe = (recipeId: string | undefined): AppThunk => {
+export const getSingleRecipe = (recipeId: number | string | undefined ): AppThunk => {
   return async (dispatch) => {
     try {
       const response = await api.get(`/recipes/${recipeId}`);
+      console.log(recipeId)
       dispatch(singleRecipe(response.data))
+      dispatch(getUserById(response.data.userId))
     }
     catch (error) {
       console.log(error)

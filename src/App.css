@@ -324,6 +324,10 @@ div.slide-out {
 	transition: 0.3s;
 }
 
+.large-recipe-img {
+	height: 45lvh;
+}
+
 .view-btn {
 	border: none;
 	border-radius: 50px;
@@ -422,6 +426,8 @@ div.slide-out {
 	align-self: flex-start;
 	margin-bottom: 0.8em;
 	color: #660f27;
+	font-size: 1.5rem;
+	font-weight: 700;
 }
 
 .feat-recipe-img {
