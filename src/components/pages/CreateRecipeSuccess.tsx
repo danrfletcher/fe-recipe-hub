@@ -19,7 +19,7 @@ const CreateRecipeSuccess: React.FC = () => {
               Your recipe has been created and is now live on our site. You can view your recipe by clicking the button below.
             </p>
             <br />
-            <p className="recipe-success-text">Thank you for contributing to <span className="">Umami</span>!</p>
+            <p className="recipe-success-text">Thank you for contributing to Umami!</p>
             <img
               className="feat-recipe-img recipe-success-img"
               src={recipeData.recipe.recipeImg}

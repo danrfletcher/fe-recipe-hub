@@ -677,6 +677,10 @@ div.slide-out {
 
 /* Recipes || RecipeCard */
 
+.recipe-wrapper {
+	margin-bottom: 3em;
+}
+
 .recipe-div {
 	display: flex;
 	flex-wrap: wrap;
@@ -723,6 +727,15 @@ div.slide-out {
 	transition: 0.3s;
 }
 
+.view-btn {
+	border: none;
+	border-radius: 50px;
+	padding: 0 3em;
+	font-size: 1rem;
+	box-shadow: 0 0 2px #222222;
+	transition: 0.3s;
+}
+
 .recipe-img:hover {
 	box-shadow: 0 0 6px 1px #222222;
 }
@@ -764,7 +777,7 @@ div.slide-out {
 }
 
 .fork-btn {
-	margin: 1.5em auto;
+	margin: 1.5em auto 0;
 	background: #404673;
 	color: #FFFFFF;
 }
@@ -899,6 +912,12 @@ div.slide-out {
 .btn-container {
 	display: flex;
 	justify-content: space-between;
+	background: none;
+}
+
+.btn-container-alt {
+	display: flex;
+	justify-content: space-around;
 	background: none;
 }
 
