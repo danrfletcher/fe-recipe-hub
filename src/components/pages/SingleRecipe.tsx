@@ -3,10 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getSingleRecipe } from "../../features/singleRecipeSlice";
 import { getAllRecipes } from "../../features/allRecipesSlice";
 import Loading from "../Loading";
-// import { Ingredient } from "../../features/ingredientsSlice";
 import { useParams, Link } from "react-router-dom";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { LuChefHat } from "react-icons/lu";
 import SimilarCuisine from "../SimilarCuisine";
 import MostPopularRecipies from "../MostPopularRecipies";
@@ -14,14 +11,10 @@ import ReviewStars from "../ReviewStars";
 import RecipeMethod from "../RecipeMethod";
 import { Ingredients } from "../Ingredients";
 
-
-
-
 const SingleRecipe: React.FC = () => {
-
 	const recipeData = useAppSelector((state) => state.singleRecipe.recipe);
-	// Without useParams, map() in line 35 will not work - useParams takes the recipeId from the URL and fixes this issue
-	const { recipeId } = useParams()
+	
+	const { recipeId } = useParams();
 	const isLoading = useAppSelector((state) => state.singleRecipe.isLoading);
 
 	const dispatch = useAppDispatch();
@@ -29,10 +22,6 @@ const SingleRecipe: React.FC = () => {
 		dispatch(getSingleRecipe(recipeId));
 		dispatch(getAllRecipes());
 	}, []);
-
-
-
-
 
 	// set difficulty
 	//----------------------------------------------------------------------------------------
@@ -60,7 +49,7 @@ const SingleRecipe: React.FC = () => {
 							<div className="titleSPR">
 								<h2>{recipeData.recipeTitle}</h2>
 								<div className="detailsSPR">
-									<p>Posted by: Username</p> {/*add username */}
+									<p>Posted by: Username</p> {/*add username to the response body on get signle recipe by iD or we need to make another call to the back to get a username by Id*/}
 									<p>on {recipeData.postedOn.split(" ")[0]}</p>
 								</div>
 								<p className="cuisineSPR">Cuisine: {recipeData.cuisine}</p>
@@ -75,13 +64,14 @@ const SingleRecipe: React.FC = () => {
 						</div>
 						<div className="mainSPR">
 							<div className="recipeSPR">
-								<Ingredients/>								
-								<RecipeMethod/>
+								<Ingredients />
+								<RecipeMethod />
 							</div>
 							<MostPopularRecipies />
 						</div>
-						<div className="buttonsSPR">  {/*add links to this buttons*/}
-							<button className="buttonSPR">Fork this recipe</button>
+						<div className="buttonsSPR">
+							{/*add links to the buttons*/}
+
 							<button className="buttonSPR">View all forks</button>
 						</div>
 						<SimilarCuisine />
