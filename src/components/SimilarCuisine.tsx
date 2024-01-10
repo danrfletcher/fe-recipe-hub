@@ -19,7 +19,7 @@ const SimilarCuisine: React.FC = () => {
             <h4>{recipe.recipeTitle}</h4>
             <img src={recipe.recipeImg} />
             <ReviewStars/>
-            <p>{recipe.tagLine}</p>
+            <p className="similarTag">{recipe.tagLine}</p>
             <button>View fork</button>
           </li>
         ))}

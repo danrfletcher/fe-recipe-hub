@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getSingleRecipe } from "../../features/singleRecipeSlice";
 import { getAllRecipes } from "../../features/allRecipesSlice";
 import Loading from "../Loading";
-import { Ingredient } from "../../features/ingredientsSlice";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +10,8 @@ import { LuChefHat } from "react-icons/lu";
 import SimilarCuisine from "../SimilarCuisine";
 import MostPopularRecipies from "./MostPopularRecipies";
 import ReviewStars from "./ReviewStars";
+import RecipeMethod from "../RecipeMethod";
+import { Ingredients } from "../Ingredients";
 
 
 
@@ -30,9 +31,9 @@ const SingleRecipe: React.FC = () => {
 
 
 
-	
 
-   	// set difficulty 
+
+	// set difficulty
 	//----------------------------------------------------------------------------------------
 	const setDifficulty = (rating: number) => {
 		const array = []
@@ -54,17 +55,17 @@ const SingleRecipe: React.FC = () => {
 				<Loading />
 			) : (
 				<>
-					<div className="SPR">	
+					<div className="SPR">
 						<div className="topSPR">
 							<img src={recipeData.recipeImg} />
 							<div className="titleSPR">
 								<h2>{recipeData.recipeTitle}</h2>
 								<div className="detailsSPR">
-									<p>User id: {recipeData.userId}</p>
+									<p>Posted by: Username</p> {/*add username */}
 									<p>on {recipeData.postedOn.split(" ")[0]}</p>
 								</div>
 								<p className="cuisineSPR">Cuisine: {recipeData.cuisine}</p>
-								<ReviewStars/>
+								<ReviewStars />
 								<p className="metaSPR">{recipeData.tagLine}</p>
 								<img className="secondImgSPR" src={recipeData.recipeImg} />
 								<div className="timingSPR">
@@ -75,103 +76,14 @@ const SingleRecipe: React.FC = () => {
 						</div>
 						<div className="mainSPR">
 							<div className="recipeSPR">
-								<div>
-									<p>Ingredients</p>
-									<ul>
-										{recipeData.recipeIngredients.map((ingredient: Ingredient) => {
-											return (
-												<li key={ingredient.ingredientId} className="ingrList">
-													<div className="ingDetailsSPR">
-														<p>{ingredient.quantity}</p>
-														<p>{ingredient.ingredientName}</p>
-													</div>
-													<div className="nutrDetailsSPR">
-														<div>
-															<p>{ingredient.calories}</p>
-															<p>CALORIES</p>
-														</div>
-														<div>
-															<p>{ingredient.fat}</p>
-															<p>FAT</p>
-														</div>
-														<div>
-															<p>{ingredient.carbohydrate}</p>
-															<p>CARBS</p>
-														</div>
-														<div>
-															<p>{ingredient.sugar}</p>
-															<p>SUGAR</p>
-														</div>
-														<div>
-															<p>{ingredient.protein}</p>
-															<p>PROTEIN</p>
-														</div>
-														<div>
-															<p>{ingredient.fiber}</p>
-															<p>FIBER</p>
-														</div>
-													</div>
-												</li>
-											)
-										})}
-									</ul>
-								</div>
-								<div>
-									<p>Method</p>
-									<ol>
-										<p>{recipeData.recipeMethod}</p>
-									</ol>
-								</div>
+								<Ingredients/>								
+								<RecipeMethod/>
 							</div>
-							<MostPopularRecipies/>
+							<MostPopularRecipies />
 						</div>
-						<div className="buttonsSPR">
+						<div className="buttonsSPR">  {/*add links to this buttons*/}
 							<button className="buttonSPR">Fork this recipe</button>
 							<button className="buttonSPR">View all forks</button>
-						</div>
-						<div className="commentsSPR">
-							<p>3 Comments</p>
-							<div className="addCommentSPR">
-								<p>User</p>
-								<input id="newComment" placeholder="Add a comment..." />
-								<button>Comment</button>
-							</div>
-							<div className="oldCommentSPR">
-								<div>
-									<p>Gordon Ramsay</p>
-									<p> on 2nd January 2024</p>
-								</div>
-								<p>This is an example of a comment on the recipe. Where’s the lamb sauce?!</p>
-								<div>
-									<FontAwesomeIcon icon={faThumbsUp} className="thumbSPR" />
-									<p>5</p>
-									<FontAwesomeIcon icon={faThumbsDown} className="thumbSPR" />
-								</div>
-							</div>
-							<div className="oldCommentSPR">
-								<div>
-									<p>Gordon Ramsay</p>
-									<p> on 2nd January 2024</p>
-								</div>
-								<p>This is an example of a comment on the recipe. Where’s the lamb sauce?!</p>
-								<div>
-									<FontAwesomeIcon icon={faThumbsUp} className="thumbSPR" />
-									<p>5</p>
-									<FontAwesomeIcon icon={faThumbsDown} className="thumbSPR" />
-								</div>
-							</div>
-							<div className="oldCommentSPR">
-								<div>
-									<p>Gordon Ramsay</p>
-									<p> on 2nd January 2024</p>
-								</div>
-								<p>This is an example of a comment on the recipe. Where’s the lamb sauce?!</p>
-								<div>
-									<FontAwesomeIcon icon={faThumbsUp} className="thumbSPR" />
-									<p>5</p>
-									<FontAwesomeIcon icon={faThumbsDown} className="thumbSPR" />
-								</div>
-							</div>
 						</div>
 						<SimilarCuisine />
 					</div>

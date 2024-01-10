@@ -540,34 +540,28 @@ div.slide-out {
 	display: flex;
 	font-size: 14px;
 	flex-wrap: wrap;
+	gap: 2px;
+	flex-direction: column;
+	padding: 5px;
+}
+
+.ingDetailsSPR{
+	background-color: transparent;
+	display: flex;	
 	gap: 10px;
 }
-
-.ingDetailsSPR {
-	display: flex;
-	gap: 5px;
-	background-color: transparent;
-	width: 50%;
+.ingDetailsSPR>p{
+  background-color: transparent;
 }
-
-.ingDetailsSPR>p {
+.nutrDetailsSPR{
 	background-color: transparent;
-}
-
-.nutrDetailsSPR {
-	background-color: transparent;
-	border: solid 1px red;
+	display: flex;	
+	gap: 10px;
 	font-size: 10px;
-	display: flex;
-	width: 50%;
-	gap: 5px;
 }
-
-.nutrDetailsSPR>div {
-	display: flex;
-	flex-direction: column;
+.nutrDetailsSPR>p{
+	background-color: transparent;
 }
-
 /*-----------------------------------------*/
 .mostPopularSPR {
 	display: flex;
@@ -626,10 +620,8 @@ div.slide-out {
 	font-size: 13px;
 }
 
-.textSPR {
-	width: 90%;
-	font-size: 13px;
-	text-align: justify;
+.listMethod{
+	font-size: 14px;
 }
 
 .buttonsSPR {
@@ -751,17 +743,23 @@ div.slide-out {
 	flex-direction: column;
 	gap: 10px;
 	justify-content: baseline;
-	padding-bottom: 20px;
 }
 
 .similarSPR>ul>li>img {
-	max-height: 130px;
+	object-fit: cover;
+	height: 30%;
+	width: auto;
+}
+.similarSPR>ul>li>h4 {
+	height: 15%;
 }
 
 .similarSPR>ul>li>p {
 	font-size: 12px;
 }
-
+.similarTag{
+	height: 15%;
+}
 .similarSPR>ul>li>div {
 	display: flex;
 	font-size: 10px;
@@ -773,7 +771,8 @@ div.slide-out {
 	display: flex;
 }
 .similarSPR>ul>li>button {
-	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
 	height: 25px;
 	width: 80px;
 	background-color: #734060;
@@ -789,7 +788,9 @@ div.slide-out {
 		padding-left: 25px;
 		padding-right: 30px;
 	}
-
+    .nutrDetailsSPR>p{
+		width: 40px;
+	}
 	.topSPR>img {
 		display: none;
 	}
