@@ -4,17 +4,19 @@ import { getSingleRecipe } from "../../features/singleRecipeSlice";
 import { getAllRecipes } from "../../features/allRecipesSlice";
 import Loading from "../Loading";
 import { useParams, Link } from "react-router-dom";
-import { LuChefHat } from "react-icons/lu";
-import SimilarCuisine from "../SimilarCuisine";
-import MostPopularRecipes from "../PopularRecipes";
+import SimilarRecipes from "../SimilarRecipes";
 import ReviewStars from "../ReviewStars";
 import RecipeMethod from "../RecipeMethod";
 import { Ingredients } from "../Ingredients";
+import { setDifficulty } from "../../utils/react-utils";
+import { lengthenDate } from "../../utils/formatting-utils";
+import "../styles.css"
 
 const SingleRecipe: React.FC = () => {
+
 	const recipeData = useAppSelector((state) => state.singleRecipe.recipe);
-	
 	const { recipeId } = useParams();
+	const isNavToggled = useAppSelector((state) => state.navToggle.value)
 	const isLoading = useAppSelector((state) => state.singleRecipe.isLoading);
 
 	const dispatch = useAppDispatch();
@@ -23,22 +25,8 @@ const SingleRecipe: React.FC = () => {
 		dispatch(getAllRecipes());
 	}, []);
 
-	// set difficulty
-	//----------------------------------------------------------------------------------------
-	const setDifficulty = (rating: number) => {
-		const array = [];
-		for (let i = 0; i < rating; i++) {
-			array.push(<LuChefHat className="difficulty-icon" key={i} />);
-		}
-		for (let i = rating; i < 5; i++) {
-			array.push(<LuChefHat key={i} className="empty-icon" />);
-		}
-		return array;
-	};
-	//-------------------------------------------------------------------------------------------
-
 	return (
-		<div>
+		<div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
 			{isLoading ? (
 				<Loading />
 			) : (
@@ -47,18 +35,24 @@ const SingleRecipe: React.FC = () => {
 						<div className="topSPR">
 							<img src={recipeData.recipeImg} />
 							<div className="titleSPR">
-								<h2>{recipeData.recipeTitle}</h2>
+								<h2 className="recipe-title">{recipeData.recipeTitle}</h2>
+								<img className="secondImgSPR recipe-el" src={recipeData.recipeImg} />
 								<div className="detailsSPR">
-									<p>Posted by: Username</p> {/*add username to the response body on get signle recipe by iD or we need to make another call to the back to get a username by Id*/}
-									<p>on {recipeData.postedOn.split(" ")[0]}</p>
+									{recipeData.postedOn ? (
+										<p className="timestamp recipe-el">Published on {lengthenDate(recipeData.postedOn)}</p>
+									) : (
+										null
+									)}
 								</div>
-								<p className="cuisineSPR">Cuisine: {recipeData.cuisine}</p>
-								<ReviewStars />
-								<p className="metaSPR">{recipeData.tagLine}</p>
-								<img className="secondImgSPR" src={recipeData.recipeImg} />
+								<p className="recipe-el">{recipeData.tagLine}</p>
+								<p className="cuisineSPR recipe-el">Cuisine: {recipeData.cuisine}</p>
+								<div className="reviewSPR">
+									<ReviewStars />
+									<p className="recipe-el"><b>{recipeData.averageRating.toFixed(1)}</b> average / <b>{recipeData.ratingCount}</b> reviews</p>
+								</div>
 								<div className="timingSPR">
-									<p>Prep time: {recipeData.timeToPrepare} mins</p>
-									<p>Difficulty: {setDifficulty(recipeData.difficulty)}</p>
+									<p className="recipe-el">Prep time: {recipeData.timeToPrepare} mins</p>
+									<p className="recipe-el">Difficulty: {setDifficulty(recipeData.difficulty)}</p>
 								</div>
 							</div>
 						</div>
@@ -67,21 +61,14 @@ const SingleRecipe: React.FC = () => {
 								<Ingredients />
 								<RecipeMethod />
 							</div>
-							<MostPopularRecipes />
 						</div>
-						<div className="buttonsSPR">
-							{/*add links to the buttons*/}
-
-							<button className="buttonSPR">View all forks</button>
-						</div>
-						<SimilarCuisine />
+						<Link to={"/recipes/create_fork"}>
+							<button className="styled-btn fork-btn spr-btn">Fork this recipe</button>
+						</Link>
+						<SimilarRecipes />
 					</div>
 				</>
 			)}
-
-			<Link to={"/recipes/create_fork"}>
-				<button className="styled-btn fork-btn">Fork this recipe</button>
-			</Link>
 		</div>
 	);
 };

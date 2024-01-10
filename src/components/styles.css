@@ -1,0 +1,374 @@
+.SPR {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  margin: auto;
+  gap: 2em;
+  justify-content: center;
+}
+
+.spr-btn {
+  margin: 0;
+}
+
+.topSPR {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em;
+  text-align: start;
+  width: 100%;
+  background-color: hsl(343, 74%, 23%, 5%);
+}
+
+.topSPR>img {
+  width: 30%;
+}
+
+.topSPR>div {
+  background-color: transparent;
+}
+
+.topSPR>div>div {
+  background-color: transparent;
+}
+
+.reviewSPR {
+  display: flex;
+  justify-content: space-between;
+}
+
+.yellowStars {
+  background-color: transparent;
+  fill: #921538;
+}
+
+.secondImgSPR {
+  object-fit: cover;
+  display: none;
+  border-radius: 4px;
+  box-shadow: 0 0 1px #222222;
+  height: 80vw;
+  appearance: none;
+}
+
+.timingSPR {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainSPR {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+/* Ingredients | Method */
+
+.recipeSPR {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin: 0;
+  padding: 5%;
+  background-color: hsl(343, 74%, 23%, 5%);
+  list-style-position: inside;
+}
+
+.recipeSPR>div {
+  background-color: transparent;
+  text-align: left;
+}
+
+.recipeSPR>div>p {
+  background-color: transparent;
+  font-size: 22px;
+  padding-bottom: 10px;
+}
+
+.recipeSPR>div>ul,
+.recipeSPR>div>ol {
+  background-color: transparent;
+}
+
+.recipeSPR>div>ul>li,
+.recipeSPR>div>ol>li {
+  background-color: transparent;
+  padding-left: 5px;
+}
+
+.ingrList {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 0.2em 0;
+  text-align: start;
+}
+
+.ingDetailsSPR {
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.listMethod {
+  font-size: 0.9em;
+}
+
+/*-----------------------------------------*/
+
+.mostPopularSPR {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  background-color: rgba(102, 34, 15, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.popularErrorSPR {
+  display: none;
+}
+
+.popularSPR {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 0;
+  background-color: transparent;
+}
+
+.popularSPR>h2,
+.popularSPR>h3 {
+  background-color: transparent;
+}
+
+.popularSPR>img {
+  padding-left: 10%;
+  padding-right: 10%;
+  background-color: transparent;
+  border-radius: 25%;
+}
+
+.popularSPR>.reviewSPR {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.popularSPR>p {
+  background-color: transparent;
+  font-size: 14px;
+}
+
+.popularSPR>button {
+  background-color: #734060;
+  border: none;
+  color: white;
+  height: 35px;
+  width: 100px;
+  margin: auto;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.buttonsSPR {
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttonSPR {
+  background-color: #734060;
+  color: white;
+  border: none;
+  font-size: 20px;
+  width: 160px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.commentsSPR {
+  width: 100%;
+  background-color: rgba(102, 15, 82, 0.04);
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  row-gap: 30px;
+  padding-bottom: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.commentsSPR>p {
+  background-color: transparent;
+  font-size: 18px;
+  text-align: left;
+}
+
+.oldCommentSPR {
+  background-color: transparent;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+}
+
+.oldCommentSPR>div {
+  background-color: transparent;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  padding-left: 10px;
+}
+
+.oldCommentSPR>div>p {
+  background-color: transparent;
+}
+
+.thumbSPR {
+  background-color: transparent;
+}
+
+.oldCommentSPR>p {
+  background-color: transparent;
+  text-align: left;
+  padding: 10px;
+  border: solid 1px #734060;
+}
+
+.addCommentSPR {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.addCommentSPR>p {
+  text-align: left;
+  background-color: transparent;
+}
+
+.addCommentSPR>input {
+  background-color: transparent;
+  padding: 10px;
+  outline: none;
+  border: solid 1px #734060;
+}
+
+.addCommentSPR>button {
+  background-color: #734060;
+  border: none;
+  color: white;
+  width: 100px;
+  height: 24px;
+  border-radius: 10px;
+}
+
+/* SimilarRecipes */
+
+.similarSPR {
+  display: flex;
+  flex-direction: column;
+  background-color: hsl(343, 74%, 23%, 5%);
+  padding: 2% 5%;
+  width: 100%;
+}
+
+.similarSPR>h2 {
+  text-align: left;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  background: transparent;
+}
+
+.similarSPR>ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: transparent;
+}
+
+.similarSPR>ul>li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  background: transparent;
+}
+
+.similarSPR>ul>li>div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: transparent;
+}
+
+.similarSPR>ul>li>div>p {
+  text-align: center;
+}
+
+.similarSPR>ul>li>div>img {
+  object-fit: cover;
+  border-radius: 6px;
+  max-width: 200px;
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+.similarSPR>ul>li>h4 {
+  text-align: justify;
+  background: transparent;
+  font-size: 1.2rem;
+}
+
+/* Media Queries */
+
+@media (max-width: 650px) {
+
+  .nutrDetailsSPR>p {
+    width: 40px;
+  }
+
+  .topSPR>img {
+    display: none;
+  }
+
+  .secondImgSPR {
+    display: revert;
+    width: 100%;
+  }
+
+  .similarSPR>ul>li {
+    width: 23%;
+  }
+}
+
+@media (max-width: 500px) {
+  .mostPopularSPR {
+    display: none;
+  }
+
+  .topSPR>div>h2 {
+    width: 100%;
+  }
+
+  .cuisineSPR {
+    width: 100%;
+  }
+
+  div.titleSPR {
+    gap: 20px;
+  }
+
+  .similarSPR>ul>li {
+    width: 30%;
+  }
+}
