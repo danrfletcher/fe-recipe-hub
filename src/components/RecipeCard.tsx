@@ -48,19 +48,19 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 						</p>
 					) : (
 						<p className="recipe-facts recipe-el">
-							This recipe has not been rated yet.
+							This {props.originalRecipeId ? "forked recipe" : "recipe"} has not been rated yet.
 						</p>
 					)}
 				</div>
 				<div className="recipe-facts-wrapper">
-					{props.forkCount ? (
-						props.forkCount === 1 ? (
-							<p className="recipe-facts recipe-el">This recipe has been forked once.</p>
+					{props.directForkCount ? (
+						props.directForkCount === 1 ? (
+							<p className="recipe-facts recipe-el">This {props.originalRecipeId ? "forked recipe" : "recipe"} has been directly forked once.</p>
 						) : (
-							<p className="recipe-facts recipe-el">This recipe has been forked {props.forkCount} times.</p>
+							<p className="recipe-facts recipe-el">This {props.originalRecipeId ? "forked recipe" : "recipe"} has been directly forked <b>{props.directForkCount}</b> times.</p>
 						)
 					) : (
-						<p className="recipe-facts recipe-el">This recipe has not been forked yet.</p>
+						<p className="recipe-facts recipe-el">This {props.originalRecipeId ? "forked recipe" : "recipe"} has not been forked yet.</p>
 					)}
 				</div>
 				<div className="recipe-facts-wrapper">
