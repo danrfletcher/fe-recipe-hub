@@ -16,8 +16,6 @@ const RecipeCard: React.FC<Recipe> = (props) => {
 		dispatch(recipeId(props.recipeId))
 	}
 
-	console.log(props.recipeId)
-
 	return (
 		<div className="recipe-wrapper">
 			<img
