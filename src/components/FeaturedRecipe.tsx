@@ -4,6 +4,7 @@ import { formatTime } from "../utils/formatting-utils"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { useEffect } from "react"
 import { getAllRecipes } from "../features/allRecipesSlice"
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 const FeaturedRecipe: React.FC = () => {
 
@@ -14,13 +15,25 @@ const FeaturedRecipe: React.FC = () => {
     return 0
   })[0]
 
-  console.log(featRecipe)
-
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(getAllRecipes())
   }, [])
+
+  const starsArray = [];
+	const wholePart = Math.floor(featRecipe.averageRating);
+	const fractionalPart = (featRecipe.averageRating - wholePart) * 100;
+
+	for (let i = 0; i < 5; i++) {
+		if (i < wholePart) {
+			starsArray.push(<FaStar key={i} className="yellowStars" />);
+		} else if (i === wholePart && fractionalPart > 0) {
+			starsArray.push(<FaStarHalfAlt key={i} className="yellowStars" />);
+		} else {
+			starsArray.push(<FaRegStar key={i} className="yellowStars" />);
+		}
+	}
 
   return (
     <div className="feat-recipe-wrapper">
@@ -40,6 +53,7 @@ const FeaturedRecipe: React.FC = () => {
         </p>
       </div>
       <p className="feat-recipe-el">{featRecipe.tagLine}</p>
+      <p className="recipe-el">{starsArray} </p>
       <div className="recipe-facts-wrapper">
         <p className="recipe-facts recipe-el">
           Prep time: {formatTime(featRecipe.timeToPrepare)}
