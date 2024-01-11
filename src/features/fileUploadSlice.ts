@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { api } from "../utils/api-utils";
 
 interface FileUploadState {
-	imageUrl: string | null;
+	imageUrl: any;
 }
 
 const initialState: FileUploadState = {
@@ -17,6 +17,9 @@ const fileUploadSlice = createSlice({
 		getFileUrl: (state, action: PayloadAction<string>) => {
 			state.imageUrl = action.payload;
 		},
+    clearFileUrl: (state)=>{
+      state.imageUrl = null
+    }
 	},
 });
 
@@ -32,5 +35,5 @@ export const getUrl = (formData: any): AppThunk => {
 	};
 };
 
-export const { getFileUrl } = fileUploadSlice.actions;
+export const { getFileUrl, clearFileUrl } = fileUploadSlice.actions;
 export default fileUploadSlice.reducer;

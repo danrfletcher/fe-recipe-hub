@@ -4,6 +4,7 @@ import { api } from "../utils/api-utils";
 import { CreateRecipe } from "../components/pages/CreateRecipe";
 import { getSingleRecipe } from "./singleRecipeSlice";
 import { Ingredient } from "./ingredientsSlice";
+import { clearFileUrl } from "./fileUploadSlice";
 
 interface CreateRecipe {
 	recipeTitle: string | null;
@@ -79,6 +80,7 @@ export const postRecipe = (object: CreateRecipe, token: string, ingredientObj: o
 			if (response.status == 201) {
 				await api.post(`ingredients/recipes/${response.data.recipeId}/ingredients`, ingredientObj)
 				dispatch(clearPost())
+        dispatch(clearFileUrl())
 			}
 		} catch (error) {
 			console.log(error);

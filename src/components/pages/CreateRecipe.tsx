@@ -12,6 +12,7 @@ import {
 } from "../../features/createRecipeSlice";
 import { getAllIngredients } from "../../features/ingredientsSlice";
 import { useNavigate } from "react-router-dom";
+import { FileUpload } from "../FileUpload";
 
 interface FormValues {
 	recipeTitle: string;
@@ -49,7 +50,7 @@ export const CreateRecipe: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const { register, handleSubmit, getValues, resetField, reset } =
 		useForm<FormValues>();
-
+   const imageUrl = useAppSelector((state)=>state.fileUpload.imageUrl) 
 	const token = `Bearer ${stateInfo.token}`;
 
 	useEffect(() => {
@@ -81,7 +82,7 @@ export const CreateRecipe: React.FC = () => {
 					difficulty: data.difficulty,
 					timeToPrepare: data.timeToPrepare,
 					recipeMethod: data.recipeMethod,
-					recipeImg: data.recipeImg,
+					recipeImg: imageUrl,
 					cuisine: data.cuisine,
 					forkedFromId: null,
 					originalRecipeId: null,
@@ -113,6 +114,7 @@ export const CreateRecipe: React.FC = () => {
 		>
 			<h2 className="auth-header">Feeling inspired?</h2>
 			<h3 className="auth-header-cursive">Create a new recipe</h3>
+      <FileUpload />
 			<form className="auth-form" onSubmit={handleSubmit(submitForm)}>
 				<div className="input-wrapper">
 					<label htmlFor="recipeTitle" className="input-label">
@@ -178,19 +180,6 @@ export const CreateRecipe: React.FC = () => {
 						{...register("timeToPrepare")}
 						required
 					/>
-				</div>
-
-				<div className="input-wrapper">
-					<label htmlFor="recipeImg" className="input-label">
-						Recipe Image URL
-					</label>
-					<input
-						type="url"
-						placeholder="Please enter a valid image URL"
-						id="recipeImg"
-						className="input-field"
-						{...register("recipeImg")}
-						required />
 				</div>
 
 				<div className="input-wrapper">

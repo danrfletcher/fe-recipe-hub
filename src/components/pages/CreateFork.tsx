@@ -17,6 +17,7 @@ import {
 } from "../../features/forkedIngredientsSlice";
 import { formatMethod } from "../../utils/formatting-utils";
 import { useNavigate } from "react-router-dom";
+import { FileUpload } from "../FileUpload";
 
 interface FormValues {
 	recipeTitle: string;
@@ -35,18 +36,23 @@ interface FormValues {
 }
 
 export const CreateFork: React.FC = () => {
-
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
 	const cuisines = useAppSelector((state) => state.cuisines.allCuisines);
 	const ingredients = useAppSelector((state) => state.ingredients.ingredients);
 	const stateInfo = useAppSelector((state) => state.auth);
-	const singleRecipeState = useAppSelector((state) => state.singleRecipe.recipe);
-	const forkedIngredientsToDisplay = useAppSelector((state) => state.forkedIngredients.forkedIngredients);
-	const forkedQuantitiesToDisplay = useAppSelector((state) => state.forkedIngredients.forkedQuantities);
+	const singleRecipeState = useAppSelector(
+		(state) => state.singleRecipe.recipe
+	);
+	const forkedIngredientsToDisplay = useAppSelector(
+		(state) => state.forkedIngredients.forkedIngredients
+	);
+	const forkedQuantitiesToDisplay = useAppSelector(
+		(state) => state.forkedIngredients.forkedQuantities
+	);
 	const error = useAppSelector((state) => state.createRecipe.error);
 	const isError = useAppSelector((state) => state.createRecipe.isError);
 
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	const dispatch = useAppDispatch();
 	const {
@@ -54,10 +60,12 @@ export const CreateFork: React.FC = () => {
 		handleSubmit,
 		getValues,
 		resetField,
-		reset
+		reset,
+		formState: { isDirty },
 	} = useForm<FormValues>();
 
 	const token = `Bearer ${stateInfo.token}`;
+	const imageUrl = useAppSelector((state) => state.fileUpload.imageUrl);
 
 	useEffect(() => {
 		dispatch(getAllCuisines());
@@ -80,8 +88,9 @@ export const CreateFork: React.FC = () => {
 	const arrayOfIngIds = forkedIngredientsToDisplay.map((ingredient) => {
 		return findId(lookupIngredients, ingredient);
 	});
-
+// imageUrl ? imageUrl :
 	const submitForm: SubmitHandler<FormValues> = (data) => {
+    console.log(data, "<<<data")
 		dispatch(
 			postRecipe(
 				{
@@ -90,7 +99,7 @@ export const CreateFork: React.FC = () => {
 					difficulty: data.difficulty,
 					timeToPrepare: data.timeToPrepare,
 					recipeMethod: data.recipeMethod,
-					recipeImg: data.recipeImg,
+					recipeImg:  imageUrl ? imageUrl : singleRecipeState.recipeImg,
 					cuisine: data.cuisine,
 					forkedFromId: singleRecipeState.recipeId,
 					originalRecipeId: !singleRecipeState.originalRecipeId
@@ -100,7 +109,7 @@ export const CreateFork: React.FC = () => {
 					cuisineId: findId(lookupCuisines, data.cuisine),
 					recipeId: singleRecipeState.recipeId,
 					ingredientIds: arrayOfIngIds,
-					quantity: [],
+					quantity: forkedQuantitiesToDisplay,
 					error: null,
 					isError: false,
 				},
@@ -108,8 +117,8 @@ export const CreateFork: React.FC = () => {
 				{ ingredientIds: arrayOfIngIds, quantity: forkedQuantitiesToDisplay }
 			)
 		);
-		reset()
-		navigate(`/recipes/create_fork/success`)
+		reset();
+		navigate(`/recipes/create_fork/success`);
 	};
 
 	const recipeIngredientsForForking: any[] =
@@ -124,20 +133,17 @@ export const CreateFork: React.FC = () => {
 	return (
 		<div
 			onTouchEnd={() => {
-				if (isError) dispatch(clearErrors())
+				if (isError) dispatch(clearErrors());
 			}}
 			onMouseUp={() => {
-				if (isError) dispatch(clearErrors())
+				if (isError) dispatch(clearErrors());
 			}}
-			className={isNavToggled ? (
-				"page-slide-in"
-			) : (
-				"page-slide-out"
-			)}>
+			className={isNavToggled ? "page-slide-in" : "page-slide-out"}
+		>
 			<h2 className="auth-header">Made it your own way?</h2>
 			<h3 className="auth-header-cursive">Submit a forked recipe</h3>
+      <FileUpload />
 			<form className="auth-form" onSubmit={handleSubmit(submitForm)}>
-
 				<div className="input-wrapper">
 					<label htmlFor="recipeTitle" className="input-label">
 						Recipe Title
@@ -149,7 +155,8 @@ export const CreateFork: React.FC = () => {
 						id="recipeTitle"
 						className="input-field"
 						{...register("recipeTitle")}
-						required />
+						required
+					/>
 				</div>
 
 				<div className="input-wrapper">
@@ -164,7 +171,8 @@ export const CreateFork: React.FC = () => {
 						autoComplete="on"
 						className="input-field"
 						{...register("tagLine")}
-						required />
+						required
+					/>
 				</div>
 
 				<div className="input-wrapper">
@@ -176,7 +184,8 @@ export const CreateFork: React.FC = () => {
 						className="input-field"
 						{...register("difficulty")}
 						required
-						defaultValue={singleRecipeState.difficulty}>
+						defaultValue={singleRecipeState.difficulty}
+					>
 						<option value="placeholder" disabled>
 							Select a rating
 						</option>
@@ -203,7 +212,7 @@ export const CreateFork: React.FC = () => {
 						required
 					/>
 				</div>
-
+{/* 
 				<div className="input-wrapper">
 					<label htmlFor="recipeImg" className="input-label">
 						Recipe Image URL
@@ -215,8 +224,9 @@ export const CreateFork: React.FC = () => {
 						id="recipeImg"
 						className="input-field"
 						{...register("recipeImg")}
-						required />
-				</div>
+						required
+					/>
+				</div> */}
 
 				<div className="input-wrapper">
 					<label htmlFor="cuisine" className="input-label">
@@ -227,7 +237,8 @@ export const CreateFork: React.FC = () => {
 						className="input-field"
 						defaultValue={singleRecipeState.cuisine}
 						{...register("cuisine")}
-						required>
+						required
+					>
 						<option className="" value="placeholder" disabled>
 							Click to select a cuisine
 						</option>
@@ -250,7 +261,8 @@ export const CreateFork: React.FC = () => {
 						autoComplete="on"
 						className="input-field"
 						{...register("recipeMethod")}
-						required />
+						required
+					/>
 				</div>
 
 				<label htmlFor="recipeIng" className="input-label">
@@ -260,27 +272,35 @@ export const CreateFork: React.FC = () => {
 					<div className="ingredients-list" id="recipeIng">
 						<div>
 							{forkedIngredientsToDisplay.map((ingredient) => {
-								return <li className="recipe-list-item recipe-list-ingredient" key={ingredient}>{ingredient}</li>
+								return (
+									<li
+										className="recipe-list-item recipe-list-ingredient"
+										key={ingredient}
+									>
+										{ingredient}
+									</li>
+								);
 							})}
 						</div>
 						<div>
-							{forkedQuantitiesToDisplay.length ? (
-								forkedQuantitiesToDisplay.map((quantity, index) => {
-									return <li className="recipe-list-item recipe-list-quantity" key={index}>{quantity}</li>
-								})
-							) : (
-								null
-							)}
+							{forkedQuantitiesToDisplay.length
+								? forkedQuantitiesToDisplay.map((quantity, index) => {
+										return (
+											<li
+												className="recipe-list-item recipe-list-quantity"
+												key={index}
+											>
+												{quantity}
+											</li>
+										);
+								  })
+								: null}
 						</div>
 					</div>
-				) : (
-					null
-				)}
+				) : null}
 
 				<div className="recipe-form-internal-wrapper ingredient-field-wrapper">
-					<label htmlFor="ingredient-field">
-						Ingredient:
-					</label>
+					<label htmlFor="ingredient-field">Ingredient:</label>
 					<input
 						type="text"
 						list="ingredientsList"
@@ -288,13 +308,15 @@ export const CreateFork: React.FC = () => {
 						id="ingredient-field"
 						placeholder="Search"
 						multiple={true}
-						{...register("ingredientsId")} />
+						{...register("ingredientsId")}
+					/>
 					<datalist id="ingredientsList">
 						{ingredients.map((ingredient) => {
 							return (
 								<option
 									key={ingredient.ingredientId}
-									data-value={ingredient.ingredientId}>
+									data-value={ingredient.ingredientId}
+								>
 									{ingredient.ingredientName}
 								</option>
 							);
@@ -303,15 +325,14 @@ export const CreateFork: React.FC = () => {
 				</div>
 
 				<div className="recipe-form-internal-wrapper">
-					<label htmlFor="quantity-field">
-						Quantity:
-					</label>
+					<label htmlFor="quantity-field">Quantity:</label>
 					<input
 						type="text"
 						className="input-field"
 						id="quantity-field"
 						placeholder="e.g. 500g"
-						{...register("quantity")} />
+						{...register("quantity")}
+					/>
 				</div>
 
 				<div className="btn-container">
@@ -320,7 +341,11 @@ export const CreateFork: React.FC = () => {
 						onClick={(e) => {
 							e.preventDefault();
 							const values = getValues();
-							if (ingredients.find((object) => object.ingredientName == values.ingredientsId)) {
+							if (
+								ingredients.find(
+									(object) => object.ingredientName == values.ingredientsId
+								)
+							) {
 								if (forkedIngredientsToDisplay.includes(values.ingredientsId)) {
 									dispatch(setError("Sorry, no duplicate items!"));
 									resetField("ingredientsId");
@@ -338,7 +363,8 @@ export const CreateFork: React.FC = () => {
 							} else {
 								dispatch(setError("Please add an ingredient"));
 							}
-						}}>
+						}}
+					>
 						Add ingredient
 					</button>
 					<button
@@ -346,7 +372,8 @@ export const CreateFork: React.FC = () => {
 						onClick={(e) => {
 							e.preventDefault();
 							dispatch(clearForkedIngredients());
-						}}>
+						}}
+					>
 						Clear list
 					</button>
 				</div>
@@ -355,15 +382,15 @@ export const CreateFork: React.FC = () => {
 					<div className="error-section create-recipe-error-section">
 						<p>{error}</p>
 					</div>
-				) : (
-					null
-				)}
+				) : null}
 
 				<p className="auth-header-cursive">Ready to go?</p>
 				<button
 					type="submit"
 					className="styled-btn auth-btn"
-					id="create-recipe-btn">
+					id="create-recipe-btn"
+					disabled={!isDirty}
+				>
 					Submit this fork
 				</button>
 			</form>
