@@ -6,6 +6,7 @@ import { setDifficulty } from "../../utils/react-utils";
 import { formatTime } from "../../utils/formatting-utils";
 import { getAllCuisines } from "../../features/cuisineSlice";
 import { Link } from "react-router-dom";
+import CuisineCard from "../CuisineCard";
 
 const Home: React.FC = () => {
 
@@ -58,13 +59,7 @@ const Home: React.FC = () => {
               {cuisines.map((cuisine) => {
                 return (
                   <li className="cuisine-item" key={cuisine.cuisineId}>
-                    <div className="cuisine-contents-wrapper">
-                      <img
-                        className="cuisine-img"
-                        src={cuisine.cuisineImg}
-                        alt="Cuisine image" />
-                      <h4 className="cuisine-title">{cuisine.cuisineName}</h4>
-                    </div>
+                    <CuisineCard {...cuisine} />
                   </li>
                 )
               })}
