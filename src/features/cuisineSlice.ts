@@ -12,10 +12,12 @@ export interface Cuisine {
 
 interface CuisinesState {
 	allCuisines: Cuisine[];
+	isLoading: boolean;
 }
 
 const initialState: CuisinesState = {
 	allCuisines: [],
+	isLoading: true
 };
 
 const cuisinesSlice = createSlice({
@@ -24,6 +26,7 @@ const cuisinesSlice = createSlice({
 	reducers: {
 		getCuisines: (state, action: PayloadAction<Cuisine[]>) => {
 			state.allCuisines = action.payload;
+			state.isLoading = false
 		},
 	},
 });

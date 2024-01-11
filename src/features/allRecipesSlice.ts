@@ -41,13 +41,22 @@ const recipesSlice = createSlice({
 	},
 });
 
-export const getAllRecipes = (): AppThunk => {
+export const getAllRecipes = (query?: any): AppThunk => {
 	return async (dispatch) => {
-		try {
-			const response = await api.get("/recipes");
-			dispatch(getRecipes(response.data));
-		} catch (error) {
-			console.log(error);
+		if (query) {
+			try {
+				const response = await api.get(`/recipes?${Object.keys(query)}=${query[Object.keys(query)[0]]}`)
+				dispatch(getRecipes(response.data))
+			} catch (error) {
+				console.log(error)
+			}
+		} else {
+			try {
+				const response = await api.get("/recipes");
+				dispatch(getRecipes(response.data));
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	};
 };
