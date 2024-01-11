@@ -89,6 +89,7 @@
   padding: 5%;
   background-color: hsl(343, 74%, 23%, 5%);
   list-style-position: inside;
+  width: 100vw;
 }
 
 .recipeSPR>div {
