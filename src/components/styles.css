@@ -1,10 +1,16 @@
 .SPR {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   width: 100vw;
   margin: auto;
   gap: 2em;
   justify-content: center;
+}
+
+.spr-btn-wrapper {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .spr-btn {
@@ -31,6 +37,16 @@
 
 .topSPR>div>div {
   background-color: transparent;
+}
+
+.spr-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.spr-fork-icon {
+  align-self: flex-end;
+  font-size: 1.4rem;
 }
 
 .reviewSPR {

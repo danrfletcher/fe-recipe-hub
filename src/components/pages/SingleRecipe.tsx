@@ -11,6 +11,7 @@ import { setDifficulty } from "../../utils/react-utils";
 import { lengthenDate } from "../../utils/formatting-utils";
 import "../styles.css"
 import { getForksById } from "../../features/allRecipesSlice";
+import { TbArrowFork } from "react-icons/tb";
 
 const SingleRecipe: React.FC = () => {
 
@@ -18,6 +19,7 @@ const SingleRecipe: React.FC = () => {
 	const params = useParams();
 	const isNavToggled = useAppSelector((state) => state.navToggle.value)
 	const isLoading = useAppSelector((state) => state.singleRecipe.isLoading);
+	const user = useAppSelector((state) => state.auth.username)
 	const navigate = useNavigate()
 
 	const dispatch = useAppDispatch();
@@ -36,7 +38,16 @@ const SingleRecipe: React.FC = () => {
 						<div className="topSPR">
 							<img src={recipeData.recipeImg} />
 							<div className="titleSPR">
-								<h2 className="recipe-title">{recipeData.recipeTitle}</h2>
+								<div className="spr-title-wrapper">
+									<h2 className="recipe-title">{recipeData.recipeTitle}</h2>
+									{recipeData.originalRecipeId ? (
+										<p className="spr-fork-icon">
+											<TbArrowFork />
+										</p>
+									) : (
+										null
+									)}
+								</div>
 								<img className="secondImgSPR recipe-el" src={recipeData.recipeImg} />
 								<div className="detailsSPR">
 									{recipeData.postedOn ? (
@@ -57,41 +68,49 @@ const SingleRecipe: React.FC = () => {
 								</div>
 							</div>
 						</div>
-						{recipeData.directForkCount || recipeData.forkCount ? (
-							<button
-								className="styled-btn fork-btn spr-btn"
-								onClick={() => {
-									dispatch(getForksById({
-										forkedFromId: recipeData.recipeId
-									}))
-									navigate(`/recipe/${recipeData.recipeId}/forks/${recipeData.originalRecipeId}/`)
-								}}>
-								View forks
-							</button>
-						) : (
-							null
-						)}
-						{recipeData.originalRecipeId ? (
-							<button
-								className="styled-btn fork-btn spr-btn"
-								onClick={() => {
-									dispatch(getSingleRecipe(recipeData.originalRecipeId))
-									navigate(`/recipe/${recipeData.originalRecipeId}`)
-								}}>
-								View original
-							</button>
-						) : (
-							null
-						)}
+						<div className="spr-btn-wrapper">
+							{recipeData.directForkCount || recipeData.forkCount ? (
+								<button
+									className="styled-btn fork-btn spr-btn"
+									onClick={() => {
+										dispatch(getForksById({
+											forkedFromId: recipeData.recipeId
+										}))
+										navigate(`/recipe/${recipeData.recipeId}/forks/${recipeData.originalRecipeId}/`)
+									}}>
+									View forks
+								</button>
+							) : (
+								null
+							)}
+							{recipeData.originalRecipeId ? (
+								<button
+									className="styled-btn fork-btn spr-btn"
+									onClick={() => {
+										dispatch(getSingleRecipe(recipeData.originalRecipeId))
+										navigate(`/recipe/${recipeData.originalRecipeId}`)
+									}}>
+									View original
+								</button>
+							) : (
+								null
+							)}
+						</div>
 						<div className="mainSPR">
 							<div className="recipeSPR">
 								<Ingredients />
 								<RecipeMethod />
 							</div>
 						</div>
-						<Link to={"/recipes/create_fork"}>
-							<button className="styled-btn fork-btn spr-btn">Fork this recipe</button>
-						</Link>
+						{user ? (
+							<Link to={"/recipes/create_fork"}>
+								<button className="styled-btn fork-btn spr-btn">
+									Fork this recipe
+								</button>
+							</Link>
+						) : (
+							null
+						)}
 						<SimilarRecipes />
 					</div>
 				</>
