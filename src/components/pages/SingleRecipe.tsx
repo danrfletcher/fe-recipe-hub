@@ -10,7 +10,7 @@ import { Ingredients } from "../Ingredients";
 import { setDifficulty } from "../../utils/react-utils";
 import { lengthenDate } from "../../utils/formatting-utils";
 import "../styles.css"
-import { getForksById } from "../../features/allRecipesSlice";
+// import { getForksById } from "../../features/allRecipesSlice";
 import { TbArrowFork } from "react-icons/tb";
 
 const SingleRecipe: React.FC = () => {
@@ -68,7 +68,7 @@ const SingleRecipe: React.FC = () => {
 								</div>
 							</div>
 						</div>
-						<div className="spr-btn-wrapper">
+						{/* <div className="spr-btn-wrapper">
 							{recipeData.directForkCount || recipeData.forkCount ? (
 								<button
 									className="styled-btn fork-btn spr-btn"
@@ -95,7 +95,7 @@ const SingleRecipe: React.FC = () => {
 							) : (
 								null
 							)}
-						</div>
+						</div> */}
 						<div className="mainSPR">
 							<div className="recipeSPR">
 								<Ingredients />
