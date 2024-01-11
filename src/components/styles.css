@@ -39,6 +39,16 @@
   background-color: transparent;
 }
 
+.spr-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.spr-fork-icon {
+  align-self: flex-end;
+  font-size: 1.4rem;
+}
+
 .reviewSPR {
   display: flex;
   justify-content: space-between;
