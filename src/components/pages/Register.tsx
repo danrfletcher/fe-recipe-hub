@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { authFail, clearErrors, loading, registerUser } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { FileUpload } from "../FileUpload";
 
 interface FormValues {
 	name: string;
@@ -24,6 +25,7 @@ const Register: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate()
 	const { register, handleSubmit } = useForm<FormValues>();
+  const imageUrl = useAppSelector((state)=>state.fileUpload.imageUrl)
 
 	const submitForm: SubmitHandler<FormValues> = (data) => {
 		if (data.password !== data.confirmPassword) {
@@ -35,7 +37,7 @@ const Register: React.FC = () => {
 			dispatch(registerUser(
 				data.username,
 				data.name,
-				data.ProfileImg,
+				imageUrl,
 				data.password,
 				data.bio
 			))
@@ -57,6 +59,7 @@ const Register: React.FC = () => {
 				"page-slide-out"
 			)}>
 			<h2 className="auth-header">Register</h2>
+      <FileUpload />
 			<form
 				className="auth-form"
 				onSubmit={handleSubmit(submitForm)}>
@@ -81,17 +84,6 @@ const Register: React.FC = () => {
 						autoComplete="on"
 						className="input-field"
 						{...register("username")}
-						required />
-				</div>
-				<div className="input-wrapper">
-					<label htmlFor="profileImg" className="input-label" >
-						Profile Image URL
-					</label>
-					<input
-						type="text"
-						id="profileImg"
-						className="input-field"
-						{...register("ProfileImg")}
 						required />
 				</div>
 				<div className="input-wrapper">

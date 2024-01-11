@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { api } from "../utils/api-utils";
 
 interface FileUploadState {
-	imageUrl: string | null;
+	imageUrl: any;
 }
 
 const initialState: FileUploadState = {
