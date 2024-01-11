@@ -54,7 +54,8 @@ export const CreateFork: React.FC = () => {
 		handleSubmit,
 		getValues,
 		resetField,
-		reset
+		reset,
+    formState: { isDirty }
 	} = useForm<FormValues>();
 
 	const token = `Bearer ${stateInfo.token}`;
@@ -363,7 +364,8 @@ export const CreateFork: React.FC = () => {
 				<button
 					type="submit"
 					className="styled-btn auth-btn"
-					id="create-recipe-btn">
+					id="create-recipe-btn"
+          disabled={!isDirty}>
 					Submit this fork
 				</button>
 			</form>
