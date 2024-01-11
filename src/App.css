@@ -209,6 +209,7 @@ div.slide-out {
 	padding: 0.6em 1.4em;
 	font-size: 1rem;
 	box-shadow: 0 0 2px #222222;
+	appearance: none;
 	transition: 0.3s;
 }
 
@@ -334,11 +335,13 @@ div.slide-out {
 	padding: 0 3em;
 	font-size: 1rem;
 	box-shadow: 0 0 2px #222222;
+	appearance: none;
 	transition: 0.3s;
 }
 
 .recipe-img:hover {
 	box-shadow: 0 0 6px 1px #222222;
+	appearance: none;
 }
 
 .recipe-facts-wrapper {
