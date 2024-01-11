@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { logout } from "../features/auth/authSlice";
+import { getAllRecipes } from "../features/allRecipesSlice";
 
 const Nav: React.FC = () => {
 	const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
@@ -16,7 +17,12 @@ const Nav: React.FC = () => {
 			<Link className="nav-link" to="/">
 				Home
 			</Link>
-			<Link className="nav-link" to="/recipes">
+			<Link
+				className="nav-link"
+				to="/recipes"
+				onClick={() => {
+					dispatch(getAllRecipes())
+				}}>
 				Recipes
 			</Link>
 			{isAuthenticated ? (
@@ -53,7 +59,12 @@ export const ToggledNav: React.FC<Props> = (props) => {
 				<Link className="nav-link" to="/">
 					Home
 				</Link>
-				<Link className="nav-link" to="/recipes">
+				<Link
+					className="nav-link"
+					to="/recipes"
+					onClick={() => {
+						dispatch(getAllRecipes())
+					}}>
 					Recipes
 				</Link>
 				{isAuthenticated ? (

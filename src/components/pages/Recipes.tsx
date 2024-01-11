@@ -2,18 +2,19 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getAllRecipes } from "../../features/allRecipesSlice";
 import RecipeCard from "../RecipeCard";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Recipes: React.FC = () => {
 
 	const isNavToggled = useAppSelector((state) => state.navToggle.value);
 	const listOfRecipes = useAppSelector((state) => state.recipes.allRecipes);
 	const user = useAppSelector((state) => state.auth.username)
+	const params = useParams()
 
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		dispatch(getAllRecipes());
+		if (!params.cuisineName) dispatch(getAllRecipes());
 	}, []);
 
 	return (
