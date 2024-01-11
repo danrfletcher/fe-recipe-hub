@@ -109,7 +109,11 @@ const SingleRecipe: React.FC = () => {
 								</button>
 							</Link>
 						) : (
-							null
+							<Link to={"/login"}>
+								<button className="styled-btn fork-btn spr-btn">
+									Log in to fork
+								</button>
+							</Link>
 						)}
 						<SimilarRecipes />
 					</div>
