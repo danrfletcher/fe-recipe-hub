@@ -1,10 +1,16 @@
 .SPR {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   width: 100vw;
   margin: auto;
   gap: 2em;
   justify-content: center;
+}
+
+.spr-btn-wrapper {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .spr-btn {
