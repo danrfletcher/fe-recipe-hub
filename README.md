@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is the front-end repository for Team HypeScript's group project for the final phase of the Northcoders software development bootcamp.
+This is the front-end repository for **Umami** - Team HypeScript's group project for the final phase of the Northcoders software development bootcamp.
 
 The application is built in React with Redux Toolkit, Vite, and TypeScript. It uses libraries such as Axios, React Hook Form, and React Icons.
 
