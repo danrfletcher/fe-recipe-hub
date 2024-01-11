@@ -11,6 +11,7 @@ import { setDifficulty } from "../../utils/react-utils";
 import { lengthenDate } from "../../utils/formatting-utils";
 import "../styles.css"
 import { getForksById } from "../../features/allRecipesSlice";
+import { TbArrowFork } from "react-icons/tb";
 
 const SingleRecipe: React.FC = () => {
 
@@ -37,7 +38,16 @@ const SingleRecipe: React.FC = () => {
 						<div className="topSPR">
 							<img src={recipeData.recipeImg} />
 							<div className="titleSPR">
-								<h2 className="recipe-title">{recipeData.recipeTitle}</h2>
+								<div className="spr-title-wrapper">
+									<h2 className="recipe-title">{recipeData.recipeTitle}</h2>
+									{recipeData.originalRecipeId ? (
+										<p className="spr-fork-icon">
+											<TbArrowFork />
+										</p>
+									) : (
+										null
+									)}
+								</div>
 								<img className="secondImgSPR recipe-el" src={recipeData.recipeImg} />
 								<div className="detailsSPR">
 									{recipeData.postedOn ? (
