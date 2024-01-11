@@ -5,6 +5,7 @@
 	font-family: 'Roboto Slab', serif;
 }
 
+
 @media (min-width: 501px) {
 
 	div.icon-container,
@@ -1023,3 +1024,18 @@ div.slide-out {
 	background: none;
 	font-size: 10vw;
 }
+/* -----styles for FileUpload.tsx----------- */
+.add-img-label{
+  margin-top: 10px;
+}
+.add-img-btn{
+  margin: 0 !important;
+
+}
+div.add-img-div{
+  display: flex;
+  padding: 1px;
+  justify-content: center;
+  align-items: center;
+}
+/* --------------------------------------- */
