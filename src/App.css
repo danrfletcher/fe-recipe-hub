@@ -224,12 +224,6 @@ div.slide-out {
 	color: #FFFFFF;
 }
 
-.auth-btn:disabled,
-.back-btn:disabled {
-	background: #FFFFFF;
-	color: gray;
-}
-
 .styled-btn:active {
 	transform: scale(0.9);
 }
@@ -383,7 +377,8 @@ div.slide-out {
 	font-size: 1.2rem;
 }
 
-.large-red-btn:hover, #create-recipe-btn:hover {
+.large-red-btn:hover,
+#create-recipe-btn:hover {
 	background: #660f27;
 }
 
@@ -593,7 +588,8 @@ div.slide-out {
 	margin-bottom: 5%;
 }
 
-#ingredient-field, #quantity-field {
+#ingredient-field,
+#quantity-field {
 	margin-right: 0;
 	border-radius: 10px;
 }
@@ -644,18 +640,32 @@ div.slide-out {
 
 /* FileUpload */
 
-.add-img-label{
-  margin-top: 10px;
+.add-img-label {
+	margin-top: 2em;
 }
-.add-img-btn{
-  margin: 0 !important;
 
+.add-img-btn, input::-webkit-file-upload-button {
+	border: none;
+	border-radius: 10px;
+	background: #921538;
+	padding: 0.5em 1em;
+	color: #FFFFFF;
+	cursor: pointer;
 }
-div.add-img-div{
-  display: flex;
-  padding: 1px;
-  justify-content: center;
-  align-items: center;
+
+input::-webkit-file-upload-button {
+	background: #525A94;
+}
+
+.add-img-div {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 5%;
+	padding: 1em;
+	border-radius: 10px;
+	box-shadow: inset 0 0 4px #222222;
+	appearance: none;
 }
 
 .transparent-div {
