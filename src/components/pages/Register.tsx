@@ -26,13 +26,15 @@ const Register: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate()
 	const { register, handleSubmit } = useForm<FormValues>();
-  const imageUrl = useAppSelector((state)=>state.fileUpload.imageUrl)
+	const imageUrl = useAppSelector((state) => state.fileUpload.imageUrl)
 
 	const submitForm: SubmitHandler<FormValues> = (data) => {
 		if (data.password !== data.confirmPassword) {
 			dispatch(authFail("Passwords do not match"))
 		} else if (data.password.length < 6) {
 			dispatch(authFail("Password must contain at least 6 characters"))
+		} else if (!isSuccessful) {
+			dispatch(authFail("Please upload an image"))
 		} else {
 			dispatch(loading())
 			dispatch(success())
@@ -61,7 +63,7 @@ const Register: React.FC = () => {
 				"page-slide-out"
 			)}>
 			<h2 className="auth-header">Register</h2>
-      <FileUpload />
+			<FileUpload />
 			{isSuccessful ? (
 				<p className="success-msg">Image uploaded successfully!</p>
 			) : (
