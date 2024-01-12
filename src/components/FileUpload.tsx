@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch } from "../app/hooks";
 import { getUrl } from "../features/fileUploadSlice";
+import { success } from "../features/auth/authSlice";
 
 
 
@@ -15,6 +16,7 @@ export const FileUpload: React.FC = () => {
 		const formData = new FormData();
 		formData.append("file", data.file[0]);
 		dispatch(getUrl(formData));
+		dispatch(success())
 	};
 
 	return (
