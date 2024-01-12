@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { authFail, clearErrors, loading, registerUser } from "../../features/auth/authSlice";
+import { authFail, clearErrors, loading, registerUser, success } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { FileUpload } from "../FileUpload";
@@ -21,6 +21,7 @@ const Register: React.FC = () => {
 	const error = useAppSelector((state) => state.auth.error)
 	const isLoading = useAppSelector((state) => state.auth.isLoading)
 	const hasRegistered = useAppSelector((state) => state.auth.hasRegistered)
+	const isSuccessful = useAppSelector((state) => state.auth.isSuccessful)
 
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate()
@@ -34,6 +35,7 @@ const Register: React.FC = () => {
 			dispatch(authFail("Password must contain at least 6 characters"))
 		} else {
 			dispatch(loading())
+			dispatch(success())
 			dispatch(registerUser(
 				data.username,
 				data.name,
@@ -60,6 +62,11 @@ const Register: React.FC = () => {
 			)}>
 			<h2 className="auth-header">Register</h2>
       <FileUpload />
+			{isSuccessful ? (
+				<p className="success-msg">Image uploaded successfully!</p>
+			) : (
+				null
+			)}
 			<form
 				className="auth-form"
 				onSubmit={handleSubmit(submitForm)}>
