@@ -18,6 +18,7 @@ import {
 import { formatMethod } from "../../utils/formatting-utils";
 import { useNavigate } from "react-router-dom";
 import { FileUpload } from "../FileUpload";
+import { success } from "../../features/auth/authSlice";
 
 interface FormValues {
 	recipeTitle: string;
@@ -51,6 +52,7 @@ export const CreateFork: React.FC = () => {
 	);
 	const error = useAppSelector((state) => state.createRecipe.error);
 	const isError = useAppSelector((state) => state.createRecipe.isError);
+	const isSuccessful = useAppSelector((state) => state.auth.isSuccessful)
 
 	const navigate = useNavigate();
 
@@ -88,9 +90,8 @@ export const CreateFork: React.FC = () => {
 	const arrayOfIngIds = forkedIngredientsToDisplay.map((ingredient) => {
 		return findId(lookupIngredients, ingredient);
 	});
-// imageUrl ? imageUrl :
+
 	const submitForm: SubmitHandler<FormValues> = (data) => {
-    console.log(data, "<<<data")
 		dispatch(
 			postRecipe(
 				{
@@ -117,8 +118,9 @@ export const CreateFork: React.FC = () => {
 				{ ingredientIds: arrayOfIngIds, quantity: forkedQuantitiesToDisplay }
 			)
 		);
-		reset();
 		navigate(`/recipes/create_fork/success`);
+		dispatch(success())
+		reset();
 	};
 
 	const recipeIngredientsForForking: any[] =
@@ -143,6 +145,11 @@ export const CreateFork: React.FC = () => {
 			<h2 className="auth-header">Made it your own way?</h2>
 			<h3 className="auth-header-cursive">Submit a forked recipe</h3>
       <FileUpload />
+			{isSuccessful ? (
+				<p className="success-msg">Image uploaded successfully!</p>
+			) : (
+				null
+			)}
 			<form className="auth-form" onSubmit={handleSubmit(submitForm)}>
 				<div className="input-wrapper">
 					<label htmlFor="recipeTitle" className="input-label">
@@ -212,21 +219,6 @@ export const CreateFork: React.FC = () => {
 						required
 					/>
 				</div>
-{/* 
-				<div className="input-wrapper">
-					<label htmlFor="recipeImg" className="input-label">
-						Recipe Image URL
-					</label>
-					<input
-						type="url"
-						placeholder="Please enter a valid image URL"
-						defaultValue={singleRecipeState.recipeImg}
-						id="recipeImg"
-						className="input-field"
-						{...register("recipeImg")}
-						required
-					/>
-				</div> */}
 
 				<div className="input-wrapper">
 					<label htmlFor="cuisine" className="input-label">
@@ -265,9 +257,9 @@ export const CreateFork: React.FC = () => {
 					/>
 				</div>
 
-				<label htmlFor="recipeIng" className="input-label">
+				<p className="input-label">
 					Ingredients
-				</label>
+				</p>
 				{forkedIngredientsToDisplay.length ? (
 					<div className="ingredients-list" id="recipeIng">
 						<div>
@@ -385,6 +377,11 @@ export const CreateFork: React.FC = () => {
 				) : null}
 
 				<p className="auth-header-cursive">Ready to go?</p>
+				{!isDirty ? (
+					<p className="success-msg">Please make at least one edit to submit a fork.</p>
+				) : (
+					null
+				)}
 				<button
 					type="submit"
 					className="styled-btn auth-btn"
