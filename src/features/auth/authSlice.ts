@@ -14,6 +14,7 @@ interface AuthState {
 	isError: boolean;
 	error: string | null
 	isLoading: boolean
+	isSuccessful: boolean
 }
 
 const initialState: AuthState = {
@@ -27,7 +28,8 @@ const initialState: AuthState = {
 	hasRegistered: false,
 	isError: false,
 	error: null,
-	isLoading: false
+	isLoading: false,
+	isSuccessful: false
 };
 
 const authSlice = createSlice({
@@ -78,6 +80,9 @@ const authSlice = createSlice({
 		},
 		resetRegisteredStatus: (state) => {
 			state.hasRegistered = false
+		},
+		success: (state) => {
+			state.isSuccessful = !state.isSuccessful
 		}
 	},
 	extraReducers: (builder) => {
@@ -140,7 +145,8 @@ export const {
 	logout,
 	loading,
 	clearErrors,
-	resetRegisteredStatus
+	resetRegisteredStatus,
+	success
 } = authSlice.actions;
 
 export default authSlice.reducer;

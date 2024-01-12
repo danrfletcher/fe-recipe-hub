@@ -13,6 +13,7 @@ import {
 import { getAllIngredients } from "../../features/ingredientsSlice";
 import { useNavigate } from "react-router-dom";
 import { FileUpload } from "../FileUpload";
+import { success } from "../../features/auth/authSlice";
 
 interface FormValues {
 	recipeTitle: string;
@@ -44,6 +45,7 @@ export const CreateRecipe: React.FC = () => {
 	const quantityToAdd = useAppSelector((state) => state.createRecipe.quantity);
 	const error = useAppSelector((state) => state.createRecipe.error);
 	const isError = useAppSelector((state) => state.createRecipe.isError);
+	const isSuccessful = useAppSelector((state) => state.auth.isSuccessful)
 
 	const navigate = useNavigate();
 
@@ -98,8 +100,9 @@ export const CreateRecipe: React.FC = () => {
 				{ ingredientIds: arrayOfIngIds, quantity: quantityToAdd }
 			)
 		);
-		reset();
 		navigate(`/recipes/add_recipe/success`);
+		dispatch(success())
+		reset();
 	};
 
 	return (
@@ -115,6 +118,11 @@ export const CreateRecipe: React.FC = () => {
 			<h2 className="auth-header">Feeling inspired?</h2>
 			<h3 className="auth-header-cursive">Create a new recipe</h3>
       <FileUpload />
+			{isSuccessful ? (
+				<p className="success-msg">Image uploaded successfully!</p>
+			) : (
+				null
+			)}
 			<form className="auth-form" onSubmit={handleSubmit(submitForm)}>
 				<div className="input-wrapper">
 					<label htmlFor="recipeTitle" className="input-label">
@@ -218,9 +226,9 @@ export const CreateRecipe: React.FC = () => {
 						required />
 				</div>
 
-				<label htmlFor="recipeIng" className="input-label">
+				<p className="input-label">
 					Ingredients
-				</label>
+				</p>
 				{ingredientsToAdd.length ? (
 					<div className="ingredients-list" id="recipeIng">
 						<div>
