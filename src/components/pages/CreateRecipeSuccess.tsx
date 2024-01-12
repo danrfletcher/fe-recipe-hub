@@ -5,7 +5,7 @@ import Error from "../Error"
 const CreateRecipeSuccess: React.FC = () => {
 
   const isNavToggled = useAppSelector((state) => state.navToggle.value)
-  const recipeData = useAppSelector((state) => state.singleRecipe)
+  const recipeData = useAppSelector((state) => state.singleRecipe.recipe)
 
   return (
     <div className={isNavToggled ? "page-slide-in" : "page-slide-out"}>
@@ -22,7 +22,7 @@ const CreateRecipeSuccess: React.FC = () => {
             <p className="recipe-success-text">Thank you for contributing to Umami!</p>
             <img
               className="feat-recipe-img recipe-success-img"
-              src={recipeData.recipe.recipeImg}
+              src={recipeData.recipeImg}
               alt="An image of your recipe" />
           </div>
           <Link to={`/recipe/${recipeData.recipeId}`}>

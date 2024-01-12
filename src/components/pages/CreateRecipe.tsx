@@ -100,9 +100,9 @@ export const CreateRecipe: React.FC = () => {
 				{ ingredientIds: arrayOfIngIds, quantity: quantityToAdd }
 			)
 		);
+		navigate(`/recipes/add_recipe/success`);
 		dispatch(success())
 		reset();
-		navigate(`/recipes/add_recipe/success`);
 	};
 
 	return (
