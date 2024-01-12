@@ -267,6 +267,11 @@ div.slide-out {
 	color: #921538;
 }
 
+.success-msg {
+	margin-top: 1.8em;
+	color: #660f27;
+}
+
 /* Recipes || RecipeCard */
 
 .recipe-wrapper {
