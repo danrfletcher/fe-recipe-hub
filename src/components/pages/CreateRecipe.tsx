@@ -58,6 +58,7 @@ export const CreateRecipe: React.FC = () => {
 	useEffect(() => {
 		dispatch(getAllCuisines());
 		dispatch(getAllIngredients());
+		dispatch(success(false))
 	}, []);
 
 	const lookupCuisines: any = cuisines.reduce(
@@ -76,33 +77,35 @@ export const CreateRecipe: React.FC = () => {
 	});
 
 	const submitForm: SubmitHandler<FormValues> = (data) => {
-		dispatch(
-			postRecipe(
-				{
-					recipeTitle: data.recipeTitle,
-					tagLine: data.tagLine,
-					difficulty: data.difficulty,
-					timeToPrepare: data.timeToPrepare,
-					recipeMethod: data.recipeMethod,
-					recipeImg: imageUrl,
-					cuisine: data.cuisine,
-					forkedFromId: null,
-					originalRecipeId: null,
-					userId: stateInfo.userId,
-					cuisineId: findId(lookupCuisines, data.cuisine),
-					recipeId: singleRecipeState.recipeId,
-					ingredientIds: arrayOfIngIds,
-					quantity: [],
-					error: null,
-					isError: false,
-				},
-				token,
-				{ ingredientIds: arrayOfIngIds, quantity: quantityToAdd }
-			)
-		);
-		navigate(`/recipes/add_recipe/success`);
-		dispatch(success())
-		reset();
+		if (isSuccessful) {
+			dispatch(
+				postRecipe(
+					{
+						recipeTitle: data.recipeTitle,
+						tagLine: data.tagLine,
+						difficulty: data.difficulty,
+						timeToPrepare: data.timeToPrepare,
+						recipeMethod: data.recipeMethod,
+						recipeImg: imageUrl,
+						cuisine: data.cuisine,
+						forkedFromId: null,
+						originalRecipeId: null,
+						userId: stateInfo.userId,
+						cuisineId: findId(lookupCuisines, data.cuisine),
+						recipeId: singleRecipeState.recipeId,
+						ingredientIds: arrayOfIngIds,
+						quantity: [],
+						error: null,
+						isError: false,
+					},
+					token,
+					{ ingredientIds: arrayOfIngIds, quantity: quantityToAdd }
+				)
+			);
+			navigate(`/recipes/add_recipe/success`);
+			dispatch(success(false))
+			reset();
+		}
 	};
 
 	return (
@@ -348,6 +351,11 @@ export const CreateRecipe: React.FC = () => {
 				) : null}
 
 				<p className="auth-header-cursive ready-text">Ready to go?</p>
+				{!isSuccessful ? (
+					<p className="success-msg">Please upload an image to create this recipe.</p>
+				) : (
+					null
+				)}
 				<button
 					type="submit"
 					className="styled-btn auth-btn"

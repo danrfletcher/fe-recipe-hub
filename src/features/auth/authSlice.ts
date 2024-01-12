@@ -81,8 +81,8 @@ const authSlice = createSlice({
 		resetRegisteredStatus: (state) => {
 			state.hasRegistered = false
 		},
-		success: (state) => {
-			state.isSuccessful = !state.isSuccessful
+		success: (state, action: PayloadAction<boolean>) => {
+			state.isSuccessful = action.payload
 		}
 	},
 	extraReducers: (builder) => {
