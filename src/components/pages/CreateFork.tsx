@@ -74,6 +74,7 @@ export const CreateFork: React.FC = () => {
 		dispatch(getAllIngredients());
 		dispatch(forkedIngredientsInitial(ingredientNames));
 		dispatch(forkedQuantitiesInitial(ingredientQuantity));
+		dispatch(success(false))
 	}, []);
 
 	const lookupCuisines: any = cuisines.reduce(
@@ -119,7 +120,7 @@ export const CreateFork: React.FC = () => {
 			)
 		);
 		navigate(`/recipes/create_fork/success`);
-		dispatch(success())
+		dispatch(success(false))
 		reset();
 	};
 

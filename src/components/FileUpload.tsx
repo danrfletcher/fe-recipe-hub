@@ -16,7 +16,7 @@ export const FileUpload: React.FC = () => {
 		const formData = new FormData();
 		formData.append("file", data.file[0]);
 		dispatch(getUrl(formData));
-		dispatch(success())
+		dispatch(success(true))
 	};
 
 	return (

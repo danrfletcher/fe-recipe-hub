@@ -37,7 +37,7 @@ const Register: React.FC = () => {
 			dispatch(authFail("Please upload an image"))
 		} else {
 			dispatch(loading())
-			dispatch(success())
+			dispatch(success(false))
 			dispatch(registerUser(
 				data.username,
 				data.name,
@@ -49,6 +49,7 @@ const Register: React.FC = () => {
 	}
 
 	useEffect(() => {
+		dispatch(success(false))
 		if (hasRegistered) {
 			navigate("/login");
 		}

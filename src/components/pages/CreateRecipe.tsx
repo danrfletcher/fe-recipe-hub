@@ -58,6 +58,7 @@ export const CreateRecipe: React.FC = () => {
 	useEffect(() => {
 		dispatch(getAllCuisines());
 		dispatch(getAllIngredients());
+		dispatch(success(false))
 	}, []);
 
 	const lookupCuisines: any = cuisines.reduce(
@@ -101,7 +102,7 @@ export const CreateRecipe: React.FC = () => {
 			)
 		);
 		navigate(`/recipes/add_recipe/success`);
-		dispatch(success())
+		dispatch(success(false))
 		reset();
 	};
 
