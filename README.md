@@ -4,7 +4,7 @@
 
 This is the front-end repository for **Umami** - Team HypeScript's group project for the final phase of the Northcoders software development bootcamp.
 
-Our site can be visited at [this](http://ec2-13-41-225-59.eu-west-2.compute.amazonaws.com:3000) web address.
+Our site can be visited at [this](http://ec2-18-130-212-68.eu-west-2.compute.amazonaws.com:3000) web address.
 
 The application is built in React with Redux Toolkit, Vite, and TypeScript. It uses libraries such as Axios, React Hook Form, and React Icons.
 
